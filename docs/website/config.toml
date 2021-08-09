@@ -3,6 +3,10 @@ languageCode = "en-us"
 title = "Models for missing data"
 theme = "book"
 
+# (Optional) Set this to true to enable 'Last Modified by' date and git author
+#  information on 'doc' type pages.
+enableGitInfo = true
+
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
@@ -22,7 +26,7 @@ theme = "book"
   # Enable 'Edit this page' links for 'doc' page type.
   # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
   # Path must point to the site directory.
-  BookEditPath = 'edit'
+  BookEditPath = 'edit/main/docs/website'
 
   # (Optional, default January 2, 2006) Configure the date format used on the pages
   # - In git information
