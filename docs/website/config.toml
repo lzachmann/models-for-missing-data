@@ -10,7 +10,7 @@ theme = "book"
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo = 'https://github.com/lzachmann/models-for-missing-data/tree/main/docs/website'
+  BookRepo = 'https://github.com/lzachmann/models-for-missing-data'
 
   # Specifies commit portion of the link to the page's last modified commit hash for 'doc' page
   # type.
