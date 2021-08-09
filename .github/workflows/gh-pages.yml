@@ -25,8 +25,7 @@ jobs:
 
       - name: Build
         run: |
-          ls -a
-          git branch
+          cd docs/website
           hugo --minify
 
       - name: Deploy
