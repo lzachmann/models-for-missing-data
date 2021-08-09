@@ -2,13 +2,15 @@
 headless: true
 ---
 
-- [**Example Site**]({{< relref "/docs/example" >}})
-- [Table of Contents]({{< relref "/docs/example/table-of-contents" >}})
-  - [With ToC]({{< relref "/docs/example/table-of-contents/with-toc" >}})
-  - [Without ToC]({{< relref "/docs/example/table-of-contents/without-toc" >}})
-- [Collapsed]({{< relref "/docs/example/collapsed" >}})
-  - [3rd]({{< relref "/docs/example/collapsed/3rd-level" >}})
-    - [4th]({{< relref "/docs/example/collapsed/3rd-level/4th-level" >}})
+- [**Technical docs**]({{< relref "/docs/example" >}})
+- [Analysis inputs]({{< relref "/docs/example/analysis-inputs" >}})
+  - [Sampling design]({{< relref "/docs/example/analysis-inputs/sampling-design" >}})
+  - [Monitoring data]({{< relref "/docs/example/analysis-inputs/monitoring-data" >}})
+  - [Model metadata]({{< relref "/docs/example/analysis-inputs/model-metadata" >}})
+- [model-info]({{< relref "/docs/example/model-info" >}})
+  - [Data types]({{< relref "/docs/example/model-info/data-types" >}})
+    - [Counts]({{< relref "/docs/example/model-info/data-types/counts" >}})
+    - [Proportions]({{< relref "/docs/example/model-info/data-types/counts" >}})
 <br />
 
 - **Shortcodes**

@@ -1,6 +1,7 @@
 ---
-title: With ToC
-weight: 1
+title: Monitoring data
+weight: 2
+bookToc: true
 ---
 # Caput vino delphine in tamen vias
 

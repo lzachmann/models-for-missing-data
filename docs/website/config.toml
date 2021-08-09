@@ -7,6 +7,9 @@ theme = "book"
 #  information on 'doc' type pages.
 enableGitInfo = true
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
