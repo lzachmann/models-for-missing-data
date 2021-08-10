@@ -2,7 +2,7 @@
 headless: true
 ---
 
-- [**Technical docs**]({{< relref "/docs/example" >}})
+- [**Guide**]({{< relref "/docs/example" >}})
 - [Analysis inputs]({{< relref "/docs/example/analysis-inputs" >}})
   - [Sampling design]({{< relref "/docs/example/analysis-inputs/sampling-design" >}})
   - [Monitoring data]({{< relref "/docs/example/analysis-inputs/monitoring-data" >}})

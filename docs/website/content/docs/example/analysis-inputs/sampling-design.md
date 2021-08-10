@@ -3,63 +3,50 @@ title: Sampling design
 weight: 1
 bookToc: true
 ---
-# Caput vino delphine in tamen vias
 
-## Cognita laeva illo fracta
+# Sampling design
 
-Testing 123. Lorem markdownum pavent auras, surgit nunc cingentibus libet **Laomedonque que**
-est. Pastor [An](http://est.org/ire.aspx) arbor filia foedat, ne [fugit
-aliter](http://www.indiciumturbam.org/moramquid.php), per. Helicona illas et
-callida neptem est *Oresitrophos* caput, dentibus est venit. Tenet reddite
-[famuli](http://www.antro-et.net/) praesentem fortibus, quaeque vis foret si
-frondes *gelidos* gravidae circumtulit [inpulit armenta
-nativum](http://incurvasustulit.io/illi-virtute.html).
+Two high-level "attributes" files are required for all analyses. So long as the basic details of the sampling design they describe do not vary for different measures within a park, or different park units within a network, they only need to be specified once.
 
-1. Te at cruciabere vides rubentis manebo
-2. Maturuit in praetemptat ruborem ignara postquam habitasse
-3. Subitarum supplevit quoque fontesque venabula spretis modo
-4. Montis tot est mali quasque gravis
-5. Quinquennem domus arsit ipse
-6. Pellem turis pugnabant locavit
+## The config directory
 
-## Natus quaerere
+The file tree needed to configure analysis of data from a given park unit (`<unit code>`) in a given network (`<network code>`) looks like the following
 
-Pectora et sine mulcere, coniuge dum tincta incurvae. Quis iam; est dextra
-Peneosque, metuis a verba, primo. Illa sed colloque suis: magno: gramen, aera
-excutiunt concipit.
+    .
+    └── config/
+        └── <network code>/
+            ├── <unit code>/
+            │   ├── _park-level-attributes.yml
+            │   └── <analysis file>.yml
+            └── _network-level-attributes.yml
 
-> Phrygiae petendo suisque extimuit, super, pars quod audet! Turba negarem.
-> Fuerat attonitus; et dextra retinet sidera ulnas undas instimulat vacuae
-> generis? *Agnus* dabat et ignotis dextera, sic tibi pacis **feriente at mora**
-> euhoeque *comites hostem* vestras Phineus. Vultuque sanguine dominoque [metuit
-> risi](http://iuvat.org/eundem.php) fama vergit summaque meus clarissimus
-> artesque tinguebat successor nominis cervice caelicolae.
+where `.` is the root directory. The contents of `<analysis file>.yml` are described in the [model metadata]({{< ref "/docs/example/analysis-inputs/model-metadata.md" >}}) section. To take a real-world example from an analysis of richness data at Little Bighorn Battlefield National Monument (LIBI) Rocky Mountain Network (ROMN), this might look like
 
-## Limitibus misere sit
+    .
+    └── config/
+        └── ROMN/
+            ├── LIBI/
+            │   ├── _park-level-attributes.yml
+            │   └── richness.yml
+            └── _network-level-attributes.yml
 
-Aurea non fata repertis praerupit feruntur simul, meae hosti lentaque *citius
-levibus*, cum sede dixit, Phaethon texta. *Albentibus summos* multifidasque
-iungitur loquendi an pectore, mihi ursaque omnia adfata, aeno parvumque in animi
-perlucentes. Epytus agis ait vixque clamat ornum adversam spondet, quid sceptra
-ipsum **est**. Reseret nec; saeva suo passu debentia linguam terga et aures et
-cervix [de](http://www.amnem.io/pervenit.aspx) ubera. Coercet gelidumque manus,
-doluit volvitur induta?
+### Network level attributes
+These attributes typically consist of
+`_network-level-attributes.yml`
+```YAML
+unit code column: Park
+site id column: SiteName
+event date info:
+    date-time column: Year
+    date-time format: Y!  # see lubridate::parse_date_time() for details
+```
 
-## Enim sua
-
-Iuvenilior filia inlustre templa quidem herbis permittat trahens huic. In
-cruribus proceres sole crescitque *fata*, quos quos; merui maris se non tamen
-in, mea.
-
-## Germana aves pignus tecta
-
-Mortalia rudibusque caelum cognosceret tantum aquis redito felicior texit, nec,
-aris parvo acre. Me parum contulerant multi tenentem, gratissime suis; vultum tu
-occupat deficeret corpora, sonum. E Actaea inplevit Phinea concepit nomenque
-potest sanguine captam nulla et, in duxisses campis non; mercede. Dicere cur
-Leucothoen obitum?
-
-Postibus mittam est *nubibus principium pluma*, exsecratur facta et. Iunge
-Mnemonidas pallamque pars; vere restitit alis flumina quae **quoque**, est
-ignara infestus Pyrrha. Di ducis terris maculatum At sede praemia manes
-nullaque!
+### Park level attributes
+`_park-level-attributes.yml`
+```YAML
+stratum id column: MDCATY
+stratum area info:
+    Gulley1: 684731
+    Gulley2: 138247
+    Upland: 1063552
+```
