@@ -1,6 +1,7 @@
 ---
-weight: 10
-title: "Analysis inputs"
+bookCollapseSection: true
+weight: 1
+title: Analysis inputs
 ---
 
 # Analysis inputs

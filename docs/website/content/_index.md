@@ -1,25 +1,23 @@
 ---
-title: Introduction
+title: Welcome
 type: docs
+image: /static/3D98AD77-CBC4-0963-8EFBF00EA361C5DDOriginal.jpg
 ---
 
-# Documentation
+# Welcome to Models for Missing Data
 
-This website serves as a storehouse of information about software used by several National Park Service [Inventory & Monitoring (I&M) networks](https://www.nps.gov/im/networks.htm) to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of the models.
+This website serves as a storehouse of information about software used by several National Park Service [Inventory & Monitoring (I&M) networks](https://www.nps.gov/im/networks.htm) to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of models.
 
 {{< columns >}}
-## Software
+## [Technical docs]({{< ref "/docs/example/_index.md" >}})
 
-Technical information about the software, including _inputs_ and _outputs_.
-We describe the data, the metadata syntax used to specify models, and the
-various outputs of the program, from model checking to inference.
+Technical information about the software, including _inputs_ and _outputs_. We describe the data, the metadata syntax used to specify models, and the various outputs of the program, from model checking to inference.
 
 <--->
 
-## Applications
+## [Posts]({{< ref "/posts/_index.md" >}})
 
-A blog section for more general content, including pieces on the missing data
-problem, proof-of-concept simulations, and example analyses.
+Posts containing more general content, including pieces on the missing data problem, proof-of-concept simulations, and example analyses.
 {{< /columns >}}
 
 

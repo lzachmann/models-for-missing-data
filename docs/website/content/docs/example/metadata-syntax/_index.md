@@ -1,5 +1,5 @@
 ---
 bookCollapseSection: true
-weight: 3
-title: Model info
+weight: 2
+title: Metadata syntax
 ---
