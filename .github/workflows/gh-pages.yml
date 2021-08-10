@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Set a branch name to trigger deployment
+    paths-ignore:
+      - README.md # don't rebuild on documentation changes
   pull_request:
 
 jobs:
