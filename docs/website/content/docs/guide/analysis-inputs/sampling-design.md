@@ -20,7 +20,7 @@ The file tree needed to configure analysis of data from a given park unit (`<uni
             │   └── <analysis file>.yml
             └── _network-level-attributes.yml
 
-where `.` is the root directory. The contents of `<analysis file>.yml` are described in the [model metadata]({{< ref "/docs/example/analysis-inputs/model-metadata.md" >}}) section. To take a real-world example from an analysis of richness data at Little Bighorn Battlefield National Monument (LIBI) Rocky Mountain Network (ROMN), this might look like
+where `.` is the root directory. The contents of `<analysis file>.yml` are described in the [model metadata]({{< ref "/docs/guide/analysis-inputs/model-metadata.md" >}}) section. To take a real-world example from an analysis of richness data at Little Bighorn Battlefield National Monument (LIBI) Rocky Mountain Network (ROMN), this might look like
 
     .
     └── config/

@@ -16,7 +16,7 @@ Options:
 
 **Discrete random variables**
 
-_Counts_ (see [counts]({{< ref "/docs/example/model-info/data-types/counts.md" >}}))
+_Counts_ (see [counts]({{< ref "/docs/guide/model-info/data-types/counts.md" >}}))
 - `poisson`
 - `negative-binomial`
 - `gen-pois`
