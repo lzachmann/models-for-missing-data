@@ -30,9 +30,8 @@ where `.` is the root directory. The contents of `<analysis file>.yml` are descr
             │   └── richness.yml
             └── _network-level-attributes.yml
 
-### Network level attributes
-These attributes typically consist of
-`_network-level-attributes.yml`
+### Network-level attributes
+These attributes, which appear in the file `_network-level-attributes.yml`, consist of several key-value pairs used to define the park unit code (`unit code column`) by whatever name it goes by in the raw data, the name of the column containing the site ID (`site id column`), and a nested set of key-value pairs used to describe the date associated with each observation.
 ```YAML
 unit code column: Park
 site id column: SiteName
@@ -41,8 +40,8 @@ event date info:
     date-time format: Y!  # see lubridate::parse_date_time() for details
 ```
 
-### Park level attributes
-`_park-level-attributes.yml`
+### Park-level attributes
+Park-level metadata, stored in `_park-level-attributes.yml`, cannot be defined at a higher level because most, if not all, of this information applies only to an individual park, and not to other park units in the network. Specifically, we use this file to describe the column in the raw data that defines the strata (`stratum id column`), if present and the associated stratum areas (`stratum area info`). These areas, in turn, are used internally to computed a weighted mean at the park scale. Each entry beneath `stratum area info` must correspond to the actual stratum IDs in the column indicated by `stratum id column`. If there are no strata, then you can supply the same column used by `_network-level-attributes.yml` to indicate the unit code, and supply a single stratum area for the park.
 ```YAML
 stratum id column: MDCATY
 stratum area info:

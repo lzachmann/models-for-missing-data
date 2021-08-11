@@ -14,7 +14,7 @@ Among a few other arguments, most of which have defaults, the analysis pipeline 
 
 Here is the first few lines of the data block for a model of count-type data at Rocky Mountain Network called `rich.yml`, which lives in the directory `config/ROMN/LIBI`
 
-```yml
+```YAML
 # ==== DATA ===================================================================
 
 response info:
