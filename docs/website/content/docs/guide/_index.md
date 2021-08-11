@@ -4,6 +4,8 @@ bookFlatSection: false
 title: "Guide"
 ---
 
+<link rel="stylesheet" type="text/css" href="{{ "/hugo-cite.css" | relURL }}" />
+
 # Guide
 
 We describe analysis inputs, model parameterization options, and outputs.
