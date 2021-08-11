@@ -2,7 +2,10 @@
 weight: 1
 bookFlatSection: false
 title: "Guide"
+bibFile: content/docs/guide/guide-bib.json
 ---
+
+<link rel="stylesheet" type="text/css" href="{{ "/hugo-cite.css" | relURL }}" />
 
 # Guide
 
@@ -21,3 +24,11 @@ git clone --recurse-submodules git@github.com:lzachmann/models-for-missing-data.
 ```
 
 You'll see several additional files and directories that are oriented at documentation and reporting (docs/) and the maintanence of the software (docker/).
+
+Trend vs. trajectory {{< cite "link1998estimating" >}}.
+
+---
+
+## References
+
+{{< bibliography cited >}}

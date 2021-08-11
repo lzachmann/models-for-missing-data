@@ -10,7 +10,6 @@ tags:
   - trajectory
 ---
 
-
 ## Introduction
 
 > The ‘term “trend” [is] a description of an overall tendency, without regard to fluctuations in the trajectory. The distinction between the terms has important consequences for analysis and interpretation of survey data. Trend describes the change in a population over a specific interval; trajectory describes the manner in which the change occurred.  
