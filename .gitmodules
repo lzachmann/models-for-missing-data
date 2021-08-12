@@ -4,3 +4,6 @@
 [submodule "docs/website/themes/book"]
 	path = docs/website/themes/book
 	url = https://github.com/alex-shpak/hugo-book
+[submodule "model-api"]
+	path = model-api
+	url = git@gitlab.com:nps-ima/uplands-ci.git
