@@ -6,4 +6,4 @@
 	url = https://github.com/alex-shpak/hugo-book
 [submodule "model-api"]
 	path = model-api
-	url = git@gitlab.com:nps-ima/uplands-ci.git
+	url = https://gitlab.com/nps-ima/uplands-ci.git
