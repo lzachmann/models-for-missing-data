@@ -49,3 +49,5 @@ stratum area info:
     Gulley2: 138247
     Upland: 1063552
 ```
+
+The number assigned to each stratum under `stratum area info` corresponds to the total number of sites -- regardless of the actual units -- that _could_ have been sampled in that stratum. In this example there are `684731` in `Gulley1` Thus, total number of sites sampled is a negligible proportion of the landscape. 684731 / (684731 + 138247 + 1063552) = 0.3629579
