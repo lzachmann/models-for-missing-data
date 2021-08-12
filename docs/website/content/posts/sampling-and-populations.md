@@ -12,7 +12,7 @@ tags:
 We sample for practical reasons. It's usually impossible to get information on the whole population, so we use the sample to make inferences about the population. In our case, the population is typically all sites in a stratum or all sites -- in all strata -- in a park unit. What do we mean by inferences? Once we have a sample, typically we have three questions.
 
 1. What's the best estimate of the population mean?  
-> We can generate a sample mean, {{< katex >}}\bar{x}{{< /katex >}}, from our sample. This is the best estimate of the population mean.
+> We can generate a sample mean, {{< katex >}}\bar{x}{{< /katex >}}, from our sample. This is the best estimate of the population mean.  
 
 {{< katex display >}}
 \bar{x}=\frac{\sum{x}}{n}
