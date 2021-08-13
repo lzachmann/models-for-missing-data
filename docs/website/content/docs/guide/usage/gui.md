@@ -1,6 +1,7 @@
 ---
 title: Graphical user interface
-weight: 2
+weight: 1
 bookToc: true
 ---
+
 # Graphical user interface (RStudio)
