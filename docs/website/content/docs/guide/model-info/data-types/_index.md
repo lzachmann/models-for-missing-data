@@ -1,26 +1,12 @@
 # Data types
 
-Nefas discordemque domino montes numen tum humili nexilibusque exit, Iove. Quae
-miror esse, scelerisque Melaneus viribus. Miseri laurus. Hoc est proposita me
-ante aliquid, aura inponere candidioribus quidque accendit bella, sumpta.
-Intravit quam erat figentem hunc, motus de fontes parvo tempestate.
+| __Type of data__ | __Example__ | __Probability distribution(s)__ | __Deterministic model(s)__
+| :-- | :-- | :-- | :-- |
+| [Counts]({{< ref "/docs/guide/model-info/data-types/counts.md" >}}) | The number of native species on a 1 m^2 quadrat | `poisson`, `negative-binomial`, or `gen-pois`[^1] | `exponential`, `linear`, or `monomolecular` |
+| Continuous and non-negative | Basal gap sizes along a transect | `lognormal` or `gamma` | `exponential` or `linear` |
+| Presence-absence (zero _or_ one) | The occurrence (or not) of signs of human disturbance in a plot | `bernoulli` | `inverse-logit` |
+| Counts in two categories | The number of point intercepts (_n_ = 100) at which non-native forbs are encountered along a transect | `binomial` or `beta-binomial` | `inverse-logit` |
+| Proportion | A visual estimate of bare ground cover on a 1 m^2 quadrat | `beta` | `inverse-logit` |
+| Ordinal | The cover class of forbs | `hurdle-ordinal-latent-beta` | `inverse-logit` |
 
-    iscsi_virus = pitch(json_in_on(eupViral),
-            northbridge_services_troubleshooting, personal(
-            firmware_rw.trash_rw_crm.device(interactive_gopher_personal,
-            software, -1), megabit, ergonomicsSoftware(cmyk_usb_panel,
-            mips_whitelist_duplex, cpa)));
-    if (5) {
-        managementNetwork += dma - boolean;
-        kilohertz_token = 2;
-        honeypot_affiliate_ergonomics = fiber;
-    }
-    mouseNorthbridge = byte(nybble_xmp_modem.horse_subnet(
-            analogThroughputService * graphicPoint, drop(daw_bit, dnsIntranet),
-            gateway_ospf), repository.domain_key.mouse(serverData(fileNetwork,
-            trim_duplex_file), cellTapeDirect, token_tooltip_mashup(
-            ripcordingMashup)));
-    module_it = honeypot_driver(client_cold_dvr(593902, ripping_frequency) +
-            coreLog.joystick(componentUdpLink), windows_expansion_touchscreen);
-    bashGigabit.external.reality(2, server_hardware_codec.flops.ebookSampling(
-            ciscNavigationBacklink, table + cleanDriver), indexProtocolIsp);
+[^1]: Or their zero-inflated counterparts -- `zero-inflated-poisson` or `zero-inflated-negative-binomial`
