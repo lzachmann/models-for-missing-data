@@ -48,5 +48,13 @@ jobs: # =======================================================================
         run: |
           ./model-api/src/model-builder/compile-jags-file.sh \
             ${{ matrix.likelihood }} exponential b0-b1 w1 \
-            assets
-          ls assets
+            assets/${{ matrix.likelihood }}
+          ls assets/${{ matrix.likelihood }}
+
+      # Upload results
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.likelihood }}-models # was: ${{ steps.findandreplace.outputs.value }}-artifact
+          path: assets/${{ matrix.likelihood }}
+          retention-days: 1
