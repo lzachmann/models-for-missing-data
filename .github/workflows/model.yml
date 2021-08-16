@@ -36,6 +36,7 @@ jobs: # =======================================================================
       - name: Checkout the gh-submodule branch of the model-api repo
         run: |
           cd model-api
+          git fetch
           git checkout gh-submodule
           cat README.md
           cd ..
