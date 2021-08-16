@@ -6,8 +6,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "docs/website"
     paths-ignore:
-      - README.md # don't rebuild on documentation changes
+      - "README.md" # don't rebuild on documentation changes
   pull_request:
 
 jobs: # =======================================================================
