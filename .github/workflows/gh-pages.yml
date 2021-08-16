@@ -1,15 +1,20 @@
-name: GitHub Pages
+# GitHub Pages workflow code
+
+name: GitHub Pages # ==========================================================
 
 on:
   push:
     branches:
-      - main  # Set a branch name to trigger deployment
+      - main
     paths-ignore:
       - README.md # don't rebuild on documentation changes
   pull_request:
 
-jobs:
-  deploy:
+jobs: # =======================================================================
+
+  # ---------------------------------------------------------------------------
+  deploy: # deploy the Hugo website we are using for documentation
+  # ---------------------------------------------------------------------------
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -35,7 +40,6 @@ jobs:
       - name: Build
         run: |
           cd docs/website
-          ls
           hugo --minify
           cd ../..
 

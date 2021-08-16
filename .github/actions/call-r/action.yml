@@ -1,0 +1,21 @@
+# Action metadata
+
+name: "Call R"
+
+description: "Run R script or command and record the time"
+
+inputs:
+  rfile:  # id of input
+    description: 'Which R file'
+    required: true
+    default: 'model-api/.empty.R'
+
+outputs:
+  time: # id of output
+    description: 'The time the task completed'
+
+runs:
+  using: "docker"
+  image: "Dockerfile" # was: ghcr.io/lzachmann/models-for-missing-data:main
+  args:
+    - ${{ inputs.rfile }}
