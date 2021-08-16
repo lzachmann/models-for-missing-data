@@ -1,4 +1,6 @@
-name: Docker
+# Docker image workflow
+
+name: Docker # ================================================================
 
 on:
   push:
@@ -11,7 +13,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-jobs:
+jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
   build-and-push-image: # create and publish a Docker image

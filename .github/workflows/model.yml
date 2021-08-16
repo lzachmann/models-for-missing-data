@@ -1,0 +1,49 @@
+# Model workflow code
+
+name: Model CI # ==============================================================
+
+on: # controls when the workflow will run
+
+  push: # trigger workflow on push events, but only for the main branch
+    branches: [ main ]
+    paths:
+      - "model-api/**"
+    paths-ignore:
+      - "README.md" # don't rebuild on documentation changes
+
+  pull_request: # triggers workflow on pull request events (main branch only)
+    branches: [ main ] # ensure changes are "mergeable"
+
+  workflow_dispatch: # permits manual triggers from the Actions tab
+
+jobs: # =======================================================================
+
+  # ---------------------------------------------------------------------------
+  template: # create all template models
+  # ---------------------------------------------------------------------------
+
+    strategy:
+      matrix:
+        likelihood: [poisson, negative-binomial]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Checkout the repo so the workflow can access it
+      - name: Checkout this repo's action(s)
+        uses: actions/checkout@v2
+
+      - name: Checkout the gh-submodule branch of the model-api repo
+        run: |
+          cd model-api
+          git checkout gh-submodule
+          cat README.md
+          cd ..
+
+      # Run analyses and compile results
+      - name: Fit models and compile results
+        run: |
+          .model-api/src/model-builder/compile-jags-file.sh \
+            ${{ matrix.likelihood }} exponential b0-b1 w1 \
+            assets
+          ls assets

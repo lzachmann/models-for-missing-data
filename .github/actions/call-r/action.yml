@@ -16,6 +16,6 @@ outputs:
 
 runs:
   using: "docker"
-  image: "Dockerfile" # was: ghcr.io/lzachmann/models-for-missing-data:main
+  image: ghcr.io/lzachmann/models-for-missing-data:main # was: "Dockerfile"
   args:
     - ${{ inputs.rfile }}
