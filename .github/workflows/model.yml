@@ -8,8 +8,8 @@ on: # controls when the workflow will run
     branches: [ main ]
     paths:
       - "model-api/**"
-    paths-ignore:
-      - "README.md" # don't rebuild on documentation changes
+      - ".github/workflows/model.yml"
+      - "!README.md" # don't rebuild on documentation changes
 
   pull_request: # triggers workflow on pull request events (main branch only)
     branches: [ main ] # ensure changes are "mergeable"
