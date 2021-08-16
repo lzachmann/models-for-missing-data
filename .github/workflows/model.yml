@@ -46,7 +46,7 @@ jobs: # =======================================================================
       # Run analyses and compile results
       - name: Fit models and compile results
         run: |
-          .model-api/src/model-builder/compile-jags-file.sh \
+          ./model-api/src/model-builder/compile-jags-file.sh \
             ${{ matrix.likelihood }} exponential b0-b1 w1 \
             assets
           ls assets
