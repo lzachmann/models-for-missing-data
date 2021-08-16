@@ -43,10 +43,11 @@ jobs: # =======================================================================
           cat README.md
           cd ..
 
-      # Run analyses and compile results
-      - name: Fit models and compile results
+      # Create model templates using job matrix params
+      - name: Create model templates
         run: |
-          ./model-api/src/model-builder/compile-jags-file.sh \
+          cd model-api
+          ./src/model-builder/compile-jags-file.sh \
             ${{ matrix.likelihood }} exponential b0-b1 w1 \
             assets/${{ matrix.likelihood }}
           ls assets/${{ matrix.likelihood }}
