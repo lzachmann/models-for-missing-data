@@ -14,3 +14,10 @@ runs:
       shell: bash
     - run: echo link is ${{ inputs.link }}
       shell: bash
+    - run: |
+        cd model-api
+        ./src/model-builder/compile-jags-file.sh \
+          ${{ inputs.likelihood }} ${{ inputs.link }} b0-b1 w1 \
+          ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
+        ls ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
+        cat ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}/model.jags
