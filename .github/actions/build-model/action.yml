@@ -1,9 +1,16 @@
 name: "Model building composite run steps"
 description: "Write model files using canned series of steps"
+inputs:
+  likelihood:
+    description: "Probability distribution"
+    required: true
+  link:
+    description: "Deterministic function for the mean"
+    required: true
 runs:
   using: "composite"
   steps:
-    - run: echo 123
+    - run: echo likelihood is ${{ inputs.likelihood }}
       shell: bash
-    - run: echo 999
+    - run: echo link is ${{ inputs.link }}
       shell: bash
