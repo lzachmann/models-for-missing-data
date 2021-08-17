@@ -1,4 +1,6 @@
 [![GitHub Pages](https://github.com/lzachmann/models-for-missing-data/actions/workflows/gh-pages.yml/badge.svg?branch=main)](https://github.com/lzachmann/models-for-missing-data/actions/workflows/gh-pages.yml)
+[![Docker](https://github.com/lzachmann/models-for-missing-data/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/lzachmann/models-for-missing-data/actions/workflows/docker.yml)
+[![Model CI](https://github.com/lzachmann/models-for-missing-data/actions/workflows/model.yml/badge.svg?branch=main)](https://github.com/lzachmann/models-for-missing-data/actions/workflows/model.yml)
 
 # models-for-missing-data
 
