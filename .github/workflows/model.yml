@@ -24,15 +24,12 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [poisson, negative-binomial, gen-pois,
-                     binomial]
-        link: [linear, exponential, inverse-logit]
+        likelihood: [poisson, negative-binomial, gen-pois]
+        link: [linear, exponential]
         exclude:
           # excludes parameterizations
-          - likelihood: binomial
-            link: [linear, exponential]
-          - likelihood: [poisson, negative-binomial]
-            link: inverse-logit
+          - likelihood: gen-pois
+            link: linear
     runs-on: ubuntu-latest
 
     steps:
@@ -60,6 +57,10 @@ jobs: # =======================================================================
             ~/assets/${{ matrix.likelihood }}
           ls ~/assets/${{ matrix.likelihood }}
           cat ~/assets/${{ matrix.likelihood }}/model.jags
+
+      # Try a composite action (testing)
+      - name: Composite action
+        uses: ./.github/actions/composite
 
       # Upload results
       - name: Upload Artifact

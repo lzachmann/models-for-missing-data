@@ -1,0 +1,7 @@
+runs:
+  using: "composite"
+  steps:
+    - run: echo 123
+      shell: bash
+    - run: echo 999
+      shell: bash
