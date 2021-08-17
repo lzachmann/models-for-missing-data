@@ -25,6 +25,11 @@ jobs: # =======================================================================
     strategy:
       matrix:
         likelihood: [poisson, negative-binomial]
+        link: [linear, exponential]
+        exclude:
+          # excludes parameterizations
+          - likelihood: poisson
+            link: linear
     runs-on: ubuntu-latest
 
     steps:
