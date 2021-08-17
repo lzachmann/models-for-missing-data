@@ -59,7 +59,7 @@ jobs: # =======================================================================
           cat ~/assets/${{ matrix.likelihood }}/model.jags
 
       # Try a composite action (testing)
-        uses: ./.github/actions/build-model
+      - uses: ./.github/actions/build-model
 
       # Upload results
       - name: Upload Artifact
