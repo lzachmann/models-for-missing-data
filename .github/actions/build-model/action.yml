@@ -21,3 +21,4 @@ runs:
           ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
         ls ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
         cat ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}/model.jags
+      shell: bash
