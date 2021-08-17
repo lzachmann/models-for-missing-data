@@ -26,10 +26,10 @@ jobs: # =======================================================================
       matrix:
         likelihood: [poisson, negative-binomial, gen-pois]
         link: [linear, exponential]
-        exclude:
-          # excludes parameterizations
-          - likelihood: gen-pois
-            link: linear
+        # exclude:
+        #   # excludes parameterizations
+        #   - likelihood: gen-pois
+        #     link: linear
     runs-on: ubuntu-latest
 
     steps:
