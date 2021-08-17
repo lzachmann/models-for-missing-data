@@ -24,12 +24,15 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [poisson, negative-binomial]
-        link: [linear, exponential]
+        likelihood: [poisson, negative-binomial, gen-pois,
+                     binomial]
+        link: [linear, exponential, inverse-logit]
         exclude:
           # excludes parameterizations
-          - likelihood: poisson
-            link: linear
+          - likelihood: binomial
+            link: [linear, exponential]
+          - likelihood: [poisson, negative-binomial]
+            link: inverse-logit
     runs-on: ubuntu-latest
 
     steps:
