@@ -1,3 +1,5 @@
+name: "Model building composite run steps"
+description: "Write model files using canned series of steps"
 runs:
   using: "composite"
   steps:
