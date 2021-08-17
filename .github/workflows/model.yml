@@ -8,6 +8,7 @@ on: # controls when the workflow will run
     branches: [ main ]
     paths:
       - "model-api/**"
+      - ".github/actions/build-model/**"
       - ".github/workflows/model.yml"
       - "!README.md" # don't rebuild on documentation changes
 
