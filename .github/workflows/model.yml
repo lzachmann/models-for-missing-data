@@ -53,7 +53,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         likelihood: [binomial, beta-binomial]
-        link: inverse-logit
+        link: [inverse-logit]
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
