@@ -53,7 +53,7 @@ jobs: # =======================================================================
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-          path: assets # ${{ github.workspace }}
+          path: ~/assets # ${{ github.workspace }}
 
   # ---------------------------------------------------------------------------
   create-jags-model-file-list:
