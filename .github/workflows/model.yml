@@ -84,7 +84,7 @@ jobs: # =======================================================================
           path: ~/assets
 
   # ---------------------------------------------------------------------------
-  create-jags-models:
+  create-jags-model-matrix:
   # ---------------------------------------------------------------------------
 
     needs: [count-variables, binomial-variables]
@@ -114,16 +114,16 @@ jobs: # =======================================================================
         matrix: ${{ steps.set-matrix.outputs.matrix }}
 
   # ---------------------------------------------------------------------------
-  sim-data-for-models:
+  use-jags-models-to-sim-data:
   # ---------------------------------------------------------------------------
 
-        needs: [create-jags-models]
+        needs: [create-jags-model-matrix]
         runs-on: ubuntu-latest
 
         strategy:
             # ↓ the real magic happens here - create dynamic matrix from the json
             matrix:
-                jags-model: ${{ fromJson(needs.create-jags-models.outputs.matrix) }}
+                jags-model: ${{ fromJson(needs.create-jags-model-matrix.outputs.matrix) }}
 
         steps:
           - uses: actions/checkout@v2
@@ -131,6 +131,14 @@ jobs: # =======================================================================
               submodules: true  # Fetch Hugo themes (true OR recursive)
               fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
           - run: echo ${{ matrix.jags-model }}
+
+          - name: Download file share
+            uses: actions/download-artifact@v2
+            with:
+              name: artifact-${{ github.sha }}
+              path: ~/assets
+
+          - run: cat ${{ matrix.jags-model }}
 
 # ls | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
