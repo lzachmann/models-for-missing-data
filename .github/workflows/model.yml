@@ -47,31 +47,53 @@ jobs: # =======================================================================
           link: ${{ matrix.link }}
 
   # ---------------------------------------------------------------------------
-  binomial-variables: # create all template models
+  create-jags-model-file-list:
   # ---------------------------------------------------------------------------
 
-    strategy:
-      matrix:
-        likelihood: [binomial, beta-binomial]
-        link: [inverse-logit]
-        # exclude:
-        #   # excludes parameterizations
-        #   - likelihood: gen-pois
-        #     link: linear
+    needs: [count-variables]
     runs-on: ubuntu-latest
 
     steps:
-
       - uses: actions/checkout@v2
-        with:
-          submodules: true  # Fetch module and data API submodules
-          fetch-depth: 0
+      - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
-      # Try a composite action (testing)
-      - uses: ./.github/actions/build-model
-        with:
-          likelihood: ${{ matrix.likelihood }}
-          link: ${{ matrix.link }}
+    #   # here we create the json, we need the "id:" so we can use it in "outputs" bellow
+    #   -
+    #     id: set-matrix
+    #     run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --names)"
+    #
+    # # here, we save the result of this 1st phase to the "outputs"
+    # outputs:
+    #     matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+# ls | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
+
+  # # ---------------------------------------------------------------------------
+  # binomial-variables: # create all template models
+  # # ---------------------------------------------------------------------------
+  #
+  #   strategy:
+  #     matrix:
+  #       likelihood: [binomial, beta-binomial]
+  #       link: [inverse-logit]
+  #       # exclude:
+  #       #   # excludes parameterizations
+  #       #   - likelihood: gen-pois
+  #       #     link: linear
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: true  # Fetch module and data API submodules
+  #         fetch-depth: 0
+  #
+  #     # Try a composite action (testing)
+  #     - uses: ./.github/actions/build-model
+  #       with:
+  #         likelihood: ${{ matrix.likelihood }}
+  #         link: ${{ matrix.link }}
 
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
