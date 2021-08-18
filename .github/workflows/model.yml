@@ -20,7 +20,7 @@ on: # controls when the workflow will run
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
-  count-variables: # create all template models
+  count-variables: # creates template models for count data
   # ---------------------------------------------------------------------------
 
     strategy:
@@ -37,11 +37,11 @@ jobs: # =======================================================================
 
       - uses: actions/checkout@v2
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true  # fetch model and data API submodules
+          fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
 
-      # Try a composite action (testing)
-      - uses: ./.github/actions/build-model
+      - name: Build model
+        uses: ./.github/actions/build-model # composite action to create model
         with:
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
@@ -56,10 +56,38 @@ jobs: # =======================================================================
           path: ~/assets # ${{ github.workspace }}
 
   # ---------------------------------------------------------------------------
+  binomial-variables: # creates template models for successes / trials data
+  # ---------------------------------------------------------------------------
+
+    strategy:
+      matrix:
+        likelihood: [binomial, beta-binomial]
+        link: [inverse-logit]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # fetch model and data API submodules
+          fetch-depth: 0
+
+      - uses: ./.github/actions/build-model
+        with:
+          likelihood: ${{ matrix.likelihood }}
+          link: ${{ matrix.link }}
+
+      - name: Upload assets directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: ~/assets
+
+  # ---------------------------------------------------------------------------
   create-jags-models:
   # ---------------------------------------------------------------------------
 
-    needs: [count-variables]
+    needs: [count-variables, binomial-variables]
     runs-on: ubuntu-latest
 
     steps:
@@ -89,7 +117,7 @@ jobs: # =======================================================================
   sim-data-for-models:
   # ---------------------------------------------------------------------------
 
-        needs: [count-variables, create-jags-models]
+        needs: [create-jags-models]
         runs-on: ubuntu-latest
 
         strategy:
@@ -105,33 +133,6 @@ jobs: # =======================================================================
           - run: echo ${{ matrix.jags-model }}
 
 # ls | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
-
-  # # ---------------------------------------------------------------------------
-  # binomial-variables: # create all template models
-  # # ---------------------------------------------------------------------------
-  #
-  #   strategy:
-  #     matrix:
-  #       likelihood: [binomial, beta-binomial]
-  #       link: [inverse-logit]
-  #       # exclude:
-  #       #   # excludes parameterizations
-  #       #   - likelihood: gen-pois
-  #       #     link: linear
-  #   runs-on: ubuntu-latest
-  #
-  #   steps:
-  #
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         submodules: true  # Fetch module and data API submodules
-  #         fetch-depth: 0
-  #
-  #     # Try a composite action (testing)
-  #     - uses: ./.github/actions/build-model
-  #       with:
-  #         likelihood: ${{ matrix.likelihood }}
-  #         link: ${{ matrix.link }}
 
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
