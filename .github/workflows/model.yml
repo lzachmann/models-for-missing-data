@@ -46,6 +46,15 @@ jobs: # =======================================================================
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
 
+      # Each artifact behaves as a file share. Uploading to the same artifact
+      # multiple times in the same workflow can overwrite and append already
+      # uploaded files.
+      - name: Upload assets directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
+          path: assets # ${{ github.workspace }}
+
   # ---------------------------------------------------------------------------
   create-jags-model-file-list:
   # ---------------------------------------------------------------------------
@@ -54,7 +63,17 @@ jobs: # =======================================================================
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v2
+
+      # Download artifacts
+      - name: Download file share
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: assets
+      - name: Display structure of downloaded files
+        run: ls -R
       - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
     #   # here we create the json, we need the "id:" so we can use it in "outputs" bellow
