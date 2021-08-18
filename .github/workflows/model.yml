@@ -20,7 +20,7 @@ on: # controls when the workflow will run
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
-  count variables: # create all template models
+  count-variables: # create all template models
   # ---------------------------------------------------------------------------
 
     strategy:
@@ -47,7 +47,7 @@ jobs: # =======================================================================
           link: ${{ matrix.link }}
 
   # ---------------------------------------------------------------------------
-  binomial variables: # create all template models
+  binomial-variables: # create all template models
   # ---------------------------------------------------------------------------
 
     strategy:
