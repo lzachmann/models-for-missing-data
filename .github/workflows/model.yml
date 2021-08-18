@@ -25,7 +25,7 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [poisson, negative-binomial, gen-pois]
+        likelihood: [poisson] # , negative-binomial, gen-pois
         link: [linear, exponential]
         # exclude:
         #   # excludes parameterizations
@@ -71,7 +71,7 @@ jobs: # =======================================================================
         uses: actions/download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: ~/assets
       - name: Display structure of downloaded files
         run: ls -R
       - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
