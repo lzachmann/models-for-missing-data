@@ -20,7 +20,7 @@ on: # controls when the workflow will run
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
-  template: # create all template models
+  count variables: # create all template models
   # ---------------------------------------------------------------------------
 
     strategy:
@@ -40,22 +40,32 @@ jobs: # =======================================================================
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      # - name: Checkout the gh-submodule branch of the model-api repo
-      #   run: |
-      #     cd model-api
-      #     git checkout gh-submodule
-      #     cat README.md
-      #     cd ..
+      # Try a composite action (testing)
+      - uses: ./.github/actions/build-model
+        with:
+          likelihood: ${{ matrix.likelihood }}
+          link: ${{ matrix.link }}
 
-      # # Create model templates using job matrix params
-      # - name: Create model templates
-      #   run: |
-      #     cd model-api
-      #     ./src/model-builder/compile-jags-file.sh \
-      #       ${{ matrix.likelihood }} ${{ matrix.link }} b0-b1 w1 \
-      #       ~/assets/${{ matrix.likelihood }}-${{ matrix.link }}
-      #     ls ~/assets/${{ matrix.likelihood }}-${{ matrix.link }}
-      #     cat ~/assets/${{ matrix.likelihood }}-${{ matrix.link }}/model.jags
+  # ---------------------------------------------------------------------------
+  binomial variables: # create all template models
+  # ---------------------------------------------------------------------------
+
+    strategy:
+      matrix:
+        likelihood: [binomial, beta-binomial]
+        link: inverse-logit
+        # exclude:
+        #   # excludes parameterizations
+        #   - likelihood: gen-pois
+        #     link: linear
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch module and data API submodules
+          fetch-depth: 0
 
       # Try a composite action (testing)
       - uses: ./.github/actions/build-model
@@ -63,10 +73,14 @@ jobs: # =======================================================================
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
 
-      # # Upload results
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: ${{ matrix.likelihood }}-models # was: ${{ steps.findandreplace.outputs.value }}-artifact
-      #     path: ~/assets/${{ matrix.likelihood }}/**/*
-      #     retention-days: 1
+  # # ---------------------------------------------------------------------------
+  # breadcrumbs: # artifacts
+  # # ---------------------------------------------------------------------------
+  #   steps:
+  #     # Upload results
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: ${{ matrix.likelihood }}-models # was: ${{ steps.findandreplace.outputs.value }}-artifact
+  #         path: ~/assets/${{ matrix.likelihood }}/**/*
+  #         retention-days: 1
