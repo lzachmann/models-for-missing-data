@@ -13,7 +13,7 @@ on: # controls when the workflow will run
       - "!README.md" # don't rebuild on documentation changes
 
   pull_request: # triggers workflow on pull request events (main branch only)
-    branches: [ main ] # ensure changes are "mergeable"
+    branches: [ main ] # ensures changes are "mergeable"
 
   workflow_dispatch: # permits manual triggers from the Actions tab
 
@@ -25,8 +25,8 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [poisson] # , negative-binomial, gen-pois
-        link: [linear, exponential]
+        likelihood: [ poisson, negative-binomial, gen-pois ]
+        link: [ linear, exponential ]
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois

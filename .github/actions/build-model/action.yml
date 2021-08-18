@@ -7,6 +7,10 @@ inputs:
   link:
     description: "Deterministic function for the mean"
     required: true
+  gle:
+    description: "Group-level effect(s)"
+    required: true
+    default: b0
 runs:
   using: "composite"
   steps:
@@ -23,8 +27,8 @@ runs:
     - run: |
         cd model-api
         ./src/model-builder/compile-jags-file.sh \
-          ${{ inputs.likelihood }} ${{ inputs.link }} b0-b1 w1 \
-          ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
-        ls ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}
-        cat ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}/model.jags
+          ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
+          ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        ls ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        cat ~/assets/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}/model.jags
       shell: bash
