@@ -35,12 +35,10 @@ jobs: # =======================================================================
 
     steps:
 
-      # # Checkout the repo so the workflow can access it
-      # - name: Checkout this repo's action(s)
-      #   uses: actions/checkout@v2
-      #   with:
-      #     submodules: true  # Fetch Hugo themes (true OR recursive)
-      #     fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       # - name: Checkout the gh-submodule branch of the model-api repo
       #   run: |

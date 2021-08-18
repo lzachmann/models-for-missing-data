@@ -14,10 +14,6 @@ runs:
       shell: bash
     - run: echo link is ${{ inputs.link }}
       shell: bash
-    - uses: actions/checkout@v2
-      with:
-        submodules: true  # Fetch Hugo themes (true OR recursive)
-        fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
     - run: |
         cd model-api
         git checkout gh-submodule
