@@ -56,7 +56,7 @@ jobs: # =======================================================================
           path: ~/assets # ${{ github.workspace }}
 
   # ---------------------------------------------------------------------------
-  create-jags-model-file-list:
+  create-jags-models:
   # ---------------------------------------------------------------------------
 
     needs: [count-variables]
@@ -72,18 +72,37 @@ jobs: # =======================================================================
         with:
           name: artifact-${{ github.sha }}
           path: ~/assets
-      - name: Display structure of downloaded files
-        run: ls -R
+      # - name: Display structure of downloaded files
+      #   run: ls -R
       - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
-    #   # here we create the json, we need the "id:" so we can use it in "outputs" bellow
-    #   -
-    #     id: set-matrix
-    #     run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --names)"
-    #
-    # # here, we save the result of this 1st phase to the "outputs"
-    # outputs:
-    #     matrix: ${{ steps.set-matrix.outputs.matrix }}
+      # Create the json, we need the "id:" so we can use it in "outputs" bellow
+      - name: Create JAGS model file list
+        id: set-matrix
+        run: echo "::set-output name=matrix::$(ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g")"
+
+    # here, we save the result of this 1st phase to the "outputs"
+    outputs:
+        matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  # ---------------------------------------------------------------------------
+  sim-data-for-models:
+  # ---------------------------------------------------------------------------
+
+        needs: [count-variables, create-jags-models]
+        runs-on: ubuntu-latest
+
+        strategy:
+            # ↓ the real magic happens here - create dynamic matrix from the json
+            matrix:
+                jags-model: ${{ fromJson(needs.create-jags-models.outputs.matrix) }}
+
+        steps:
+          - uses: actions/checkout@v2
+            with:
+              submodules: true  # Fetch Hugo themes (true OR recursive)
+              fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          - run: echo ${{ matrix.jags-model }}
 
 # ls | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
