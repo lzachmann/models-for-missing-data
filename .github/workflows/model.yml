@@ -124,9 +124,9 @@ jobs: # =======================================================================
         runs-on: ubuntu-latest
 
         strategy:
-            # ↓ the real magic happens here - create dynamic matrix from the json
-            matrix:
-                jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
+          # the magic happens here - create dynamic matrix from the json
+          matrix:
+            jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
 
         steps:
           - uses: actions/checkout@v2
@@ -161,7 +161,8 @@ jobs: # =======================================================================
             # id: publish
             uses: ./.github/actions/call-r
             with:
-              rfile: "model-api/demo/sim.R ${{ matrix.jags-model }}"
+              rfile: model-api/demo/sim.R
+              args: ${{ matrix.jags-model }}
 
           # - name: Upload assets directory as an artifact
           #   uses: actions/upload-artifact@v2
