@@ -144,7 +144,9 @@ jobs: # =======================================================================
           - run: cat ${{ matrix.jags-model }}
 
           - name: Display structure of workspace
-            run: ls -R
+            run: |
+              ls -R
+              ls ~/assets
 
           - name: Use cached results
             # id: publish
