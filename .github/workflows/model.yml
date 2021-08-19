@@ -152,6 +152,12 @@ jobs: # =======================================================================
             with:
               rfile: ~/model-api/demo/sim.R ${{ matrix.jags-model }}
 
+          - name: Upload assets directory as an artifact
+            uses: actions/upload-artifact@v2
+            with:
+              name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
+              path: ~/assets # ${{ github.workspace }}
+
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
   # # ---------------------------------------------------------------------------
