@@ -102,46 +102,46 @@ jobs: # =======================================================================
         with:
           name: artifact-${{ github.sha }}
           path: ~/assets
-      - name: Display structure of downloaded files
-        run: ls -R
+      # - name: Display structure of downloaded files
+      #   run: ls -R
       - run: find ~/assets -name "model.jags" #ls ~/assets/**/model.jags
       # - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
-  #     # Create the json array, we need the "id:" so we can use it in "outputs" bellow
-  #     - name: Create JAGS model file list
-  #       id: set-matrix
-  #       run: echo "::set-output name=matrix::$(ls ~/assets/**/model.jags | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-  #
-  #   # here, we save the result of this 1st phase to the "outputs"
-  #   outputs:
-  #       matrix: ${{ steps.set-matrix.outputs.matrix }}
-  #
-  # # ---------------------------------------------------------------------------
-  # use-jags-models-to-sim-data:
-  # # ---------------------------------------------------------------------------
-  #
-  #       needs: [ define-jags-model-matrix ]
-  #       runs-on: ubuntu-latest
-  #
-  #       strategy:
-  #           # ↓ the real magic happens here - create dynamic matrix from the json
-  #           matrix:
-  #               jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
-  #
-  #       steps:
-  #         - uses: actions/checkout@v2
-  #           with:
-  #             submodules: true  # Fetch Hugo themes (true OR recursive)
-  #             fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
-  #         - run: echo ${{ matrix.jags-model }}
-  #
-  #         - name: Download file share
-  #           uses: actions/download-artifact@v2
-  #           with:
-  #             name: artifact-${{ github.sha }}
-  #             path: ~/assets
-  #
-  #         - run: cat ${{ matrix.jags-model }}
+      # Create the json array, we need the "id:" so we can use it in "outputs" bellow
+      - name: Create JAGS model file list
+        id: set-matrix
+        run: echo "::set-output name=matrix::$(find ~/assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+
+    # here, we save the result of this 1st phase to the "outputs"
+    outputs:
+        matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  # ---------------------------------------------------------------------------
+  use-jags-models-to-sim-data:
+  # ---------------------------------------------------------------------------
+
+        needs: [ define-jags-model-matrix ]
+        runs-on: ubuntu-latest
+
+        strategy:
+            # ↓ the real magic happens here - create dynamic matrix from the json
+            matrix:
+                jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
+
+        steps:
+          - uses: actions/checkout@v2
+            with:
+              submodules: true  # Fetch Hugo themes (true OR recursive)
+              fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          - run: echo ${{ matrix.jags-model }}
+
+          - name: Download file share
+            uses: actions/download-artifact@v2
+            with:
+              name: artifact-${{ github.sha }}
+              path: ~/assets
+
+          - run: cat ${{ matrix.jags-model }}
 
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
