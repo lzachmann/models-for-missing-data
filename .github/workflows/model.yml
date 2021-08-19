@@ -102,9 +102,9 @@ jobs: # =======================================================================
         with:
           name: artifact-${{ github.sha }}
           path: ~/assets
-      # - name: Display structure of downloaded files
-      #   run: ls -R
-      - run: ls ~/assets/**/model.jags
+      - name: Display structure of downloaded files
+        run: ls -R
+      - run: find ~/assets -name "model.jags" #ls ~/assets/**/model.jags
       # - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
   #     # Create the json array, we need the "id:" so we can use it in "outputs" bellow
