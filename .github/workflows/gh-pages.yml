@@ -4,8 +4,7 @@ name: GitHub Pages # ==========================================================
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - "docs/website"
       - "!README.md" # don't rebuild on documentation changes
