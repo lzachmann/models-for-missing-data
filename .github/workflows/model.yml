@@ -161,7 +161,7 @@ jobs: # =======================================================================
             # id: publish
             uses: ./.github/actions/call-r
             with:
-              rfile: model-api/demo/sim.R ${{ matrix.jags-model }}
+              rfile: "model-api/demo/sim.R ${{ matrix.jags-model }}"
 
           # - name: Upload assets directory as an artifact
           #   uses: actions/upload-artifact@v2
