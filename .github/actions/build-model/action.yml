@@ -1,6 +1,9 @@
 name: "Model building composite run steps"
 description: "Write model files using canned series of steps"
 inputs:
+  data-type:
+    description: "Data type"
+    required: true
   likelihood:
     description: "Probability distribution"
     required: true
@@ -29,9 +32,8 @@ runs:
         ./src/model-builder/compile-jags-file.sh \
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
           ~/assets/$MODEL_PATH
-        ls ~/assets/$MODEL_PATH
         cat ~/assets/$MODEL_PATH/crumbs.txt
         cat ~/assets/$MODEL_PATH/model.jags
       env:
-        MODEL_PATH: ${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        MODEL_PATH: ${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
