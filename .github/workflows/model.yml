@@ -151,14 +151,14 @@ jobs: # =======================================================================
 
           - name: Display structure of workspace
             run: |
-              ls -R
+              echo ${{ matrix.jags-model }}
               ls ~/assets
 
           - name: Use cached results
             # id: publish
             uses: ./.github/actions/call-r
             with:
-              rfile: ~/model-api/demo/sim.R ${{ matrix.jags-model }}
+              rfile: model-api/demo/sim.R ${{ matrix.jags-model }}
 
           - name: Upload assets directory as an artifact
             uses: actions/upload-artifact@v2
