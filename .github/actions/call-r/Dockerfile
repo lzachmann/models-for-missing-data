@@ -23,6 +23,7 @@ RUN apt-get install tree && \
         HDInterval \
         rjags \
         coda \
+        R2jags \
         runjags \
         bayesplot
 
