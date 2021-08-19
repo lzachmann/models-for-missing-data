@@ -22,7 +22,10 @@ RUN apt-get install tree && \
         cowplot \
         HDInterval \
         rjags \
-        coda
+        coda \
+        R2jags \
+        runjags \
+        bayesplot
 
 # Copies the code to the filesystem path `/` of the container
 COPY . .
