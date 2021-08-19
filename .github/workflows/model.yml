@@ -106,7 +106,7 @@ jobs: # =======================================================================
       #   run: ls -R
       - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
 
-      # Create the json, we need the "id:" so we can use it in "outputs" bellow
+      # Create the json array, we need the "id:" so we can use it in "outputs" bellow
       - name: Create JAGS model file list
         id: set-matrix
         run: echo "::set-output name=matrix::$(ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g")"
