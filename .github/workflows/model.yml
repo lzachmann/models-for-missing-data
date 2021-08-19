@@ -153,6 +153,9 @@ jobs: # =======================================================================
             run: |
               echo ${{ matrix.jags-model }}
               ls ~/assets
+              pwd
+              ls
+              cat model-api/demo/sim.R
 
           - name: Use cached results
             # id: publish
@@ -160,11 +163,11 @@ jobs: # =======================================================================
             with:
               rfile: model-api/demo/sim.R ${{ matrix.jags-model }}
 
-          - name: Upload assets directory as an artifact
-            uses: actions/upload-artifact@v2
-            with:
-              name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-              path: ~/assets # ${{ github.workspace }}
+          # - name: Upload assets directory as an artifact
+          #   uses: actions/upload-artifact@v2
+          #   with:
+          #     name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
+          #     path: ~/assets # ${{ github.workspace }}
 
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
