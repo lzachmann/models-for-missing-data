@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "docs/website"
+      - "docs/website/**"
       - "!README.md" # don't rebuild on documentation changes
   pull_request:
 
