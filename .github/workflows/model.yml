@@ -135,6 +135,12 @@ jobs: # =======================================================================
               fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
           - run: echo ${{ matrix.jags-model }}
 
+          - run: |
+              cd model-api
+              git checkout gh-submodule
+              cat README.md
+              cd ..
+
           - name: Download file share
             uses: actions/download-artifact@v2
             with:
