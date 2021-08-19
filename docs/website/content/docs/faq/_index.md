@@ -9,5 +9,5 @@ bookHidden: false
 
 # Frequently asked questions
 
-**Q**: Which type of data am I working with?
+**Q**: Which type of data am I working with?  
 **A**: Let's talk about it!
