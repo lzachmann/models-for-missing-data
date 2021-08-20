@@ -55,7 +55,7 @@ jobs: # =======================================================================
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-          path: assets # was: ${{ github.workspace }}/assets
+          path: ${{ github.workspace }}/assets # was: ${{ github.workspace }}/assets
 
   # # ---------------------------------------------------------------------------
   # binomial-variables: # creates template models for successes / trials data
