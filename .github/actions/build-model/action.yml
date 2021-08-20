@@ -1,7 +1,7 @@
 name: "Model building composite run steps"
 description: "Write model files using canned series of steps"
 inputs:
-  # workspace:
+  # wd:
   #   description: "Working directory"
   #   required: true
   data-type:
@@ -31,6 +31,7 @@ runs:
         cd ..
       shell: bash
     - run: |
+        echo $MODEL_PATH
         cd model-api
         ./src/model-builder/compile-jags-file.sh \
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
