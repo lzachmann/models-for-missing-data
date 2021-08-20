@@ -106,8 +106,11 @@ jobs: # =======================================================================
       #   run: ls -R
       - run: find ~/assets -name "model.jags" #ls ~/assets/**/model.jags
       # - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
-      - run: find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";'
-
+      - run: |
+          pwd
+          cd ~
+          pwd
+          echo "~/$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
   #     # Create the json array, we need the "id:" so we can use it in "outputs" bellow
   #     - name: Create JAGS model file list
   #       id: set-matrix
