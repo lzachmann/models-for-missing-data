@@ -40,11 +40,10 @@ jobs: # =======================================================================
           submodules: true  # fetch model and data API submodules
           fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
 
-      - run: echo ${{ github.workspace }}
+      # Build the JAGS model (and save it in an assets directory in the workspace)
       - name: Build model
         uses: ./.github/actions/build-model # composite action to create model
         with:
-          # wd: ${{ github.workspace }}/assets # was ${{ github.workspace }}/assets
           data-type: ${{ github.job }}
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
@@ -56,7 +55,7 @@ jobs: # =======================================================================
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-          path: ${{ github.workspace }}/assets # was: ${{ github.workspace }}/assets
+          path: assets # was: ${{ github.workspace }}/assets
 
   # # ---------------------------------------------------------------------------
   # binomial-variables: # creates template models for successes / trials data
