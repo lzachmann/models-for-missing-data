@@ -164,7 +164,7 @@ jobs: # =======================================================================
             uses: ./.github/actions/call-r
             with:
               rfile: model-api/demo/sim.R
-              args: ${{ github.workspace }}/${{ matrix.jags-model }}
+              args: ${{ matrix.jags-model }} # ${{ github.workspace }}
 
           # - name: Upload assets directory as an artifact
           #   uses: actions/upload-artifact@v2
