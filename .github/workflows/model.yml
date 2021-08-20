@@ -148,9 +148,9 @@ jobs: # =======================================================================
             uses: actions/download-artifact@v2
             with:
               name: artifact-${{ github.sha }}
-              path: ~/assets
+              path: assets
 
-          - run: cat ${{ matrix.jags-model }}
+          - run: cat ~/${{ matrix.jags-model }}
 
           - name: Display structure of workspace
             run: |
@@ -167,7 +167,7 @@ jobs: # =======================================================================
             uses: ./.github/actions/call-r
             with:
               rfile: model-api/demo/sim.R
-              args: ${{ matrix.jags-model }} # ${{ github.workspace }}
+              args: ~/${{ matrix.jags-model }} # ${{ github.workspace }}
 
           # - name: Upload assets directory as an artifact
           #   uses: actions/upload-artifact@v2
