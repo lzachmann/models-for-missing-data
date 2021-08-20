@@ -48,6 +48,7 @@ jobs: # =======================================================================
           data-type: ${{ github.job }}
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
+          gle: ${{ matrix.gle }}
 
       # Each artifact behaves as a file share. Uploading to the same artifact
       # multiple times in the same workflow can overwrite and append to already
