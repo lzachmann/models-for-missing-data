@@ -38,9 +38,9 @@ jobs: # =======================================================================
       - uses: actions/checkout@v2
         with:
           submodules: true  # fetch model and data API submodules
-          fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
+          # fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
 
-      # Build the JAGS model (and save it in an assets directory in the workspace)
+      # Build the JAGS model and save it in assets/
       - name: Build model
         uses: ./.github/actions/build-model # composite action to create model
         with:
@@ -49,13 +49,13 @@ jobs: # =======================================================================
           link: ${{ matrix.link }}
 
       # Each artifact behaves as a file share. Uploading to the same artifact
-      # multiple times in the same workflow can overwrite and append already
+      # multiple times in the same workflow can overwrite and append to already
       # uploaded files.
       - name: Upload assets directory as an artifact
         uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-          path: assets # was: ${{ github.workspace }}/assets
+          name: artifact-${{ github.sha }}
+          path: assets
 
   # # ---------------------------------------------------------------------------
   # binomial-variables: # creates template models for successes / trials data
@@ -97,82 +97,60 @@ jobs: # =======================================================================
 
       - uses: actions/checkout@v2
 
-      # Download artifacts
       - name: Download file share
         uses: actions/download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets # was: ${{ github.workspace }}/assets
-      # - name: Display structure of downloaded files
-      #   run: ls -R
-      - run: find assets -name "model.jags" #ls ~/assets/**/model.jags
-      # - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
-      - run: |
-          echo "$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-      # Create the json array, we need the "id:" so we can use it in "outputs" bellow
-      - name: Create JAGS model file list
-        id: set-matrix
+          path: assets
+
+      - name: Create JAGS model file list as a JSON array
+        id: set-matrix # we need an "id" so we can use it in "outputs" below
         run: |
           echo "::set-output name=matrix::$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
 
-    # here, we save the result of this 1st phase to the "outputs"
     outputs:
-        matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
 
   # ---------------------------------------------------------------------------
-  use-jags-models-to-sim-data:
+  use-jags-models-to-sim-data: # create dynamic matrix from json, simulate data
   # ---------------------------------------------------------------------------
 
-        needs: [ define-jags-model-matrix ]
-        runs-on: ubuntu-latest
+    needs: [ define-jags-model-matrix ]
+    runs-on: ubuntu-latest
 
-        strategy:
-          # the magic happens here - create dynamic matrix from the json
-          matrix:
-            jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
+    strategy:
+      matrix:
+        jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
 
-        steps:
-          - uses: actions/checkout@v2
-            with:
-              submodules: true  # Fetch Hugo themes (true OR recursive)
-              fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          # fetch-depth: 0
 
-          - run: |
-              cd model-api
-              git checkout gh-submodule
-              cat README.md
-              cd ..
+      - run: |
+          cd model-api
+          git checkout gh-submodule
+          cd ..
 
-          - name: Download file share
-            uses: actions/download-artifact@v2
-            with:
-              name: artifact-${{ github.sha }}
-              path: assets
+      - name: Download file share
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: assets
 
-          - run: cat ${{ matrix.jags-model }}
+      - name: Use cached results
+        # id: publish
+        uses: ./.github/actions/call-r
+        with:
+          rfile: model-api/demo/sim.R
+          args: ${{ matrix.jags-model }}
 
-          - name: Display structure of workspace
-            run: |
-              echo ${{ matrix.jags-model }}
-              ls -R assets
-              pwd
-              ls
-              cat model-api/demo/sim.R
-              echo $(dirname ${{ matrix.jags-model }})
-
-          # Try this!
-          - name: Use cached results
-            # id: publish
-            uses: ./.github/actions/call-r
-            with:
-              rfile: model-api/demo/sim.R
-              args: ${{ matrix.jags-model }} # ${{ github.workspace }}
-
-          # - name: Upload assets directory as an artifact
-          #   uses: actions/upload-artifact@v2
-          #   with:
-          #     name: artifact-${{ github.sha }} # ${{ steps.findandreplace.outputs.value }}-artifact
-          #     path: ~/assets # ${{ github.workspace }}
+      - name: Upload assets directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: assets
 
   # # ---------------------------------------------------------------------------
   # breadcrumbs: # artifacts
