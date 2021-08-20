@@ -108,22 +108,16 @@ jobs: # =======================================================================
       - run: find ${{ github.workspace }}/assets -name "model.jags" #ls ~/assets/**/model.jags
       # - run: ls ~/assets/**/model.jags | awk ' BEGIN { ORS = ""; print "["; } { print "\/\@"$0"\/\@"; } END { print "]"; }' | sed "s^\"^\\\\\"^g;s^\/\@\/\@^\", \"^g;s^\/\@^\"^g"
       - run: |
-          pwd
-          echo ${{ github.workspace }}
-          ls ${{ github.workspace }}
           echo "$(find ${{ github.workspace }}/assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-  #     # Create the json array, we need the "id:" so we can use it in "outputs" bellow
-  #     - name: Create JAGS model file list
-  #       id: set-matrix
-  #       run: |
-  #         cd ~
-  #         echo "::set-output name=matrix::$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-  #         cd ..
-  #
-  #   # here, we save the result of this 1st phase to the "outputs"
-  #   outputs:
-  #       matrix: ${{ steps.set-matrix.outputs.matrix }}
-  #
+      # Create the json array, we need the "id:" so we can use it in "outputs" bellow
+      - name: Create JAGS model file list
+        id: set-matrix
+        run: echo "::set-output name=matrix::$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+
+    # here, we save the result of this 1st phase to the "outputs"
+    outputs:
+        matrix: ${{ steps.set-matrix.outputs.matrix }}
+
   # # ---------------------------------------------------------------------------
   # use-jags-models-to-sim-data:
   # # ---------------------------------------------------------------------------
