@@ -110,7 +110,8 @@ jobs: # =======================================================================
           pwd
           cd ~
           pwd
-          echo "~/$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+          ls ${{ github.workspace }}
+          echo "$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(~/\@in)."\n";')"
   #     # Create the json array, we need the "id:" so we can use it in "outputs" bellow
   #     - name: Create JAGS model file list
   #       id: set-matrix
