@@ -31,6 +31,7 @@ runs:
         cd ..
       shell: bash
     - run: |
+        echo "check this out"
         echo $MODEL_PATH
         cd model-api
         ./src/model-builder/compile-jags-file.sh \
@@ -39,5 +40,5 @@ runs:
         cat $MODEL_PATH/crumbs.txt
         cat $MODEL_PATH/model.jags
       env:
-        MODEL_PATH: ${{ github.workspace }}/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
