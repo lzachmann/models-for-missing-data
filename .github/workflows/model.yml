@@ -27,6 +27,7 @@ jobs: # =======================================================================
       matrix:
         likelihood: [ poisson ] #, negative-binomial, gen-pois
         link: [ linear, exponential ]
+        gle: [ b0-b1 ]
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
