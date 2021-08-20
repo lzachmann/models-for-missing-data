@@ -156,6 +156,7 @@ jobs: # =======================================================================
               pwd
               ls
               cat model-api/demo/sim.R
+              chmod 777 $(dirname ${{ matrix.jags-model }})
 
           # Try this!
           - name: Use cached results
