@@ -1,9 +1,9 @@
 name: "Model building composite run steps"
 description: "Write model files using canned series of steps"
 inputs:
-  workspace:
-    description: "Working directory"
-    required: true
+  # workspace:
+  #   description: "Working directory"
+  #   required: true
   data-type:
     description: "Data type"
     required: true
@@ -38,5 +38,5 @@ runs:
         cat $MODEL_PATH/crumbs.txt
         cat $MODEL_PATH/model.jags
       env:
-        MODEL_PATH: ${{ inputs.workspace }}/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        MODEL_PATH: ${{ github.workspace }}/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
