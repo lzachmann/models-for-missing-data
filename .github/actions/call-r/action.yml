@@ -12,9 +12,9 @@ inputs:
   args: # some applications may have positional parameters
     description: 'Arguments to the R script'
     required: false
-  # opts:
-  #   description: 'Flags used by the R script'
-  #   required: false
+  opts:
+    description: 'Flags used by the R script'
+    required: false
 
 
 outputs:
@@ -27,4 +27,4 @@ runs:
   args:
     - ${{ inputs.rfile }}
     - ${{ inputs.args }}
-    # - ${{ inputs.opts }}
+    - ${{ inputs.opts }}

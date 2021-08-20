@@ -121,6 +121,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
+        options: "--seed 123"
 
     steps:
       - uses: actions/checkout@v2
@@ -145,6 +146,7 @@ jobs: # =======================================================================
         with:
           rfile: model-api/demo/sim.R
           args: ${{ matrix.jags-model }}
+          opts: ${{ matrix.options }}
 
       - name: Upload assets directory as an artifact
         uses: actions/upload-artifact@v2
