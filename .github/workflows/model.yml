@@ -99,7 +99,7 @@ jobs: # =======================================================================
   define-jags-model-matrix:
   # ---------------------------------------------------------------------------
 
-    needs: [ count-vars ] #, binomial-variables
+    needs: [ count-vars, binomial-vars ]
     runs-on: ubuntu-latest
 
     steps:
