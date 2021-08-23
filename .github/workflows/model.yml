@@ -17,12 +17,10 @@ on: # controls when the workflow will run
 
   workflow_dispatch: # permits manual triggers from the Actions tab
 
-  workflow_run:
-    workflows: [ "Docker" ]
-    branches: [ main ]
-    types:
-      - completed
-      - requested
+  # workflow_run:
+  #   workflows: [ "Docker" ]
+  #   branches: [ main ]
+  #   types: [ completed ]
 
 jobs: # =======================================================================
 
@@ -40,6 +38,7 @@ jobs: # =======================================================================
         #   - likelihood: gen-pois
         #     link: linear
     runs-on: ubuntu-latest
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
 
