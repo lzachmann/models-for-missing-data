@@ -6,7 +6,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - ".github/actions/call-r/Dockerfile"
+      - ".github/actions/call-r/**"
       - ".github/workflows/docker.yml"
 
 env:
