@@ -20,7 +20,7 @@ on: # controls when the workflow will run
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
-  count-variables: # creates template models for count data
+  count-vars: # creates template models for count data
   # ---------------------------------------------------------------------------
 
     strategy:
@@ -60,7 +60,7 @@ jobs: # =======================================================================
           path: assets
 
   # # ---------------------------------------------------------------------------
-  # binomial-variables: # creates template models for successes / trials data
+  # binomial-vars: # creates template models for successes / trials data
   # # ---------------------------------------------------------------------------
   #
   #   strategy:
@@ -92,7 +92,7 @@ jobs: # =======================================================================
   define-jags-model-matrix:
   # ---------------------------------------------------------------------------
 
-    needs: [ count-variables ] #, binomial-variables
+    needs: [ count-vars ] #, binomial-variables
     runs-on: ubuntu-latest
 
     steps:
