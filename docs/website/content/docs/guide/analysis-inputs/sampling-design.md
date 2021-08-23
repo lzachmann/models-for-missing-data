@@ -6,7 +6,7 @@ bookToc: true
 
 # Sampling design
 
-Luke was here. Two high-level "attributes" files are required for all analyses. So long as the basic details of the sampling design they describe do not vary for different measures within a park, or different park units within a network, they only need to be specified once.
+Two high-level "attributes" files are required for all analyses. So long as the basic details of the sampling design they describe do not vary for different measures within a park, or different park units within a network, they only need to be specified once.
 
 ## The config directory
 
