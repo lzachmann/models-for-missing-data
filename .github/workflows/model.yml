@@ -25,7 +25,7 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [ poisson, negative-binomial ] #, negative-binomial, gen-pois
+        likelihood: [ poisson ] #, negative-binomial, gen-pois
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
         # exclude:
