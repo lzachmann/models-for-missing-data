@@ -25,7 +25,8 @@ RUN apt-get install tree && \
         coda \
         R2jags \
         runjags \
-        bayesplot
+        bayesplot \
+        extraDistr
 
 # Copies the code to the filesystem path `/` of the container
 COPY . .
