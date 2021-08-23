@@ -17,6 +17,13 @@ on: # controls when the workflow will run
 
   workflow_dispatch: # permits manual triggers from the Actions tab
 
+  workflow_run:
+    workflows: [ "Docker" ]
+    branches: [ main ]
+    types:
+      - completed
+      - requested
+
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
@@ -67,7 +74,7 @@ jobs: # =======================================================================
       matrix:
         likelihood: [ binomial ] #, beta-binomial
         link: [ inverse-logit ]
-        gle: [ b0, b0-b1 ] # 
+        gle: [ b0, b0-b1 ] #
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
@@ -130,7 +137,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
-        options: [ "--seed 123" ]
+        options: [ --seed=123 ]
 
     steps:
       - uses: actions/checkout@v2
