@@ -7,7 +7,7 @@ on: # controls when the workflow will run
   push: # trigger workflow on push events, but only for the main branch
     branches: [ main ]
     paths:
-      - "model-api/**"
+      - "model-api/**/*"
       - ".github/actions/build-model/**"
       - ".github/workflows/model.yml"
       - "!README.md" # don't rebuild on documentation changes
