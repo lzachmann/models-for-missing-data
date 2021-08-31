@@ -20,16 +20,21 @@ if [ ${APPLICATION} == "rstudio" ]; then
     echo "http://localhost:$PORT/ (with usr and pwd 'bayes')"
   fi
 
-  # # rm -rf kitematic/ .rstudio/ rstudio/
-  # docker run -it --rm \
-  # 		--name rstudio-m4md-$PORT \
-  # 		-v "$(pwd)":/home/bayes \
-  # 		-w /home/bayes \
-  # 		-e USER="bayes" \
-  # 		-e PASSWORD="bayes" \
-  # 		-p $PORT:8787 \
-  #     --entrypoint $ENTRYPOINT \
-  # 		$IMAGE
+  mkdir -p .config/rstudio
+  cp assets/rstudio-prefs.json .config/rstudio
+  cp assets/.Rprofile .
+
+  docker run -it --rm \
+		--name rstudio-m4md-$PORT \
+		-v "$(pwd)":/home/bayes \
+		-w /home/bayes \
+		-e USER="bayes" \
+		-e PASSWORD="bayes" \
+		-p $PORT:8787 \
+    --entrypoint $ENTRYPOINT \
+		$IMAGE
+
+  rm -r .config .local rstudio .Rprofile
 
 elif [ ${APPLICATION} == "hugo" ]; then
 
@@ -39,7 +44,6 @@ elif [ ${APPLICATION} == "hugo" ]; then
     -w /src/docs/website \
     klakegg/hugo:0.83.1-ext-ubuntu \
     shell
-
     # hugo server -D
 
 fi
