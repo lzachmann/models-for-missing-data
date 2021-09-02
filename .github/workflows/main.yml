@@ -10,6 +10,7 @@ on: # controls when the workflow will run
       - "model-api/**"
       - ".github/actions/build-model/**"
       - ".github/workflows/main.yml"
+      - "st-kit/**"
       - "!README.md" # don't rebuild on documentation changes
 
   pull_request: # triggers workflow on pull request events (main branch only)
