@@ -5,7 +5,7 @@ name: Docker # ================================================================
 on:
   push:
     branches: [ 'main' ]
-    tags: [ 'v*' ] # unsure if this is needed unless using in metadata step
+    tags: [ 'v*' ]
     paths:
       - ".github/actions/call-r/**"
       - ".github/workflows/docker.yml"
@@ -18,7 +18,7 @@ env:
 jobs: # =======================================================================
 
   # ---------------------------------------------------------------------------
-  build-and-push-images: # create and publish a Docker image
+  build-and-push-images: # create and publish Docker images
   # ---------------------------------------------------------------------------
 
     strategy:
@@ -46,65 +46,20 @@ jobs: # =======================================================================
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - run: cp assets/Latin-Modern-Roman-fontfacekit.zip ${{ matrix.context }}
-      # - run: |
-      #     echo ${{ steps.meta.outputs.tags }}
-      #     echo ${{ steps.meta.outputs.labels }}
+      - name: Copy any assets required by the Dockerfile
+        run: cp assets/Latin-Modern-Roman-fontfacekit.zip ${{ matrix.context }}
 
-      - name: Set selected color
-        run: echo '::set-output name=SELECTED_COLOR::green'
-        id: random-color-generator
-      - name: Get color
-        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
-
-      - name: Use environment variable to assign image tag
+      - name: Set an environment variable for the image tag
         id: tag-generator
         run: |
-          echo "DIRNAME=$(basename $CONTEXT)" >> $GITHUB_ENV
-        #run: |
-        #  DIRNAME=$(basename $CONTEXT)
-        #  echo $DIRNAME
-        #  echo '::set-output name=TAG::$DIRNAME'
+          echo "TAG=$(basename $CONTEXT)" >> $GITHUB_ENV
         env:
           CONTEXT: ${{ matrix.context }}
-      - name: Get tag
-        run: |
-          echo "${{ env.DIRNAME }}"
-        # echo "The tag is ${{ steps.tag-generator.outputs.TAG }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ${{ matrix.context }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DIRNAME }} # was: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} # was: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  # # ---------------------------------------------------------------------------
-  # dev-env: # create and publish a Docker image
-  # # ---------------------------------------------------------------------------
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #     packages: write
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Login to GitHub Container Registry
-  #       uses: docker/login-action@v1
-  #       with:
-  #         registry: ${{ env.REGISTRY }}
-  #         username: ${{ github.actor }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #     - run: |
-  #         cp assets/Latin-Modern-Roman-fontfacekit.zip ./docker/latest
-  #         ls ./docker/latest
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         context: ./docker/latest
-  #         push: true
-  #         tags: ghcr.io/lzachmann/models-for-missing-data:latest
