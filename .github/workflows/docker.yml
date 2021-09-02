@@ -52,9 +52,14 @@ jobs: # =======================================================================
       #     echo ${{ steps.meta.outputs.labels }}
       - name: Use environment variable to assign image tag
         id: tag-generator
-        run: echo '::set-output name=TAG::$(basename $CONTEXT)'
+        run: |
+          DIRNAME=$(basename $CONTEXT)
+          echo $DIRNAME
+          echo '::set-output name=TAG::$DIRNAME'
         env:
           CONTEXT: ${{ matrix.context }}
+      - name: Get tag
+        run: echo "The tag is ${{ steps.tag-generator.outputs.TAG }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
