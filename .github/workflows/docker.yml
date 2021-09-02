@@ -41,9 +41,9 @@ jobs: # =======================================================================
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - run: cp assets/Latin-Modern-Roman-fontfacekit.zip ./.github/actions/call-r
-      - run: |
-          echo ${{ steps.meta.outputs.tags }}
-          echo ${{ steps.meta.outputs.labels }}
+      # - run: |
+      #     echo ${{ steps.meta.outputs.tags }}
+      #     echo ${{ steps.meta.outputs.labels }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -74,10 +74,9 @@ jobs: # =======================================================================
       - run: |
           cp assets/Latin-Modern-Roman-fontfacekit.zip ./docker/latest
           ls ./docker/latest
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./docker/latest
-      #     push: true
-      #     tags: latest
-      #     labels: dev
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./docker/latest
+          push: true
+          tags: ghcr.io/lzachmann/models-for-missing-data:latest
