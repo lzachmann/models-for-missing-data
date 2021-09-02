@@ -104,19 +104,19 @@ stk_hist <- function(x, var = NULL, theme = NULL, n_sig_figs = 2, facets = NULL,
 
 # Example usage.
 # stk_hist(rnorm(1000))
-stk_hist(
-  x = rpois(1E4, 5), #rnorm(1000),
-  theme = get_theme("sim_theme", y_lab_angle = 90)(),
-  bins = 30
-)
-stk_hist(
-  x = d_in_sample %>% filter(x %in% range(x)), var = 'y', 
-  theme = get_theme("sim_theme", y_lab_angle = 90)(),
-  bins = 30
-)
-stk_hist(
-  x = d_in_sample %>% filter(x %in% range(x)), var = 'y', 
-  facets = c('x', 'stratum'),
-  theme = get_theme("sim_theme", y_lab_angle = 90)(),
-  bins = 30
-)
+# stk_hist(
+#   x = rpois(1E4, 5), #rnorm(1000),
+#   theme = get_theme("sim_theme", y_lab_angle = 90)(),
+#   bins = 30
+# )
+# stk_hist(
+#   x = d_in_sample %>% filter(x %in% range(x)), var = 'y', 
+#   theme = get_theme("sim_theme", y_lab_angle = 90)(),
+#   bins = 30
+# )
+# stk_hist(
+#   x = d_in_sample %>% filter(x %in% range(x)), var = 'y', 
+#   facets = c('x', 'stratum'),
+#   theme = get_theme("sim_theme", y_lab_angle = 90)(),
+#   bins = 30
+# )
