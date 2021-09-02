@@ -155,13 +155,16 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: assets
 
-      - name: Use cached results
-        # id: publish
+      - name: Use cached results (simulate data and fit model)
+        id: verify
         uses: ./.github/actions/call-r
         with:
           rfile: model-api/demo/sim.R
           args: ${{ matrix.jags-model }}
           opts: ${{ matrix.options }}
+
+      - name: Check status of model verification
+        run: echo "The exit status was ${{ steps.verify.outputs.code }}"
 
       - name: Upload assets directory as an artifact
         uses: actions/upload-artifact@v2
