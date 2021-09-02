@@ -5,7 +5,11 @@ name: "Call R"
 description: "Run R script or command and record the time"
 
 inputs:
-  rfile: # id of input
+  image:
+    description: 'The container for the action'
+    required: true
+    default: 'Dockerfile'
+  rfile: # R file name (including project path)
     description: 'Which R file'
     required: true
     default: 'model-api/.empty.R'
@@ -23,7 +27,7 @@ outputs:
 
 runs:
   using: "docker"
-  image: ghcr.io/lzachmann/models-for-missing-data:main # was: "Dockerfile"
+  image: ${{ inputs.image }} # was: ghcr.io/lzachmann/models-for-missing-data:main # was: "Dockerfile"
   args:
     - ${{ inputs.rfile }}
     - ${{ inputs.args }}

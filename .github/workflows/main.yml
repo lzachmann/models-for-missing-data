@@ -7,7 +7,7 @@ on: # controls when the workflow will run
   push: # trigger workflow on push events, but only for the main branch
     branches: [ main ]
     paths:
-      - "model-api/**/*"
+      - "model-api/**"
       - ".github/actions/build-model/**"
       - ".github/workflows/main.yml"
       - "!README.md" # don't rebuild on documentation changes
@@ -21,6 +21,10 @@ on: # controls when the workflow will run
   #   workflows: [ "Docker" ]
   #   branches: [ main ]
   #   types: [ completed ]
+
+  env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository }}
 
 jobs: # =======================================================================
 
@@ -159,6 +163,7 @@ jobs: # =======================================================================
         # id: publish
         uses: ./.github/actions/call-r
         with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:call-r # ghcr.io/lzachmann/models-for-missing-data:main
           rfile: model-api/demo/sim.R
           args: ${{ matrix.jags-model }}
           opts: ${{ matrix.options }}
