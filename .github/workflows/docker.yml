@@ -50,23 +50,34 @@ jobs: # =======================================================================
       # - run: |
       #     echo ${{ steps.meta.outputs.tags }}
       #     echo ${{ steps.meta.outputs.labels }}
+
+      - name: Set selected color
+        run: echo '::set-output name=SELECTED_COLOR::green'
+        id: random-color-generator
+      - name: Get color
+        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
+
       - name: Use environment variable to assign image tag
         id: tag-generator
         run: |
-          DIRNAME=$(basename $CONTEXT)
-          echo $DIRNAME
-          echo '::set-output name=TAG::$DIRNAME'
+          echo "DIRNAME=$(basename $CONTEXT)" >> $GITHUB_ENV
+        #run: |
+        #  DIRNAME=$(basename $CONTEXT)
+        #  echo $DIRNAME
+        #  echo '::set-output name=TAG::$DIRNAME'
         env:
           CONTEXT: ${{ matrix.context }}
       - name: Get tag
-        run: echo "The tag is ${{ steps.tag-generator.outputs.TAG }}"
+        run: |
+          echo "${{ env.DIRNAME }}"
+        # echo "The tag is ${{ steps.tag-generator.outputs.TAG }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ${{ matrix.context }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag-generator.outputs.TAG }} # was: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DIRNAME }} # was: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
   # # ---------------------------------------------------------------------------
