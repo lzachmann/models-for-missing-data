@@ -9,7 +9,7 @@ on: # controls when the workflow will run
     paths:
       - "model-api/**/*"
       - ".github/actions/build-model/**"
-      - ".github/workflows/model.yml"
+      - ".github/workflows/main.yml"
       - "!README.md" # don't rebuild on documentation changes
 
   pull_request: # triggers workflow on pull request events (main branch only)
