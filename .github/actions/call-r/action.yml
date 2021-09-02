@@ -16,10 +16,9 @@ inputs:
     description: 'Flags used by the R script'
     required: false
 
-
 outputs:
-  time: # id of output
-    description: 'The time the task completed'
+  code: # id of output
+    description: 'Process exit code'
 
 runs:
   using: "docker"

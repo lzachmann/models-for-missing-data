@@ -16,5 +16,7 @@ else
 	fi
 fi
 
-time=$(date)
-echo "::set-output name=time::$time"
+EXIT_STATUS=$?
+echo "::set-output name=code::$EXIT_STATUS"
+# time=$(date)
+# echo "::set-output name=time::$time"
