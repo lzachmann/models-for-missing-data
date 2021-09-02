@@ -24,6 +24,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         context: [ ./.github/actions/call-r, ./docker/latest ]
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
