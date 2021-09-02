@@ -22,9 +22,9 @@ on: # controls when the workflow will run
   #   branches: [ main ]
   #   types: [ completed ]
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+# env:
+#   REGISTRY: ghcr.io
+#   IMAGE_NAME: ${{ github.repository }}
 
 jobs: # =======================================================================
 
@@ -163,7 +163,7 @@ jobs: # =======================================================================
         # id: publish
         uses: ./.github/actions/call-r
         with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:call-r # ghcr.io/lzachmann/models-for-missing-data:main
+          # image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:call-r # ghcr.io/lzachmann/models-for-missing-data:main
           rfile: model-api/demo/sim.R
           args: ${{ matrix.jags-model }}
           opts: ${{ matrix.options }}
