@@ -143,7 +143,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
-        options: [ --seed=101 ]
+        options: [ --seed=123 ]
 
     steps:
       - uses: actions/checkout@v2
