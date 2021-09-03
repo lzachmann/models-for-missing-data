@@ -128,7 +128,8 @@ jobs: # =======================================================================
       - name: Create JAGS model file list as a JSON array
         id: set-matrix # we need an "id" so we can use it in "outputs" below
         run: |
-          echo "::set-output name=matrix::$(find assets -name "model.jags" | perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+          echo "::set-output name=matrix::$(find assets -name "model.jags" | \
+          perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
 
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -162,7 +163,8 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: assets
 
-      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+      # Enable tmate debugging of manually-triggered workflows if the input
+      # option was provided (i.e., debug_enabled=true)
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
