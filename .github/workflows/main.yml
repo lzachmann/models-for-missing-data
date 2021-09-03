@@ -39,6 +39,13 @@ jobs: # =======================================================================
         likelihood: [ poisson ] #, negative-binomial, gen-pois
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
+        include:
+          # includes a new variable demo with a value of true for the matrix leg
+          # matching the likelihood, link, and gle
+          - likelihood: poisson
+            link: exponential
+            gle: b0
+            demo: true
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
@@ -62,6 +69,12 @@ jobs: # =======================================================================
           link: ${{ matrix.link }}
           gle: ${{ matrix.gle }}
 
+      - name: Flag demo models
+        run: |
+          demo=${{ matrix.demo }}
+          if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
+
+
       # Each artifact behaves as a file share. Uploading to the same artifact
       # multiple times in the same workflow can overwrite and append to already
       # uploaded files.
@@ -79,7 +92,7 @@ jobs: # =======================================================================
       matrix:
         likelihood: [ binomial ] #, beta-binomial
         link: [ inverse-logit ]
-        gle: [b0]#[ b0, b0-b1 ] #
+        gle: [ b0, b0-b1 ]
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
@@ -108,80 +121,80 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: assets
 
-  # ---------------------------------------------------------------------------
-  define-jags-model-matrix:
-  # ---------------------------------------------------------------------------
-
-    needs: [ count-vars, binomial-vars ]
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v2
-
-      - name: Download file share
-        uses: actions/download-artifact@v2
-        with:
-          name: artifact-${{ github.sha }}
-          path: assets
-
-      - name: Create JAGS model file list as a JSON array
-        id: set-matrix # we need an "id" so we can use it in "outputs" below
-        run: |
-          echo "::set-output name=matrix::$(find assets -name "model.jags" | \
-          perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-
-  # ---------------------------------------------------------------------------
-  use-jags-models-to-sim-data: # create dynamic matrix from json, simulate data
-  # ---------------------------------------------------------------------------
-
-    needs: [ define-jags-model-matrix ]
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
-        options: [ --seed=123 ]
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - run: |
-          cd model-api
-          git checkout gh-submodule
-          cd ..
-
-      - name: Download file share
-        uses: actions/download-artifact@v2
-        with:
-          name: artifact-${{ github.sha }}
-          path: assets
-
-      # # Enable tmate debugging of manually-triggered workflows if the input
-      # # option was provided (i.e., debug_enabled=true)
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
-      #   if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-
-      - name: Use cached results (simulate data and fit model)
-        id: verify
-        uses: ./.github/actions/call-r
-        with:
-          rfile: model-api/demo/sim.R
-          args: ${{ matrix.jags-model }}
-          opts: ${{ matrix.options }}
-
-      - name: Check status of model verification
-        run: echo "The exit status was ${{ steps.verify.outputs.code }}"
-
-      - name: Upload assets directory as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifact-${{ github.sha }}
-          path: assets
+  # # ---------------------------------------------------------------------------
+  # define-jags-model-matrix:
+  # # ---------------------------------------------------------------------------
+  #
+  #   needs: [ count-vars, binomial-vars ]
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #
+  #     - uses: actions/checkout@v2
+  #
+  #     - name: Download file share
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: artifact-${{ github.sha }}
+  #         path: assets
+  #
+  #     - name: Create JAGS model file list as a JSON array
+  #       id: set-matrix # we need an "id" so we can use it in "outputs" below
+  #       run: |
+  #         echo "::set-output name=matrix::$(find assets -name "model.jags" | \
+  #         perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+  #
+  #   outputs:
+  #     matrix: ${{ steps.set-matrix.outputs.matrix }}
+  #
+  # # ---------------------------------------------------------------------------
+  # use-jags-models-to-sim-data: # create dynamic matrix from json, simulate data
+  # # ---------------------------------------------------------------------------
+  #
+  #   needs: [ define-jags-model-matrix ]
+  #   runs-on: ubuntu-latest
+  #
+  #   strategy:
+  #     matrix:
+  #       jags-model: ${{ fromJson(needs.define-jags-model-matrix.outputs.matrix) }}
+  #       options: [ --seed=123 ]
+  #
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: true
+  #         fetch-depth: 0
+  #
+  #     - run: |
+  #         cd model-api
+  #         git checkout gh-submodule
+  #         cd ..
+  #
+  #     - name: Download file share
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: artifact-${{ github.sha }}
+  #         path: assets
+  #
+  #     # # Enable tmate debugging of manually-triggered workflows if the input
+  #     # # option was provided (i.e., debug_enabled=true)
+  #     # - name: Setup tmate session
+  #     #   uses: mxschmitt/action-tmate@v3
+  #     #   if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+  #
+  #     - name: Use cached results (simulate data and fit model)
+  #       id: verify
+  #       uses: ./.github/actions/call-r
+  #       with:
+  #         rfile: model-api/demo/sim.R
+  #         args: ${{ matrix.jags-model }}
+  #         opts: ${{ matrix.options }}
+  #
+  #     - name: Check status of model verification
+  #       run: echo "The exit status was ${{ steps.verify.outputs.code }}"
+  #
+  #     - name: Upload assets directory as an artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: artifact-${{ github.sha }}
+  #         path: assets
