@@ -17,6 +17,11 @@ on: # controls when the workflow will run
     branches: [ main ] # ensures changes are "mergeable"
 
   workflow_dispatch: # permits manual triggers from the Actions tab
+    inputs:
+      debug_enabled:
+        description: 'Run the build with tmate debugging enabled'
+        required: false
+        default: false
 
   # workflow_run:
   #   workflows: [ "Docker" ]
@@ -32,8 +37,8 @@ jobs: # =======================================================================
     strategy:
       matrix:
         likelihood: [ poisson ] #, negative-binomial, gen-pois
-        link: [ linear, exponential ]
-        gle: [ b0, b0-b1 ]
+        link: [exponential] # [ linear, exponential ]
+        gle: [b0] # [ b0, b0-b1 ]
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
@@ -80,6 +85,7 @@ jobs: # =======================================================================
         #   - likelihood: gen-pois
         #     link: linear
     runs-on: ubuntu-latest
+    if: false # skip job for now
 
     steps:
 
@@ -155,6 +161,11 @@ jobs: # =======================================================================
         with:
           name: artifact-${{ github.sha }}
           path: assets
+
+      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - name: Use cached results (simulate data and fit model)
         id: verify

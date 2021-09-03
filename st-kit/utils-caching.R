@@ -3,7 +3,9 @@ library(grid)
 
 save_figure <- function(plot, path, filename, p_width, p_height, units = 'in',
                         margin = theme_gray()$plot.margin[1],
-                        limitsize = FALSE, device = cairo_pdf, ...) {
+                        limitsize = FALSE, 
+                        device = if (grepl("\\.pdf$", filename)) cairo_pdf else NULL,
+                        ...) {
 
   # Much of the following shamelessly plagiarized from set_panel_size() in the
   # egg package.
