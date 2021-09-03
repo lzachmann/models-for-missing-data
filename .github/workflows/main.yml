@@ -79,13 +79,13 @@ jobs: # =======================================================================
       matrix:
         likelihood: [ binomial ] #, beta-binomial
         link: [ inverse-logit ]
-        gle: [ b0, b0-b1 ] #
+        gle: [b0]#[ b0, b0-b1 ] #
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
         #     link: linear
     runs-on: ubuntu-latest
-    if: false # skip job for now
+    # if: false # skip job for now
 
     steps:
 
