@@ -10,6 +10,8 @@ rstudio
 !assets/.Rprofile
 
 # Misc
+.cache
+debug
 .bash_history
 .DS_Store
 tmp
