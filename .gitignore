@@ -15,3 +15,4 @@ debug
 .bash_history
 .DS_Store
 tmp
+.Rhistory

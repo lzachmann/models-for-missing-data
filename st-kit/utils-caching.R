@@ -3,7 +3,7 @@ library(grid)
 
 save_figure <- function(plot, path, filename, p_width, p_height, units = 'in',
                         margin = theme_gray()$plot.margin[1],
-                        limitsize = FALSE, 
+                        limitsize = FALSE,
                         device = if (grepl("\\.pdf$", filename)) cairo_pdf else NULL,
                         ...) {
 
@@ -31,7 +31,7 @@ save_figure <- function(plot, path, filename, p_width, p_height, units = 'in',
     if (file.exists('Rplots.pdf')) file.remove('Rplots.pdf')
   }
 
-  plot
+  if (interactive()) return(plot)
 
 }
 
