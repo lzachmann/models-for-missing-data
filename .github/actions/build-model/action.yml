@@ -14,6 +14,10 @@ inputs:
     description: "Group-level effect(s)"
     required: true
     default: b0
+  demo:
+    description: "Flag model as public-facing demo"
+    required: false
+    default: false
 runs:
   using: "composite"
   steps:
@@ -34,4 +38,8 @@ runs:
           $MODEL_PATH
       env:
         MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+      shell: bash
+    - run: |
+        demo=${{ inputs.demo }}
+        if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
       shell: bash

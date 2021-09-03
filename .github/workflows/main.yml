@@ -44,7 +44,7 @@ jobs: # =======================================================================
           # matching the likelihood, link, and gle
           - likelihood: poisson
             link: exponential
-            gle: b0
+            gle: b0-b1
             demo: true
         # exclude:
         #   # excludes parameterizations
@@ -68,12 +68,12 @@ jobs: # =======================================================================
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
           gle: ${{ matrix.gle }}
+          demo: ${{ matrix.demo }}
 
-      - name: Flag demo models
-        run: |
-          demo=${{ matrix.demo }}
-          if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
-
+      # - name: Flag demo models
+      #   run: |
+      #     demo=${{ matrix.demo }}
+      #     if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
 
       # Each artifact behaves as a file share. Uploading to the same artifact
       # multiple times in the same workflow can overwrite and append to already
@@ -114,6 +114,7 @@ jobs: # =======================================================================
           likelihood: ${{ matrix.likelihood }}
           link: ${{ matrix.link }}
           gle: ${{ matrix.gle }}
+          demo: ${{ matrix.demo }}
 
       - name: Upload assets directory as an artifact
         uses: actions/upload-artifact@v2
