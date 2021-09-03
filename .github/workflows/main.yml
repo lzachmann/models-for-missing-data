@@ -167,7 +167,8 @@ jobs: # =======================================================================
       # option was provided (i.e., debug_enabled=true)
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+        if: ${{ github.event_name == 'workflow_dispatch' && \
+                github.event.inputs.debug_enabled }}
 
       - name: Use cached results (simulate data and fit model)
         id: verify
