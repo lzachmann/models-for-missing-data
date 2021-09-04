@@ -37,14 +37,14 @@ runs:
         ./src/model-builder/compile-jags-file.sh \
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
           $MODEL_PATH
-      id: compile
       env:
         MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
     - run: |
         demo=${{ inputs.demo }}
-        echo ${{ steps.compile.env.MODEL_PATH }}
-        if [ $demo ]; then mkdir -p model-api/data-demo && cp -r ${{ steps.compile.env.MODEL_PATH }} model-api/data-demo; fi
-        ls model-api/data-demo
-        #if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
+        #if [ $demo ]; then mkdir -p model-api/data-demo && cp -r $MODEL_PATH model-api/data-demo; fi
+        #ls model-api/data-demo
+        if [ -z ${demo} ]; then echo "variable demo is unset"; else mkdir -p model-api/data-demo && cp -r $MODEL_PATH model-api/data-demo; fi
+      env:
+        MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
