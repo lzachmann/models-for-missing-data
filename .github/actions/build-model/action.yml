@@ -43,7 +43,7 @@ runs:
     - run: |
         demo=${{ inputs.demo }}
         if [ -z ${demo} ]; then echo "variable demo is unset or empty"; else touch $MODEL_PATH/demo; fi
-        ls model-api/data-demo
+        ls $MODEL_PATH
       env:
         MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
