@@ -41,5 +41,8 @@ runs:
       shell: bash
     - run: |
         demo=${{ inputs.demo }}
-        if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
+        echo $MODEL_PATH
+        if [ $demo ]; then mkdir -p model-api/data-demo && cp -r $MODEL_PATH model-api/data-demo; fi
+        ls model-api/data-demo
+        #if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
       shell: bash

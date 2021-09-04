@@ -40,8 +40,8 @@ jobs: # =======================================================================
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
         include:
-          # includes a new variable demo with a value of true for the matrix leg
-          # matching the likelihood, link, and gle
+          # Includes a new variable demo with a value of true for the matrix leg
+          # matching the following likelihood, link, and gle.
           - likelihood: poisson
             link: exponential
             gle: b0-b1
