@@ -42,9 +42,8 @@ runs:
       shell: bash
     - run: |
         demo=${{ inputs.demo }}
-        #if [ $demo ]; then mkdir -p model-api/data-demo && cp -r $MODEL_PATH model-api/data-demo; fi
-        #ls model-api/data-demo
-        if [ -z ${demo} ]; then echo "variable demo is unset"; else mkdir -p model-api/data-demo && cp -r $MODEL_PATH model-api/data-demo; fi
+        if [ -z ${demo} ]; then echo "variable demo is unset or empty"; else touch $MODEL_PATH/demo; fi
+        ls model-api/data-demo
       env:
         MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash

@@ -122,32 +122,47 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: assets
 
-  # # ---------------------------------------------------------------------------
-  # define-jags-model-matrix:
-  # # ---------------------------------------------------------------------------
-  #
-  #   needs: [ count-vars, binomial-vars ]
-  #   runs-on: ubuntu-latest
-  #
-  #   steps:
-  #
-  #     - uses: actions/checkout@v2
-  #
-  #     - name: Download file share
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: artifact-${{ github.sha }}
-  #         path: assets
-  #
-  #     - name: Create JAGS model file list as a JSON array
-  #       id: set-matrix # we need an "id" so we can use it in "outputs" below
-  #       run: |
-  #         echo "::set-output name=matrix::$(find assets -name "model.jags" | \
-  #         perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
-  #
-  #   outputs:
-  #     matrix: ${{ steps.set-matrix.outputs.matrix }}
-  #
+  # ---------------------------------------------------------------------------
+  define-jags-model-matrix:
+  # ---------------------------------------------------------------------------
+
+    needs: [ count-vars, binomial-vars ]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Download file share
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: assets
+
+      - name: Create JAGS model file list as a JSON array
+        id: set-matrix # we need an "id" so we can use it in "outputs" below
+        run: |
+          echo "::set-output name=matrix::$(find assets -name "model.jags" | \
+          perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+
+      - name: Copy model files into model zoo in assets
+        run: |
+          find tmp -type f -name '*.jags' \
+            -exec bash -c 'ZOO=$(sed "s/tmp/assets\/model-zoo/g" <<< $(dirname $0)); mkdir -p $(dirname $ZOO) && cp $0 $ZOO-model.jags' {} \;
+          ls assets/**/*-model.jags
+
+      # Push changes made to the repo during a workflow run
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          branch: main
+          add: "assets/**/*-model.jags" # --force
+          message: Automatic update of model files in model zoo
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
   # # ---------------------------------------------------------------------------
   # use-jags-models-to-sim-data: # create dynamic matrix from json, simulate data
   # # ---------------------------------------------------------------------------
