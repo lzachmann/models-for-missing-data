@@ -18,6 +18,8 @@ inputs:
     description: "Flag model as public-facing demo"
     required: false
     default: false
+env:
+  MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
 runs:
   using: "composite"
   steps:
@@ -29,6 +31,7 @@ runs:
         cd model-api
         git checkout gh-submodule
         cat README.md
+        ls -a
         cd ..
       shell: bash
     - run: |
@@ -36,8 +39,6 @@ runs:
         ./src/model-builder/compile-jags-file.sh \
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
           $MODEL_PATH
-      env:
-        MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
     - run: |
         demo=${{ inputs.demo }}
