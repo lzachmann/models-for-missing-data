@@ -147,9 +147,11 @@ jobs: # =======================================================================
 
       - name: Copy model files into model zoo in assets
         run: |
+          find assets -type f -name '*.jags'
           find assets -type f -name '*.jags' \
             -exec bash -c 'ZOO=$(sed "s/assets/assets\/model-zoo/g" <<< $(dirname $0)); mkdir -p $(dirname $ZOO) && cp $0 $ZOO-model.jags' {} \;
-          ls assets/**/*-model.jags
+
+        # ls assets/**/*-model.jags
 
       # Push changes made to the repo during a workflow run
       - name: Commit changes
