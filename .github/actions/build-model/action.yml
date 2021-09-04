@@ -18,10 +18,10 @@ inputs:
     description: "Flag model as public-facing demo"
     required: false
     default: false
-env:
-  MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
 runs:
   using: "composite"
+  env:
+    MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
   steps:
     - run: echo likelihood is ${{ inputs.likelihood }}
       shell: bash
