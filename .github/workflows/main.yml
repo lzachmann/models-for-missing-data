@@ -93,6 +93,11 @@ jobs: # =======================================================================
         likelihood: [ binomial ] #, beta-binomial
         link: [ inverse-logit ]
         gle: [ b0, b0-b1 ]
+        include:
+          - likelihood: binomial
+            link: inverse-logit
+            gle: b0
+            demo: true
         # exclude:
         #   # excludes parameterizations
         #   - likelihood: gen-pois
@@ -238,18 +243,18 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: assets
 
-      - name: Move datasets flagged for demo to model-api/data-demo
+      - name: Move datasets flagged for demo to assets/data-demo
         run: |
           find assets -type f -name 'demo'
-          mkdir -p model-api/data-demo
-          rm -f model-api/data-demo/hint.txt && touch model-api/data-demo/hint.txt
+          mkdir -p assets/data-demo
+          rm -f assets/data-demo/challenge.txt && touch assets/data-demo/challenge.txt
           find assets -type f -name 'demo' \
             -exec bash -c '
-              echo $0 >> model-api/data-demo/hint.txt
+              echo $0 >> assets/data-demo/challenge.txt
               DATA=$(dirname $0)
               DESC=$(echo $0 | grep -oP "(?<=assets/).*(?=-vars)")
-              cp $DATA/samples.csv model-api/data-demo/$DESC-type-data.csv' {} \;
-          ls model-api/data-demo
+              cp $DATA/samples.csv assets/data-demo/$DESC-type-data.csv' {} \;
+          ls assets/data-demo
 
       # Push changes made to the repo during a workflow run
       - name: Commit changes
@@ -257,5 +262,5 @@ jobs: # =======================================================================
         with:
           default_author: github_actions
           branch: main
-          add: "model-api/data-demo/**" # --force
+          add: "assets/data-demo/**"
           message: Automatic update of demo data
