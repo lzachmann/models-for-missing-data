@@ -1,5 +1,6 @@
 library(ggplot2)
 library(grid)
+library(readr)
 
 save_figure <- function(plot, path, filename, p_width, p_height, units = 'in',
                         margin = theme_gray()$plot.margin[1],
@@ -46,7 +47,7 @@ save_object <- function(x, path, filename) {
 save_table <- function(x, path, filename) {
   if (!is.null(path)) {
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
-    write.csv(x, file.path(path, filename))
+    write_csv(x, file.path(path, filename))
   }
   x
 }
