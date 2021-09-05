@@ -1,0 +1,61 @@
+# Authors: L. J. Zachmann and N. T. Hobbs. 2021.
+
+# Likelihood: poisson
+# Design matrix for additional covariates, X: present
+# Deterministic model: linear
+# Group-level effects: b0
+# Variance structure: fixed-stratum
+# Release: v0.7.0
+
+model {
+
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the Poisson distribution with parameter
+        ## `mu`.
+        y.rep[n] ~ dpois(mu[n])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- max(0.00001,
+                     B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta)
+        ## Poisson likelihood.
+        y[n] ~ dpois(mu[n])
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- priors -------------------------------------------------------------
+    ## on the coefficients for each covariate.
+    for(m in 1:length(X[1, ])) {
+        Beta[m] ~ dnorm(0, 1E-04)
+    }
+    ## on intercept parameters for each site within each stratum. Slopes vary by
+    ## stratum.
+    for(k in 1:y.n.strata) {
+        mu.B0[k] ~ dnorm(0, 4E-06)
+        sigma.B0[k] ~ dunif(1E-6, 1000)
+        tau.B0[k] <- 1 / sigma.B0[k]^2
+        B1[k] ~ dnorm(0, 1E-04)
+        for(j in 1:y.n.site[k]) {
+            ### Intercepts vary by site and stratum.
+            B0[j, k] ~ dnorm(mu.B0[k], tau.B0[k])
+            ### Put coefficients into matrix form to make them compatible with
+            ### the multiple slopes model.
+            B[j, 1, k] <- B0[j, k]
+            B[j, 2, k] <- B1[k]
+        }
+    }
+
+}
