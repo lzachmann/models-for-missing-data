@@ -1,2 +1,2 @@
-assets/count-vars/poisson-exponential-b0-b1/demo
-assets/binomial-vars/binomial-inverse-logit-b0/demo
+tmp/count-vars/poisson-exponential-b0-b1/demo
+tmp/binomial-vars/binomial-inverse-logit-b0/demo
