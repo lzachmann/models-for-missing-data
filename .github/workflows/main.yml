@@ -36,7 +36,7 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [ poisson ] #, negative-binomial, gen-pois
+        likelihood: [ poisson, negative-binomial ] # gen-pois
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
         include:
@@ -85,7 +85,7 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [ binomial ] #, beta-binomial
+        likelihood: [ binomial, beta-binomial ] # zero-inflated-binomial, zero-inflated-beta-binomial
         link: [ inverse-logit ]
         gle: [ b0, b0-b1 ]
         include:
@@ -93,12 +93,47 @@ jobs: # =======================================================================
             link: inverse-logit
             gle: b0
             demo: true
-        # exclude:
-        #   # excludes parameterizations
-        #   - likelihood: gen-pois
-        #     link: linear
+
     runs-on: ubuntu-latest
-    # if: false # skip job for now
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # fetch model and data API submodules
+          fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
+
+      - name: Build model
+        uses: ./.github/actions/build-model # composite action to create model
+        with:
+          data-type: ${{ github.job }}
+          likelihood: ${{ matrix.likelihood }}
+          link: ${{ matrix.link }}
+          gle: ${{ matrix.gle }}
+          demo: ${{ matrix.demo }}
+
+      - name: Upload tmp directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: tmp
+
+  # ---------------------------------------------------------------------------
+  nonnegative-continuous-vars: # template models for non-zero continuous data
+  # ---------------------------------------------------------------------------
+
+    strategy:
+      matrix:
+        likelihood: [ lognormal, gamma ] #, beta-binomial
+        link: [ linear ] # TODO: is exponential here even an option?
+        gle: [ b0, b0-b1 ]
+        include:
+          - likelihood: gamma
+            link: linear
+            gle: b0-b1
+            demo: true
+
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -126,7 +161,7 @@ jobs: # =======================================================================
   define-jags-model-matrix:
   # ---------------------------------------------------------------------------
 
-    needs: [ count-vars, binomial-vars ]
+    needs: [ count-vars, binomial-vars, nonnegative-continuous-vars ]
     runs-on: ubuntu-latest
 
     steps:
@@ -241,16 +276,17 @@ jobs: # =======================================================================
       - name: Move datasets flagged for demo to assets/_data
         run: |
           mkdir -p assets/_data
-          HINT_FILE=assets/_data/challenge.tsv
+          HINT_FILE=assets/_data/challenge.csv
           rm -f $HINT_FILE && touch $HINT_FILE
-          echo file generating_model >> $HINT_FILE
+          echo file, generating_model >> $HINT_FILE
           find tmp -type f -name 'demo' \
             -exec bash -c '
               DD_DIR=$(dirname $0)
               DD_LAB=$(echo $0 | grep -oP "(?<=tmp/).*(?=-vars)")
-              DD_CSV=assets/_data/$DD_LAB-type-data.csv
-              echo $DD_CSV $(basename $DD_DIR) >> assets/_data/challenge.tsv
-              cp $DD_DIR/samples.csv $DD_CSV' {} \;
+              DD_CSV=assets/_data/$DD_LAB-data.csv
+              echo $DD_CSV, $(basename $DD_DIR) >> assets/_data/challenge.csv
+              cp $DD_DIR/samples.csv $DD_CSV
+              cp $DD_DIR/sample-*.csv assets/_data' {} \;
           ls assets/_data
 
       # Push changes made to the repo during a workflow run

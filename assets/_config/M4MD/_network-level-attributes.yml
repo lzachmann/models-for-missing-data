@@ -1,0 +1,5 @@
+unit code column: park_unit
+site id column: site
+event date info:
+    date-time column: event_year
+    date-time format: Y! # see lubridate::parse_date_time() for details
