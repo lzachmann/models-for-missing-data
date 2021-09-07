@@ -70,11 +70,6 @@ jobs: # =======================================================================
           gle: ${{ matrix.gle }}
           demo: ${{ matrix.demo }}
 
-      # - name: Flag demo models
-      #   run: |
-      #     demo=${{ matrix.demo }}
-      #     if [ -z ${demo+x} ]; then echo "variable demo is unset"; else echo "demo is set to '$demo'"; fi
-
       # Each artifact behaves as a file share. Uploading to the same artifact
       # multiple times in the same workflow can overwrite and append to already
       # uploaded files.
@@ -223,7 +218,7 @@ jobs: # =======================================================================
           path: tmp
 
   # ---------------------------------------------------------------------------
-  cleanup: # summarise sim fits, and write demo data to data-demo directory
+  cleanup: # summarise sim fits, and write demo data to _data directory
   # ---------------------------------------------------------------------------
 
     needs: [ use-jags-models-to-sim-data ]
@@ -243,18 +238,20 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: tmp
 
-      - name: Move datasets flagged for demo to assets/data-demo
+      - name: Move datasets flagged for demo to assets/_data
         run: |
-          find tmp -type f -name 'demo'
-          mkdir -p assets/data-demo
-          rm -f assets/data-demo/challenge.txt && touch assets/data-demo/challenge.txt
+          mkdir -p assets/_data
+          HINT_FILE=assets/_data/challenge.tsv
+          rm -f $HINT_FILE && touch $HINT_FILE
+          echo file generating_model >> $HINT_FILE
           find tmp -type f -name 'demo' \
             -exec bash -c '
-              echo $0 >> assets/data-demo/challenge.txt
-              DATA=$(dirname $0)
-              DESC=$(echo $0 | grep -oP "(?<=tmp/).*(?=-vars)")
-              cp $DATA/samples.csv assets/data-demo/$DESC-type-data.csv' {} \;
-          ls assets/data-demo
+              DD_DIR=$(dirname $0)
+              DD_LAB=$(echo $0 | grep -oP "(?<=tmp/).*(?=-vars)")
+              DD_CSV=assets/_data/$DD_LAB-type-data.csv
+              echo $DD_CSV $(basename $DD_DIR) >> assets/_data/challenge.tsv
+              cp $DD_DIR/samples.csv $DD_CSV' {} \;
+          ls assets/_data
 
       # Push changes made to the repo during a workflow run
       - name: Commit changes
@@ -262,5 +259,5 @@ jobs: # =======================================================================
         with:
           default_author: github_actions
           branch: main
-          add: "assets/data-demo/**"
+          add: "assets/_data/**"
           message: Automatic update of demo data
