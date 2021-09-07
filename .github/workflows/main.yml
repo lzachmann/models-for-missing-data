@@ -60,7 +60,7 @@ jobs: # =======================================================================
           submodules: true  # fetch model and data API submodules
           fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
 
-      # Build the JAGS model and save it in assets/
+      # Build the JAGS model and save it in tmp
       - name: Build model
         uses: ./.github/actions/build-model # composite action to create model
         with:
@@ -78,11 +78,11 @@ jobs: # =======================================================================
       # Each artifact behaves as a file share. Uploading to the same artifact
       # multiple times in the same workflow can overwrite and append to already
       # uploaded files.
-      - name: Upload assets directory as an artifact
+      - name: Upload tmp directory as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
   # ---------------------------------------------------------------------------
   binomial-vars: # creates template models for successes / trials data
@@ -121,11 +121,11 @@ jobs: # =======================================================================
           gle: ${{ matrix.gle }}
           demo: ${{ matrix.demo }}
 
-      - name: Upload assets directory as an artifact
+      - name: Upload tmp directory as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
   # ---------------------------------------------------------------------------
   define-jags-model-matrix:
@@ -142,20 +142,20 @@ jobs: # =======================================================================
         uses: actions/download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
       - name: Create JAGS model file list as a JSON array
         id: set-matrix # we need an "id" so we can use it in "outputs" below
         run: |
-          echo "::set-output name=matrix::$(find assets -name "model.jags" | \
+          echo "::set-output name=matrix::$(find tmp -name "model.jags" | \
           perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
 
       - name: Copy model files into model zoo in assets
         run: |
-          find assets -type f -name '*.jags'
-          find assets -type f -name '*.jags' \
+          find tmp -type f -name '*.jags'
+          find tmp -type f -name '*.jags' \
             -exec bash -c '
-              ZOO=$(sed "s/assets/assets\/model-zoo/g" <<< $(dirname $0))
+              ZOO=$(sed "s/tmp/assets\/model-zoo/g" <<< $(dirname $0))
               mkdir -p $(dirname $ZOO) && cp $0 $ZOO-model.jags' {} \;
 
       # Push changes made to the repo during a workflow run
@@ -197,7 +197,7 @@ jobs: # =======================================================================
         uses: actions/download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
       # # Enable tmate debugging of manually-triggered workflows if the input
       # # option was provided (i.e., debug_enabled=true)
@@ -216,11 +216,11 @@ jobs: # =======================================================================
       - name: Check status of model verification
         run: echo "The exit status was ${{ steps.verify.outputs.code }}"
 
-      - name: Upload assets directory as an artifact
+      - name: Upload tmp directory as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
   # ---------------------------------------------------------------------------
   cleanup: # summarise sim fits, and write demo data to data-demo directory
@@ -241,18 +241,18 @@ jobs: # =======================================================================
         uses: actions/download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
-          path: assets
+          path: tmp
 
       - name: Move datasets flagged for demo to assets/data-demo
         run: |
-          find assets -type f -name 'demo'
+          find tmp -type f -name 'demo'
           mkdir -p assets/data-demo
           rm -f assets/data-demo/challenge.txt && touch assets/data-demo/challenge.txt
-          find assets -type f -name 'demo' \
+          find tmp -type f -name 'demo' \
             -exec bash -c '
               echo $0 >> assets/data-demo/challenge.txt
               DATA=$(dirname $0)
-              DESC=$(echo $0 | grep -oP "(?<=assets/).*(?=-vars)")
+              DESC=$(echo $0 | grep -oP "(?<=tmp/).*(?=-vars)")
               cp $DATA/samples.csv assets/data-demo/$DESC-type-data.csv' {} \;
           ls assets/data-demo
 

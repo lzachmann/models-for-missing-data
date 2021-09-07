@@ -21,16 +21,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo likelihood is ${{ inputs.likelihood }}
-      shell: bash
-    - run: echo link is ${{ inputs.link }}
+    - run: |
+        echo Building JAGS model for the ${{ inputs.data-type }} data type \
+        using a ${{ inputs.likelihood }} likelihood, ${{ inputs.link }} link, \
+        and ${{ inputs.gle }} group-level effects.
+        mkdir -p tmp
       shell: bash
     - run: |
-        cd model-api
-        git checkout gh-submodule
-        cat README.md
-        ls -a
-        cd ..
+        cd model-api && git checkout gh-submodule && cd ..
       shell: bash
     - run: |
         cd model-api
@@ -38,11 +36,11 @@ runs:
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
           $MODEL_PATH
       env:
-        MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        MODEL_PATH: ${{ github.workspace }}/tmp/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
     - run: |
         demo=${{ inputs.demo }}
         if [ -z ${demo} ]; then echo "variable demo is unset or empty"; else touch $MODEL_PATH/demo; fi
       env:
-        MODEL_PATH: ${{ github.workspace }}/assets/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
+        MODEL_PATH: ${{ github.workspace }}/tmp/${{ inputs.data-type }}/${{ inputs.likelihood }}-${{ inputs.link }}-${{ inputs.gle }}
       shell: bash
