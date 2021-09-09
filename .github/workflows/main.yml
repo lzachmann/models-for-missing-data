@@ -298,6 +298,7 @@ jobs: # =======================================================================
           add: "assets/_data/**"
           message: Automatic update of demo data
 
+# CLI code.
 # Rscript analysis-pipeline.R \
 # -f ../assets/_config/M4MD/ELDO/counts.yml \
 # -a 1000 -u 2000 -n 3000 \
