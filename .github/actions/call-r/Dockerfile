@@ -26,7 +26,8 @@ RUN apt-get install tree && \
         R2jags \
         runjags \
         bayesplot \
-        extraDistr
+        extraDistr \
+        MCMCpack
 
 # Copies the code to the filesystem path `/` of the container
 COPY . .

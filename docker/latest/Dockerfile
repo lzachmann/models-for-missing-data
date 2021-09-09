@@ -26,7 +26,8 @@ RUN apt-get install tree && \
         R2jags \
         runjags \
         bayesplot \
-        extraDistr
+        extraDistr \
+        MCMCpack
 
 # Update RStudio Server (to v1.4).
 RUN apt-get -y install gdebi-core && \

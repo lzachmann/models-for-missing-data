@@ -19,21 +19,21 @@ site location info:
 
 covariate info:
     file: assets/_data/sample-covariates.csv
-    event date info:
-        date-time column: event_year
-        date-time format: Y!
+    # event date info: # TODO: describe. Only use when covariates are time-varying!
+    #     date-time column: event_year
+    #     date-time format: Y!
 
 # ==== MODEL ==================================================================
 
 # Likelihood. For counts, one or both of: poisson, negative-binomial.
 likelihood:
     - poisson
-    - negative-binomial
+    # - negative-binomial
 
 # Deterministic model for the mean. For counts, one of: exponential, linear,
 # or monomolecular.
 deterministic model:
-    - linear
+    # - linear
     - exponential
     # - monomolecular
 
@@ -58,3 +58,6 @@ variances:
 # Covariates.
 additional covariates:
     - w1
+
+# Initial values (one of: 'auto', 'default', or 'inherited')
+initial values: inherited

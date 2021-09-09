@@ -11,8 +11,12 @@ rstudio
 
 # Misc
 .cache
+assets/_inits
+assets/_output
+bin
 debug
 .bash_history
 .DS_Store
 tmp
 .Rhistory
+.wget-hsts

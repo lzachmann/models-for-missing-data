@@ -276,7 +276,7 @@ jobs: # =======================================================================
       - name: Move datasets flagged for demo to assets/_data
         run: |
           mkdir -p assets/_data
-          HINT_FILE=assets/_data/challenge.csv
+          HINT_FILE=assets/_data/.generating-models.csv
           rm -f $HINT_FILE && touch $HINT_FILE
           echo file, generating_model >> $HINT_FILE
           find tmp -type f -name 'demo' \
@@ -284,7 +284,7 @@ jobs: # =======================================================================
               DD_DIR=$(dirname $0)
               DD_LAB=$(echo $0 | grep -oP "(?<=tmp/).*(?=-vars)")
               DD_CSV=assets/_data/$DD_LAB-data.csv
-              echo $DD_CSV, $(basename $DD_DIR) >> assets/_data/challenge.csv
+              echo $DD_CSV, $(basename $DD_DIR) >> assets/_data/.generating-models.csv
               cp $DD_DIR/samples.csv $DD_CSV
               cp $DD_DIR/sample-*.csv assets/_data' {} \;
           ls assets/_data
@@ -297,3 +297,8 @@ jobs: # =======================================================================
           branch: main
           add: "assets/_data/**"
           message: Automatic update of demo data
+
+# Rscript analysis-pipeline.R \
+# -f ../assets/_config/M4MD/ELDO/counts.yml \
+# -a 1000 -u 2000 -n 3000 \
+# -c 1

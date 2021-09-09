@@ -31,8 +31,7 @@ runs:
         cd model-api && git checkout gh-submodule && cd ..
       shell: bash
     - run: |
-        cd model-api
-        ./src/model-builder/compile-jags-file.sh \
+        ./model-api/src/model-builder/compile-jags-file.sh \
           ${{ inputs.likelihood }} ${{ inputs.link }} ${{ inputs.gle }} w1 \
           $MODEL_PATH
       env:

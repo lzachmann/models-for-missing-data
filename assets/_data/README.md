@@ -1,6 +1,6 @@
 # `_data/` | demo data files
 
-These data files are generated automagically using R and JAGS code compiled using GitHub Actions. The files are sufficient to show the model API in action. The model used to generate these 'fake' datasets can be found in "challenge.csv".
+These data files are generated automagically using R and JAGS code compiled using GitHub Actions. The files are sufficient to show the model API in action. The model used to generate these 'fake' datasets can be found in ".generating-models.csv".
 
 | **File**   | **Description**  | **Examples**  |
 |----|---|---|
