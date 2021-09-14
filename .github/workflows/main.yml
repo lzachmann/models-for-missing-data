@@ -330,7 +330,7 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: tmp
 
-      - name: Use cached results (simulate data and fit model)
+      - name: Test model API using data simulated in prior jobs
         uses: ./.github/actions/call-r
         with:
           rfile: model-api/analysis-pipeline.R

@@ -1,12 +1,14 @@
 # ==== DATA ===================================================================
 
 response info:
-    file: assets/_data/count-data.csv
+    file: assets/_data/binomial-data.csv
     state variable:
-        response column:
+        hits column:
             - y_sim
         description:
-            - Simulated count data
+            - Simulated binomial data
+        trials column:
+            - trials
     sampling method: plot
     sample id column(s):
         - plot
@@ -27,15 +29,15 @@ covariate info:
 
 # Likelihood. For counts, one or both of: poisson, negative-binomial.
 likelihood:
-    - poisson
-    - negative-binomial
+    - binomial
+    - beta-binomial
+    # - zero-inflated-binomial
+    # - zero-inflated-beta-binomial
 
 # Deterministic model for the mean. For counts, one of: exponential, linear,
 # or monomolecular.
 deterministic model:
-    # - linear
-    - exponential
-    # - monomolecular
+    - inverse-logit
 
 # Group-level effects structure. One of: b0, b0-b1.
 group-level effects:
