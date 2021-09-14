@@ -343,8 +343,3 @@ jobs: # =======================================================================
         with:
           name: artifact-${{ github.sha }}
           path: tmp
-# # CLI code.
-# Rscript model-api/analysis-pipeline.R \
-# -f assets/_config/M4MD/ELDO/counts.yml \
-# -a 1000 -u 2000 -n 3000 \
-# -c 1 -d true
