@@ -301,8 +301,8 @@ jobs: # =======================================================================
           echo "::set-output name=matrix::$(find assets -name "[a-z]*.yml" | \
           perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
 
-        outputs:
-          configs: ${{ steps.config-file-list.outputs.matrix }}
+    outputs:
+      configs: ${{ steps.config-file-list.outputs.matrix }}
 
   # ---------------------------------------------------------------------------
   test: # use simulated data in the analysis pipeline
