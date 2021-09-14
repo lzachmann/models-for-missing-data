@@ -45,5 +45,6 @@ elif [ ${APPLICATION} == "hugo" ]; then
     klakegg/hugo:0.83.1-ext-ubuntu \
     shell
     # hugo server -D
+    # pandoc content/posts/bib.bib -t csljson -o content/posts/bib.json
 
 fi

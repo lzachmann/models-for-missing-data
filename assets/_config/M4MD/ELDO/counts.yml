@@ -40,7 +40,7 @@ deterministic model:
 # Group-level effects structure. One of: b0, b0-b1.
 group-level effects:
     - b0
-    - b0-b1
+    # - b0-b1
 
 # Variance structure (these *have* to be colnames, not descriptions).
 variances:

@@ -218,10 +218,7 @@ jobs: # =======================================================================
           submodules: true
           fetch-depth: 0
 
-      - run: |
-          cd model-api
-          git checkout gh-submodule
-          cd ..
+      - run: cd model-api && git checkout gh-submodule && cd ..
 
       - name: Download file share
         uses: actions/download-artifact@v2
@@ -298,8 +295,56 @@ jobs: # =======================================================================
           add: "assets/_data/**"
           message: Automatic update of demo data
 
-# CLI code.
-# Rscript analysis-pipeline.R \
-# -f ../assets/_config/M4MD/ELDO/counts.yml \
+      - name: Create model config file list as a JSON array
+        id: config-file-list # we need an "id" so we can use it in "outputs" below
+        run: |
+          echo "::set-output name=matrix::$(find assets -name "[a-z]*.yml" | \
+          perl -e 'use JSON; @in=grep(s/\n$//, <>); print encode_json(\@in)."\n";')"
+
+        outputs:
+          configs: ${{ steps.config-file-list.outputs.matrix }}
+
+  # ---------------------------------------------------------------------------
+  test: # use simulated data in the analysis pipeline
+  # ---------------------------------------------------------------------------
+
+    needs: [ cleanup ]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.cleanup.outputs.configs) }}
+        options: [ -a 1000 -u 2000 -n 3000 -c 1 -d true ]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - run: cd model-api && git checkout gh-submodule && cd ..
+
+      - name: Download file share
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: tmp
+
+      - name: Use cached results (simulate data and fit model)
+        uses: ./.github/actions/call-r
+        with:
+          rfile: model-api/analysis-pipeline.R
+          args: ${{ matrix.config-file }}
+          opts: ${{ matrix.options }}
+
+      - run: mv assets/_output tmp/test-fits
+      - name: Upload tmp directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.sha }}
+          path: tmp
+# # CLI code.
+# Rscript model-api/analysis-pipeline.R \
+# -f assets/_config/M4MD/ELDO/counts.yml \
 # -a 1000 -u 2000 -n 3000 \
-# -c 1
+# -c 1 -d true
