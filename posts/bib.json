@@ -2,6 +2,33 @@
   {
     "author": [
       {
+        "family": "Gelfand",
+        "given": "Alan E"
+      },
+      {
+        "family": "Smith",
+        "given": "Adrian FM"
+      }
+    ],
+    "container-title": "Journal of the American statistical association",
+    "id": "gelfand1990sampling",
+    "issue": "410",
+    "issued": {
+      "date-parts": [
+        [
+          1990
+        ]
+      ]
+    },
+    "page": "398-409",
+    "publisher": "Taylor & Francis",
+    "title": "Sampling-based approaches to calculating marginal densities",
+    "type": "article-journal",
+    "volume": "85"
+  },
+  {
+    "author": [
+      {
         "family": "Link",
         "given": "William A"
       },
@@ -26,5 +53,28 @@
     "title-short": "Estimating population change from count data",
     "type": "article-journal",
     "volume": "8"
+  },
+  {
+    "author": [
+      {
+        "family": "Hobbs",
+        "given": "N Thompson"
+      },
+      {
+        "family": "Hooten",
+        "given": "Mevin B"
+      }
+    ],
+    "id": "hobbs2015bayesian",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "publisher": "Princeton University Press",
+    "title": "Bayesian models",
+    "type": "book"
   }
 ]
