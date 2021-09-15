@@ -226,12 +226,6 @@ jobs: # =======================================================================
           name: artifact-${{ github.sha }}
           path: tmp
 
-      # # Enable tmate debugging of manually-triggered workflows if the input
-      # # option was provided (i.e., debug_enabled=true)
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
-      #   if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-
       - name: Use cached results (simulate data and fit model)
         id: verify
         uses: ./.github/actions/call-r
@@ -314,7 +308,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         config-file: ${{ fromJson(needs.cleanup.outputs.configs) }}
-        options: [ -a 1000 -u 2000 -n 3000 -c 1 -d true ]
+        options: [ -a=1000 -u=2000 -n=3000 -c=1 -d=true ]
 
     steps:
       - uses: actions/checkout@v2
@@ -336,6 +330,12 @@ jobs: # =======================================================================
           rfile: model-api/analysis-pipeline.R
           args: ${{ matrix.config-file }}
           opts: ${{ matrix.options }}
+
+      # Enable tmate debugging of manually-triggered workflows if the input
+      # option was provided (i.e., debug_enabled=true)
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - run: mv assets/_output tmp/test-fits
       - name: Upload tmp directory as an artifact
