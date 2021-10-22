@@ -1,7 +1,7 @@
 ---
 author: Luke Zachmann
 title: The offset term
-weight: 7
+weight: 8
 categories: background
 bookHidden: true
 tags:
@@ -18,7 +18,7 @@ Offset terms are used to model rates -- e.g., counts per unit area or time. In t
 
 Why can't we simply derive a new response variable by normalizing the original counts by the relevant sampling unit? The distributions we use to model counts have support for discrete-valued variables. Transformations of the counts can violate that requirement. For instance, say we counts signs of human disturbance in 20m-by-50m plots. If we see 60 signs, that's 60 / (20 * 50) = 0.06.  Although the mean of a Poisson distributed variable can be continuous, observations cannot be. Thus, transforming the response variable from counts to a rate is incorrect.
 
-{{< hint [warning] >}}
+{{< hint warning >}}
 The offset needs to be on the same scale as the linear predictor. In the case of a log link model, this requires the offset variable to be logged before inclusion in the model
 {{< /hint >}}
 

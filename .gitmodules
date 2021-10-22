@@ -7,6 +7,7 @@
 [submodule "model-api"]
 	path = model-api
 	url = https://gitlab.com/nps-ima/uplands-ci.git
+	branch = gh-submodule
 [submodule "docs/tex/status-and-trends-manuscript"]
 	path = docs/tex/status-and-trends-manuscript
 	url = https://git.overleaf.com/5f80c7b2ed36a80001dae03e
