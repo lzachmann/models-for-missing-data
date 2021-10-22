@@ -76,5 +76,25 @@
     "publisher": "Princeton University Press",
     "title": "Bayesian models",
     "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "McElreath",
+        "given": "Richard"
+      }
+    ],
+    "id": "mcelreath2018statistical",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "publisher": "Chapman; Hall/CRC",
+    "title": "Statistical rethinking: A bayesian course with examples in r and stan",
+    "title-short": "Statistical rethinking",
+    "type": "book"
   }
 ]
