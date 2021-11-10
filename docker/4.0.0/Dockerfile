@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.1.1
+FROM rocker/geospatial:4.0.0-ubuntu18.04
 
 # Copy Latin Modern font files to fonts directory and refresh fonts cache.
 COPY Latin-Modern-Roman-fontfacekit.zip /tmp
@@ -27,7 +27,10 @@ RUN apt-get install tree && \
         runjags \
         bayesplot \
         extraDistr \
-        MCMCpack \
-        magick \
-        gifski \
-        gganimate
+        MCMCpack
+
+# Update RStudio Server (to v1.4).
+RUN apt-get -y install gdebi-core && \
+    wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb && \
+    gdebi -n rstudio-server-1.4.1717-amd64.deb && \
+    rm rstudio-server-1.4.1717-amd64.deb

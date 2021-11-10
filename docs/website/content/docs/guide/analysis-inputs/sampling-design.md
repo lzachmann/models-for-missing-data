@@ -40,6 +40,17 @@ event date info:
     date-time format: Y!  # see lubridate::parse_date_time() for details
 ```
 
+You can also specify multiple date-time formatting options if individual data files for a network use different datetime standards.
+```YAML
+unit code column: Unit_Code
+site id column: Plot_ID
+event date info:
+    date-time column: Start_Date
+    date-time format:
+        - Y!-m!*-d! I!:M!:S!  # see lubridate::parse_date_time() for details
+        - Y!-m!*-d!
+```
+
 ### Park-level attributes
 Park-level metadata, stored in `_park-level-attributes.yml`, cannot be defined at a higher level because most, if not all, of this information applies only to an individual park, and not to other park units in the network. Specifically, we use this file to describe the column in the raw data that defines the strata (`stratum id column`), if present and the associated stratum areas (`stratum area info`). These areas, in turn, are used internally to computed a weighted mean at the park scale. Each entry beneath `stratum area info` must correspond to the actual stratum IDs in the column indicated by `stratum id column`. If there are no strata, then you can supply the same column used by `_network-level-attributes.yml` to indicate the unit code, and supply a single stratum area for the park.
 ```YAML
@@ -50,4 +61,4 @@ stratum area info:
     Upland: 1063552
 ```
 
-The number assigned to each stratum under `stratum area info` corresponds to the total number of sites -- regardless of the actual units -- that _could_ have been sampled in that stratum. In this example there are `684731` in `Gulley1` Thus, total number of sites sampled is a negligible proportion of the landscape. 684731 / (684731 + 138247 + 1063552) = 0.3629579
+The number assigned to each stratum under `stratum area info` corresponds to the total number of sites -- regardless of the actual units -- that _could_ have been sampled in that stratum. In this example there are `684731` in `Gulley1` Thus, total number of sites sampled is a negligible proportion of the landscape. 684731 / (684731 + 138247 + 1063552) = 0.3629579. Does the unit of the stratum areas matter so long as they are in the same unit? No, not yet, because these are only used to create the (normalized) stratum weights.

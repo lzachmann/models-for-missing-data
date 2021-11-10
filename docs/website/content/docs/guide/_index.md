@@ -16,10 +16,19 @@ All networks tend to use different language to refer to the same basic observati
 
 ## The project file tree
 
-When downloading the repository containing all of the code, you will see several directories. Notably, the config/, data/, and src/ directories, as well as the main calling script `analysis-pipeline.r`.
+When downloading the repository containing all of the code, you will see several directories. Notably, the assets/, data-api/, and model-api/ directories, as well as the main calling script model-api/analysis-pipeline.R.
 
 ```sh
 git clone --recurse-submodules git@github.com:lzachmann/models-for-missing-data.git
 ```
 
 You'll see several additional files and directories that are oriented at documentation and reporting (docs/) and the maintanence of the software (docker/).
+
+### For Windows users
+
+Using Git Bash, `cd` into the directory into which you'd like to place the "models for missing data" tool. Then run:
+```sh
+git clone --recurse-submodules https://github.com/lzachmann/models-for-missing-data.git
+```
+
+### Protected assets

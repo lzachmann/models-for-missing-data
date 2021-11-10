@@ -21,3 +21,5 @@ debug
 tmp
 .Rhistory
 .wget-hsts
+
+.vscode/
