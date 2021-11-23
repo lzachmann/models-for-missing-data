@@ -16,9 +16,9 @@
 	path = assets/uplands-data
 	url = https://gitlab.com/nps-ima/uplands-data.git
 	branch = gh-submodule
-	# update = none
+	update = none
 [submodule "assets/uplands-config"]
 	path = assets/uplands-config
 	url = https://gitlab.com/nps-ima/uplands-config.git
 	branch = gh-submodule
-	# update = none
+	update = none
