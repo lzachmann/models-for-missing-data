@@ -30,3 +30,6 @@ git checkout gh-submodule
 ```R
 update.packages(ask = FALSE)
 ``` -->
+
+### A special note to NPS users
+You may need to disconnect from your VPN.
