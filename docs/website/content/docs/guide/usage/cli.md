@@ -1,6 +1,6 @@
 ---
 title: Command line interface
-weight: 2
+weight: 3
 bookToc: true
 ---
 

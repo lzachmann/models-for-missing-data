@@ -1,6 +1,6 @@
 ---
 title: Graphical user interface
-weight: 1
+weight: 2
 bookToc: true
 ---
 
