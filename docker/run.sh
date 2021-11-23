@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-APPLICATION=${1:-rstudio} # one of: rstudio or hugo
+APPLICATION=${1:-R} # one of: R or Hugo
 
-if [ ${APPLICATION} == "rstudio" ]; then
+if [ ${APPLICATION,,} == "r" ]; then
 
   ENTRYPOINT=${2:-/init} # one of: /init or /bin/bash (or just 'bash')
-  TAG=${3:-latest} # latest is currently the only option, but this may change
+  TAG=${3:-latest}
 
   REPO=$(basename $(pwd))
-  IMAGE=ghcr.io/lzachmann/$REPO:$TAG
+  IMAGE_NAME=ghcr.io/lzachmann/$REPO:$TAG
 
-  if [[ "$(docker images -q $IMAGE 2> /dev/null)" == "" ]]; then
+  if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
     echo "Image not found, building from recipe."
     $(find . -path \*build.sh -maxdepth 2) $TAG
   fi
@@ -25,24 +25,25 @@ if [ ${APPLICATION} == "rstudio" ]; then
   cp assets/.Rprofile .
 
   docker run -it --rm \
-		--name rstudio-m4md-$PORT \
+		--name ${APPLICATION,,}-m4md-$PORT \
+    -p $PORT:8787 \
 		-v "$(pwd)":/home/bayes \
 		-w /home/bayes \
 		-e USER="bayes" \
 		-e PASSWORD="bayes" \
-		-p $PORT:8787 \
     --entrypoint $ENTRYPOINT \
-		$IMAGE
+		$IMAGE_NAME
 
   rm -r .config .local rstudio .Rprofile
 
-elif [ ${APPLICATION} == "hugo" ]; then
+elif [ ${APPLICATION,,} == "hugo" ]; then
 
   docker run --rm -it \
+    --name ${APPLICATION,,}-m4md-1313 \
     -p 1313:1313 \
     -v $(pwd):/src \
     -w /src/docs/website \
-    klakegg/hugo:0.83.1-ext-ubuntu \
+    klakegg/hugo:0.89.4-ext-ubuntu \
     shell
     # hugo server -D
     # pandoc content/posts/bib.bib -t csljson -o content/posts/bib.json

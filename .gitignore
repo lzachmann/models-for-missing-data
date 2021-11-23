@@ -1,6 +1,7 @@
 # Hugo
 public
 resources
+.hugo_build.lock
 
 # RStudio
 .config
@@ -8,10 +9,10 @@ resources
 rstudio
 .Rprofile
 !assets/.Rprofile
+.Rhistory
 
 # Misc
 .cache
-assets/_inits
 assets/_output
 assets/*-output
 bin
@@ -19,7 +20,5 @@ debug
 .bash_history
 .DS_Store
 tmp
-.Rhistory
 .wget-hsts
-
 .vscode/

@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.1.1
+FROM rocker/geospatial:4.1.2
 
 # Copy Latin Modern font files to fonts directory and refresh fonts cache.
 COPY Latin-Modern-Roman-fontfacekit.zip /tmp
