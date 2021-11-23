@@ -22,15 +22,13 @@ jobs: # =======================================================================
     steps:
       - uses: actions/checkout@v2
         with:
-          # ref: ${{ github.sha }}
           submodules: recursive  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
-          # token: ${{ github.token }}
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.89.4'
+          hugo-version: 'latest'
           extended: true
 
       - name: Build
