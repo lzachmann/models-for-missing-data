@@ -15,7 +15,7 @@ jobs: # =======================================================================
   # ---------------------------------------------------------------------------
   deploy: # deploy the Hugo website we are using for documentation
   # ---------------------------------------------------------------------------
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted # [self-hosted, ubuntu-20.04]
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:

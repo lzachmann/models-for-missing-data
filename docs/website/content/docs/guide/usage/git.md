@@ -20,6 +20,22 @@ git submodule update --recursive --remote
 ```
 If you see error, likely you've made changes locally that you've not yet saved (staged and commited using `git add` and `git commit`). Git won't replace changes in unsaved files with changes on the remote by default. This is desireable behavior. Try commiting your changes locally _before_ syncing with the remote.
 
+### Pushing local changes to a subodule to its remote
+First, `cd` into the submodule directory, we're going to do all of our Git work within the context of the submodule. If you've got uncommitted changes, do any necessary housekeeping:
+```sh
+git status
+git add .
+git commit -m "<some descriptive message about your changes>"
+```
+As always, please ensure you're not staging / committing unwanted files (e.g., binary files). Then run:
+
+```sh
+git fetch
+git checkout gh-submodule
+git merge <ref>
+git push origin gh-submodule
+```
+
 <!-- ### Checking out a specific ref / branch as opposed to a specific commit
 ```sh
 git fetch --all
@@ -31,5 +47,5 @@ git checkout gh-submodule
 update.packages(ask = FALSE)
 ``` -->
 
-### A special note to NPS users
-You may need to disconnect from your VPN.
+<!-- ### A special note to NPS users
+You may need to disconnect from your VPN. -->
