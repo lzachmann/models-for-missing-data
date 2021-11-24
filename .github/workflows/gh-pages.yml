@@ -27,8 +27,8 @@ jobs: # =======================================================================
 
       - name: Update themes used by the website
         run: |
-          git submodule update --remote docs/website/themes/hugo-cite
-          git submodule update --remote docs/website/themes/book
+          git submodule update --init --remote docs/website/themes/hugo-cite
+          git submodule update --init --remote docs/website/themes/book
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
