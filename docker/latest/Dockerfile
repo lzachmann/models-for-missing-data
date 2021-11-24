@@ -7,8 +7,7 @@ RUN unzip tmp/Latin-Modern-Roman-fontfacekit.zip -d /usr/share/fonts && \
     rm tmp/Latin-Modern-Roman-fontfacekit.zip
 
 # Install JAGS.
-RUN apt-get update -y && \
-    apt-get install -y jags
+RUN apt-get update -y && apt-get install -y jags
 
 # Graphics and other required packages.
 RUN apt-get install tree && \

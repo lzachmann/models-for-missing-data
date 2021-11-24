@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.0.0-ubuntu18.04
+FROM rocker/geospatial:4.1.2
 
 # Copy Latin Modern font files to fonts directory and refresh fonts cache.
 COPY Latin-Modern-Roman-fontfacekit.zip /tmp
@@ -7,8 +7,7 @@ RUN unzip tmp/Latin-Modern-Roman-fontfacekit.zip -d /usr/share/fonts && \
     rm tmp/Latin-Modern-Roman-fontfacekit.zip
 
 # Install JAGS.
-RUN apt-get update -y && \
-    apt-get install -y jags
+RUN apt-get update -y && apt-get install -y jags
 
 # Graphics and other required packages.
 RUN apt-get install tree && \
@@ -27,7 +26,10 @@ RUN apt-get install tree && \
         runjags \
         bayesplot \
         extraDistr \
-        MCMCpack
+        MCMCpack \
+        magick \
+        gifski \
+        gganimate
 
 # Copies the code to the filesystem path `/` of the container
 COPY . .
