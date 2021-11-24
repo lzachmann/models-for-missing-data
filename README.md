@@ -4,7 +4,7 @@
 
 # models-for-missing-data
 
-The "models-for-missing-data" toolkit contains code used to specify and fit Bayesian models to monitoring data. Models are declared usign YAML configuration files. Complete technical documentation can be found in the [Developer's Guide](https://lzachmann.github.io/models-for-missing-data/docs/guide/).
+The "models-for-missing-data" repo contains code used to specify and fit Bayesian models to monitoring data. Models, data, and details of the sampling design &ndash; e.g., observation units (plots, quadrats, and transects) within sites, sites within strata, and strata within parks &ndash; are declared using YAML configuration files. Complete technical documentation can be found in the [Developer's Guide](https://lzachmann.github.io/models-for-missing-data/docs/guide/). The article describing the general modeling approach can be found [here](https://link.springer.com/article/10.1007/s13253-021-00473-z).
 
 ## assets
 
