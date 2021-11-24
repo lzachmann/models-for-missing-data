@@ -9,9 +9,9 @@ response info:
             - Simulated binomial data
         trials column:
             - trials
-    sampling method: plot
+    sampling method: transect
     sample id column(s):
-        - plot
+        - transect
 
 site location info:
     file: assets/_data/sample-locs.csv
