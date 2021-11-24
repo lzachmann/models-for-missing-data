@@ -1,15 +1,234 @@
-<!doctype html><html lang=en dir=ltr><head><meta name=generator content="Hugo 0.85.0"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Welcome to Models for Missing Data #  This website serves as a storehouse of information about software used by several National Park Service Inventory & Monitoring (I&M) networks to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of models.
-Guide #  Technical information about the software, including inputs and outputs. We describe the data, the metadata syntax used to specify models, and the various outputs of the program, from model checking to inference."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Welcome"><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/"><title>Welcome | Models for missing data</title><link rel=manifest href=/models-for-missing-data/manifest.json><link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon><link rel=stylesheet href=/models-for-missing-data/book.min.44d646274b130ab88a21f0e2d365f1bbb5167a4df0287f8376c42ce0cd7d1919.css integrity="sha256-RNZGJ0sTCriKIfDi02Xxu7UWek3wKH+DdsQs4M19GRk=" crossorigin=anonymous><script defer src=/models-for-missing-data/flexsearch.min.js></script><script defer src=/models-for-missing-data/en.search.min.70e8559d713e056175024217f3fcf0e46cb93827a9d5e8c7d0c71b1aa4aaa4b0.js integrity="sha256-cOhVnXE+BWF1AkIX8/zw5Gy5OCep1ejH0McbGqSqpLA=" crossorigin=anonymous></script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','G-W93Y6ZYE7X','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script><link rel=alternate type=application/rss+xml href=https://lzachmann.github.io/models-for-missing-data/index.xml title="Models for missing data"><link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/models-for-missing-data/><span>Models for missing data</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/>Guide</a><ul><li><input type=checkbox id=section-f7766582f62ab983cd62571b7c710fac class=toggle>
-<label for=section-f7766582f62ab983cd62571b7c710fac class="flex justify-between"><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/>Analysis inputs</a></label><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/sampling-design/>Sampling design</a></li><li><input type=checkbox id=section-35783569a5ce73f2b5c1ecc0d6500018 class=toggle>
-<label for=section-35783569a5ce73f2b5c1ecc0d6500018 class="flex justify-between"><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/>Metadata syntax</a></label><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/>Data Block</a><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/response-info/>Response info</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/site-loc-info/>Site location</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/covariate-info/>Covariates</a></li></ul></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/>Model Block</a><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/likelihood/>Likelihood</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/link/>Link function</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/group-level-effects/>Group-level effects</a></li></ul></li></ul></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/monitoring-data/>Monitoring data</a></li></ul></li><li><input type=checkbox id=section-d7373ca643fcc6c02c8442c160b52546 class=toggle>
-<label for=section-d7373ca643fcc6c02c8442c160b52546 class="flex justify-between"><a role=button>Model info</a></label><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/>Data Types</a><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/counts/>Counts</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/proportions/>Proportions</a></li></ul></li></ul></li><li><input type=checkbox id=section-3bbc37212c4a16cbcb354e76443d9d1c class=toggle>
-<label for=section-3bbc37212c4a16cbcb354e76443d9d1c class="flex justify-between"><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/>Usage</a></label><ul><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/gui/>Graphical user interface</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/cli/>Command line interface</a></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/model-builder/>Model builder</a></li></ul></li></ul></li><li><a href=https://lzachmann.github.io/models-for-missing-data/docs/faq/>FAQ</a><ul></ul></li></ul><ul><li><a href=/models-for-missing-data/posts/>Posts</a></li><li><a href=https://github.com/lzachmann/models-for-missing-data target=_blank rel=noopener>GitHub</a></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/models-for-missing-data/svg/menu.svg class=book-icon alt=Menu></label>
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta name=generator content="Hugo 0.89.4">
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Welcome to Models for Missing Data #  This website serves as a storehouse of information about software used by several National Park Service Inventory & Monitoring (I&M) networks to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of models.
+Guide #  Technical information about the software, including inputs and outputs. We describe the data, the metadata syntax used to specify models, and the various outputs of the program, from model checking to inference.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Welcome">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/">
+<title>Welcome | Models for missing data</title>
+<link rel=manifest href=/models-for-missing-data/manifest.json>
+<link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/models-for-missing-data/book.min.89a77f7e702a8626749b948bbfb01109823daf6c1246ca407d1378833494c402.css integrity="sha256-iad/fnAqhiZ0m5SLv7ARCYI9r2wSRspAfRN4gzSUxAI=" crossorigin=anonymous>
+<script defer src=/models-for-missing-data/flexsearch.min.js></script>
+<script defer src=/models-for-missing-data/en.search.min.e9bd582f8bb970a961aa369535404de1c05d5cab0136f94ab5d1c13702cf1878.js integrity="sha256-6b1YL4u5cKlhqjaVNUBN4cBdXKsBNvlKtdHBNwLPGHg=" crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W93Y6ZYE7X"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-W93Y6ZYE7X',{anonymize_ip:!1})}</script>
+<link rel=alternate type=application/rss+xml href=https://lzachmann.github.io/models-for-missing-data/index.xml title="Models for missing data">
+<link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/models-for-missing-data/><span>Models for missing data</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/>Guide</a>
+<ul>
+<li>
+<input type=checkbox id=section-f7766582f62ab983cd62571b7c710fac class=toggle>
+<label for=section-f7766582f62ab983cd62571b7c710fac class="flex justify-between">
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/>Analysis inputs</a>
+</label>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/sampling-design/>Sampling design</a>
+</li>
+<li>
+<input type=checkbox id=section-35783569a5ce73f2b5c1ecc0d6500018 class=toggle>
+<label for=section-35783569a5ce73f2b5c1ecc0d6500018 class="flex justify-between">
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/>Metadata syntax</a>
+</label>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/>Data Block</a>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/response-info/>Response info</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/site-loc-info/>Site location</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/covariate-info/>Covariates</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/>Model Block</a>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/likelihood/>Likelihood</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/link/>Link function</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/group-level-effects/>Group-level effects</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/monitoring-data/>Monitoring data</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-d7373ca643fcc6c02c8442c160b52546 class=toggle>
+<label for=section-d7373ca643fcc6c02c8442c160b52546 class="flex justify-between">
+<a role=button>Model info</a>
+</label>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/>Data Types</a>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/counts/>Counts</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/proportions/>Proportions</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-3bbc37212c4a16cbcb354e76443d9d1c class=toggle>
+<label for=section-3bbc37212c4a16cbcb354e76443d9d1c class="flex justify-between">
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/>Usage</a>
+</label>
+<ul>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/git/>Getting started</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/gui/>Graphical user interface</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/cli/>Command line interface</a>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/model-builder/>Model builder</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/faq/>FAQ</a>
+<ul>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<a href=/models-for-missing-data/posts/>
+Posts
+</a>
+</li>
+<li>
+<a href=https://github.com/lzachmann/models-for-missing-data target=_blank rel=noopener>
+GitHub
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/models-for-missing-data/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>Welcome</strong>
-<label for=toc-control><img src=/models-for-missing-data/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#contributors>Contributors</a></li></ul></nav></aside></header><article class=markdown><h1 id=welcome-to-models-for-missing-data>Welcome to Models for Missing Data
-<a class=anchor href=#welcome-to-models-for-missing-data>#</a></h1><p>This website serves as a storehouse of information about software used by several National Park Service <a href=https://www.nps.gov/im/networks.htm>Inventory & Monitoring (I&M) networks</a> to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of models.</p><div class="book-columns flex flex-wrap"><div class="flex-even markdown-inner"><h2 id=guidehttpslzachmanngithubiomodels-for-missing-datadocsguide><a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/>Guide</a>
-<a class=anchor href=#guidehttpslzachmanngithubiomodels-for-missing-datadocsguide>#</a></h2><p>Technical information about the software, including <em>inputs</em> and <em>outputs</em>. We describe the data, the metadata syntax used to specify models, and the various outputs of the program, from model checking to inference.</div><div class="flex-even markdown-inner"><h2 id=postshttpslzachmanngithubiomodels-for-missing-dataposts><a href=https://lzachmann.github.io/models-for-missing-data/posts/>Posts</a>
-<a class=anchor href=#postshttpslzachmanngithubiomodels-for-missing-dataposts>#</a></h2><p>Posts containing more general content, including pieces on the missing data problem, proof-of-concept simulations, and example analyses.</div></div><h2 id=contributors>Contributors
-<a class=anchor href=#contributors>#</a></h2><p>The contributing team includes Luke Zachmann, Tom Hobbs, Erin Borgman, Dana Witwicki, Megan Swan, Cheryl McIntyre, and Carolyn Livensperger.</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/76e2e410677419f256a9f44e708288607a827f56 title="Last modified by Luke Zachmann | Aug 10, 2021" target=_blank rel=noopener><img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Aug 10, 2021</span></a></div><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/edit/main/docs/website/content/_index.md target=_blank rel=noopener><img src=/models-for-missing-data/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span></a></div></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#contributors>Contributors</a></li></ul></nav></div></aside></main></body></html>
+<label for=toc-control>
+<img src=/models-for-missing-data/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#contributors>Contributors</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=welcome-to-models-for-missing-data>
+Welcome to Models for Missing Data
+<a class=anchor href=#welcome-to-models-for-missing-data>#</a>
+</h1>
+<p>This website serves as a storehouse of information about software used by several National Park Service <a href=https://www.nps.gov/im/networks.htm>Inventory & Monitoring (I&M) networks</a> to develop models of the status and trends of park resources. It also features general-interest articles introducing statistical concepts and applications of models.</p>
+<div class="book-columns flex flex-wrap">
+<div class="flex-even markdown-inner">
+<h2 id=guidehttpslzachmanngithubiomodels-for-missing-datadocsguide>
+<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/>Guide</a>
+<a class=anchor href=#guidehttpslzachmanngithubiomodels-for-missing-datadocsguide>#</a>
+</h2>
+<p>Technical information about the software, including <em>inputs</em> and <em>outputs</em>. We describe the data, the metadata syntax used to specify models, and the various outputs of the program, from model checking to inference.
+</div>
+<div class="flex-even markdown-inner">
+<h2 id=postshttpslzachmanngithubiomodels-for-missing-dataposts>
+<a href=https://lzachmann.github.io/models-for-missing-data/posts/>Posts</a>
+<a class=anchor href=#postshttpslzachmanngithubiomodels-for-missing-dataposts>#</a>
+</h2>
+<p>Posts containing more general content, including pieces on the missing data problem, proof-of-concept simulations, and example analyses.
+</div>
+</div>
+<h2 id=contributors>
+Contributors
+<a class=anchor href=#contributors>#</a>
+</h2>
+<p>The contributing team includes Luke Zachmann, Tom Hobbs, Erin Borgman, Dana Witwicki, Megan Swan, Cheryl McIntyre, and Carolyn Livensperger.</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/76e2e410677419f256a9f44e708288607a827f56 title="Last modified by Luke Zachmann | Aug 10, 2021" target=_blank rel=noopener>
+<img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Aug 10, 2021</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/edit/main/docs/website/content/_index.md target=_blank rel=noopener>
+<img src=/models-for-missing-data/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#contributors>Contributors</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
