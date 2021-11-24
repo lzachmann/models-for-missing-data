@@ -3,22 +3,20 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=description content="Getting started #  Downloading the project for the first time #  To clone the entire repository (including submodules) run the following at the command line from the directory into which you&rsquo;d like to place the project.
-git clone --recurse-submodules --remote-submodules https://github.com/lzachmann/models-for-missing-data.git If the above doesn&rsquo;t work, try updating Git (--remote-submodules is only available in newer versions of Git). Alternatively, try removing --remote-submodules from the clone command.
-Syncing an existing project to get the latest updates #  To get the latest updates for each of the submodules, run:">
+git clone --recurse-submodules --remote-submodules \  https://github.com/lzachmann/models-for-missing-data.git If the above doesn&rsquo;t work, try updating Git (--remote-submodules is only available in newer versions of Git). Alternatively, try removing --remote-submodules from the clone command.">
 <meta name=theme-color content="#FFFFFF">
 <meta name=color-scheme content="light dark"><meta property="og:title" content="Getting started">
 <meta property="og:description" content="Getting started #  Downloading the project for the first time #  To clone the entire repository (including submodules) run the following at the command line from the directory into which you&rsquo;d like to place the project.
-git clone --recurse-submodules --remote-submodules https://github.com/lzachmann/models-for-missing-data.git If the above doesn&rsquo;t work, try updating Git (--remote-submodules is only available in newer versions of Git). Alternatively, try removing --remote-submodules from the clone command.
-Syncing an existing project to get the latest updates #  To get the latest updates for each of the submodules, run:">
+git clone --recurse-submodules --remote-submodules \  https://github.com/lzachmann/models-for-missing-data.git If the above doesn&rsquo;t work, try updating Git (--remote-submodules is only available in newer versions of Git). Alternatively, try removing --remote-submodules from the clone command.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/git/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-23T14:37:54-07:00">
+<meta property="article:modified_time" content="2021-11-23T20:53:01-07:00">
 <title>Getting started | Models for missing data</title>
 <link rel=manifest href=/models-for-missing-data/manifest.json>
 <link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/models-for-missing-data/book.min.89a77f7e702a8626749b948bbfb01109823daf6c1246ca407d1378833494c402.css integrity="sha256-iad/fnAqhiZ0m5SLv7ARCYI9r2wSRspAfRN4gzSUxAI=" crossorigin=anonymous>
 <script defer src=/models-for-missing-data/flexsearch.min.js></script>
-<script defer src=/models-for-missing-data/en.search.min.e9bd582f8bb970a961aa369535404de1c05d5cab0136f94ab5d1c13702cf1878.js integrity="sha256-6b1YL4u5cKlhqjaVNUBN4cBdXKsBNvlKtdHBNwLPGHg=" crossorigin=anonymous></script>
+<script defer src=/models-for-missing-data/en.search.min.93f1885f5e36cb6808dceddc9d12a3de2363b664326068e7abd6c7c9875e5dc7.js integrity="sha256-k/GIX142y2gI3O3cnRKj3iNjtmQyYGjnq9bHyYdeXcc=" crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W93Y6ZYE7X"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-W93Y6ZYE7X',{anonymize_ip:!1})}</script>
 <link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css>
@@ -190,7 +188,8 @@ Downloading the project for the first time
 <a class=anchor href=#downloading-the-project-for-the-first-time>#</a>
 </h3>
 <p>To clone the entire repository (including submodules) run the following at the command line <em>from</em> the directory into which you&rsquo;d like to place the project.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>git clone --recurse-submodules --remote-submodules https://github.com/lzachmann/models-for-missing-data.git
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>git clone --recurse-submodules --remote-submodules <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>  https://github.com/lzachmann/models-for-missing-data.git
 </code></pre></div><p>If the above doesn&rsquo;t work, try updating Git (<code>--remote-submodules</code> is only available in newer versions of Git). Alternatively, try removing <code>--remote-submodules</code> from the <code>clone</code> command.</p>
 <h3 id=syncing-an-existing-project-to-get-the-latest-updates>
 Syncing an existing project to get the latest updates
@@ -198,7 +197,8 @@ Syncing an existing project to get the latest updates
 </h3>
 <p>To get the latest updates for each of the submodules, run:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>git submodule update --recursive --remote
-</code></pre></div><p>If you see error, likely you&rsquo;ve made changes locally that you&rsquo;ve not yet saved (staged and commited using <code>git add</code> and <code>git commit</code>). Git won&rsquo;t replace changes in unsaved files with changes on the remote by default. This is desireable behavior. Try commiting your changes locally <em>before</em> syncing with the remote.</p>
+</code></pre></div>
+<p>If you see error, likely you&rsquo;ve made changes locally that you&rsquo;ve not yet saved (staged and commited using <code>git add</code> and <code>git commit</code>). Git won&rsquo;t replace changes in unsaved files with changes on the remote by default. This is desireable behavior. Try commiting your changes locally <em>before</em> syncing with the remote.</p>
 <h3 id=pushing-local-changes-to-a-subodule-to-its-remote>
 Pushing local changes to a subodule to its remote
 <a class=anchor href=#pushing-local-changes-to-a-subodule-to-its-remote>#</a>
@@ -216,9 +216,9 @@ git push origin gh-submodule
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/b813de31c16164fb8d725b7f1a4880f64e768e03 title="Last modified by Luke Zachmann | Nov 23, 2021" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/b0913ee5b4d746cc1c3b64cc2bb30baaad8aa1f2 title="Last modified by Luke Zachmann | Nov 24, 2021" target=_blank rel=noopener>
 <img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Nov 23, 2021</span>
+<span>Nov 24, 2021</span>
 </a>
 </div>
 <div>
