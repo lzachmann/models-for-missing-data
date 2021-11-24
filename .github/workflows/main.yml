@@ -335,11 +335,11 @@ jobs: # =======================================================================
           args: ${{ matrix.config-file }}
           opts: ${{ matrix.options }}
 
-      # Enable tmate debugging of manually-triggered workflows if the input
-      # option was provided (i.e., debug_enabled=true)
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+      # # Enable tmate debugging of manually-triggered workflows if the input
+      # # option was provided (i.e., debug_enabled=true)
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+      #   # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - run: mv assets/_output tmp/test-fits
       - name: Upload tmp directory as an artifact
