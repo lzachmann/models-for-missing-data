@@ -167,7 +167,7 @@ jobs: # =======================================================================
   define-jags-model-matrix:
   # ---------------------------------------------------------------------------
 
-    needs: [ count-vars, binomial-vars, nonnegative-continuous-vars ]
+    needs: [ count-vars ] # [ count-vars, binomial-vars, nonnegative-continuous-vars ]
     runs-on: ubuntu-latest
 
     steps:
