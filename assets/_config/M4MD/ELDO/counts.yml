@@ -60,4 +60,4 @@ additional covariates:
     - w1
 
 # Initial values (one of: 'auto', 'default', or 'inherited')
-initial values: inherited
+initial values: default
