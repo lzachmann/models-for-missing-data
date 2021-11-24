@@ -254,7 +254,7 @@ jobs: # =======================================================================
           retention-days: 1
 
   # ---------------------------------------------------------------------------
-  cleanup: # summarise sim fits, and write demo data to _data directory
+  cleanup: # summarize sim fits, and write demo data to assets/_data
   # ---------------------------------------------------------------------------
 
     needs: [ use-jags-models-to-sim-data ]
