@@ -103,9 +103,9 @@ jobs: # =======================================================================
     steps:
 
       - uses: actions/checkout@v2
-        with:
-          # submodules: true  # fetch model and data API submodules
-          # fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
+        # with:
+        #   submodules: true  # fetch model and data API submodules
+        #   fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api

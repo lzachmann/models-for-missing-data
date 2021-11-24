@@ -8,6 +8,8 @@ The "models-for-missing-data" repo contains code used to specify and fit Bayesia
 
 ## assets
 
+Data, model config files, and the ["model zoo"](assets/model-zoo), a quick reference for many of the models implemented by this collection of tools.
+
 ## model-api
 
 R library for calling the model building / model fitting API.
