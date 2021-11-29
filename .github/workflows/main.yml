@@ -323,7 +323,7 @@ jobs: # =======================================================================
     strategy:
       matrix:
         config-file: ${{ fromJson(needs.cleanup.outputs.configs) }}
-        options: [ -a 1000 -u 2000 -n 3000 -c 1 -d true ]
+        options: [ --n-adapt=1000 --n-update=5000 --n-iter=2500 --n-cores=1 --rm-dqs ]
 
     steps:
       - uses: actions/checkout@v2
