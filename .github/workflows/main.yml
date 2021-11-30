@@ -347,7 +347,7 @@ jobs: # =======================================================================
         with:
           rfile: model-api/analysis-pipeline.R
           args: ${{ matrix.config-file }}
-          opts: '--n-adapt=1000 --n-update=5000 --n-iter=2500 --n-cores=1 --rm-dqs' # ${{ matrix.options }}
+          opts: '--n-adapt=2000 --n-update=6000 --n-iter=3000 --n-cores=1 --rm-dqs' # ${{ matrix.options }}
 
       # # Enable tmate debugging of manually-triggered workflows if the input
       # # option was provided (i.e., debug_enabled=true)
