@@ -55,9 +55,6 @@ jobs: # =======================================================================
 
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   submodules: true  # fetch model and data API submodules
-        #   fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api
@@ -101,9 +98,6 @@ jobs: # =======================================================================
 
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   submodules: true  # fetch model and data API submodules
-        #   fetch-depth: 0    # fetch all history for .GitInfo and .Lastmod
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api
@@ -222,14 +216,9 @@ jobs: # =======================================================================
 
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   submodules: true
-        #   fetch-depth: 0
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api
-
-      # - run: cd model-api && git checkout gh-submodule && cd ..
 
       - name: Download file share
         uses: actions/download-artifact@v2
@@ -264,14 +253,9 @@ jobs: # =======================================================================
 
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   submodules: true
-        #   fetch-depth: 0
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api
-
-      # - run: cd model-api && git checkout gh-submodule && cd ..
 
       - name: Download file share
         uses: actions/download-artifact@v2
@@ -327,14 +311,9 @@ jobs: # =======================================================================
 
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   submodules: true
-        #   fetch-depth: 0
       - name: Pull model API from GitLab
         run: |
           git submodule update --init --remote model-api
-
-      # - run: cd model-api && git checkout gh-submodule && cd ..
 
       - name: Download file share
         uses: actions/download-artifact@v2
@@ -355,7 +334,7 @@ jobs: # =======================================================================
       #   uses: mxschmitt/action-tmate@v3
       #   # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
-      - run: mv assets/_output tmp/test-fits
+      - run: sudo mv assets/_output tmp/test-fits
       - name: Upload tmp directory as an artifact
         uses: actions/upload-artifact@v2
         with:
