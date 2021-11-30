@@ -29,4 +29,5 @@ RUN apt-get install tree && \
         MCMCpack \
         magick \
         gifski \
-        gganimate
+        gganimate \
+        multidplyr

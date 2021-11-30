@@ -29,7 +29,8 @@ RUN apt-get install tree && \
         MCMCpack \
         magick \
         gifski \
-        gganimate
+        gganimate \
+        multidplyr
 
 # Copies the code to the filesystem path `/` of the container
 COPY . .
