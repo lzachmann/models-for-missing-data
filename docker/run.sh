@@ -44,8 +44,6 @@ elif [ ${APPLICATION,,} == "hugo" ]; then
     -v $(pwd):/src \
     -w /src/docs/website \
     klakegg/hugo:0.89.4-ext-ubuntu \
-    shell
-    # hugo server -D
-    # pandoc content/posts/bib.bib -t csljson -o content/posts/bib.json
+    shell # ./live-reload.sh
 
 fi
