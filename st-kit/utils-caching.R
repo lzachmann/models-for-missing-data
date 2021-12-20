@@ -41,7 +41,6 @@ save_object <- function(x, path, filename) {
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
     saveRDS(x, file.path(path, filename))
   }
-  x
 }
 
 save_table <- function(x, path, filename) {
@@ -49,5 +48,13 @@ save_table <- function(x, path, filename) {
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
     write_csv(x, file.path(path, filename))
   }
-  x
+}
+
+save_stdout <- function(x, path, filename) {
+  if (!is.null(path)) {
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
+    sink(file.path(path, filename))
+    print(x)
+    sink()
+  }
 }
