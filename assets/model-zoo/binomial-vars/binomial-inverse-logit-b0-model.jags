@@ -9,33 +9,6 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the binomial distribution with parameter
-        ## `p` and number of trials `y.n`.
-        y.rep[n] ~ dbinom(p[n], y.n[n])
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Inverse logit deterministic model (w/ additional covariates).
-        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
-                          B[y.site[n], 2, y.strata[n]] * x[n] +
-                          X[n, ] %*% Beta)
-        ## Binomial likelihood.
-        p[n] <- mu.p[n]
-        y[n] ~ dbinom(p[n], y.n[n])
-        ## Residuals.
-        y.hat[n] <- p[n] * y.n[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -57,5 +30,32 @@ model {
             B[j, 2, k] <- B1[k]
         }
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Inverse logit deterministic model (w/ additional covariates).
+        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                          B[y.site[n], 2, y.strata[n]] * x[n] +
+                          X[n, ] %*% Beta)
+        ## Binomial likelihood.
+        p[n] <- mu.p[n]
+        y[n] ~ dbinom(p[n], y.n[n])
+        ## Residuals.
+        y.hat[n] <- p[n] * y.n[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the binomial distribution with parameter
+        ## `p` and number of trials `y.n`.
+        y.rep[n] ~ dbinom(p[n], y.n[n])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }
