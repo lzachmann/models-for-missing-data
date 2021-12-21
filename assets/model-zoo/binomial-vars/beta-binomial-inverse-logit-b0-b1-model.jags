@@ -9,46 +9,15 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the beta binomial model with parameter
-        ## `p` and number of trials `y.n`.
-        y.rep[n] ~ dbinom(p[n], y.n[n])
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Inverse logit deterministic model (w/ additional covariates).
-        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
-                          B[y.site[n], 2, y.strata[n]] * x[n] +
-                          X[n, ] %*% Beta)
-        ## Beta-binomial likelihood.
-        tau.ss[n] <- 1 / sigma.ss[y.site[n], y.strata[n]]^2
-        eps[n] ~ dnorm(0, tau.ss[n])
-        p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
-                         B[y.site[n], 2, y.strata[n]] * x[n] +
-                         X[n, ] %*% Beta + eps[n])
-        y[n] ~ dbinom(p[n], y.n[n])
-        ## Residuals.
-        y.hat[n] <- p[n] * y.n[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ## on sigma for each site and/or stratum.
     for(k in 1:y.n.strata) {
         for(j in 1:y.n.site[k]) {
             sigma.ss[j, k] <- sigma[k]
         }
-        sigma[k] ~ dunif(0.0001, 10)
+        #sigma[k] ~ dunif(0.0001, 10)
         #sigma[k] ~ dt(0, 1 / (10^2), 1) T(0,)
-        #sigma[k] ~ dgamma(0.01, 0.01)
+        sigma[k] ~ dgamma(0.01, 0.01)
     }
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -73,5 +42,36 @@ model {
         Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
         rho[k] ~ dunif(-1, 1)
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Inverse logit deterministic model (w/ additional covariates).
+        mu.p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                          B[y.site[n], 2, y.strata[n]] * x[n] +
+                          X[n, ] %*% Beta)
+        ## Beta-binomial likelihood.
+        tau.ss[n] <- 1 / sigma.ss[y.site[n], y.strata[n]]^2
+        eps[n] ~ dnorm(0, tau.ss[n])
+        p[n] <- ilogit(B[y.site[n], 1, y.strata[n]] +
+                         B[y.site[n], 2, y.strata[n]] * x[n] +
+                         X[n, ] %*% Beta + eps[n])
+        y[n] ~ dbinom(p[n], y.n[n])
+        ## Residuals.
+        y.hat[n] <- p[n] * y.n[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the beta binomial model with parameter
+        ## `p` and number of trials `y.n`.
+        y.rep[n] ~ dbinom(p[n], y.n[n])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }

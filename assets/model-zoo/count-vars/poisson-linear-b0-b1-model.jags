@@ -9,33 +9,6 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the Poisson distribution with parameter
-        ## `mu`.
-        y.rep[n] ~ dpois(mu[n])
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Linear deterministic model (w/ additional covariates).
-        mu[n] <- max(0.00001,
-                     B[y.site[n], 1, y.strata[n]] +
-                     B[y.site[n], 2, y.strata[n]] * x[n] +
-                     X[n, ] %*% Beta)
-        ## Poisson likelihood.
-        y[n] ~ dpois(mu[n])
-        ## Residuals.
-        y.hat[n] <- mu[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -60,5 +33,32 @@ model {
         Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
         rho[k] ~ dunif(-1, 1)
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- max(0.00001,
+                     B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta) 
+        ## Poisson likelihood.
+        y[n] ~ dpois(mu[n])
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the Poisson distribution with parameter
+        ## `mu`.
+        y.rep[n] ~ dpois(mu[n])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }
