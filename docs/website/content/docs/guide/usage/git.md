@@ -15,7 +15,7 @@ git clone --recurse-submodules --remote-submodules \
 If the above doesn't work, try updating Git (`--remote-submodules` is only available in newer versions of Git). Alternatively, try removing `--remote-submodules` from the `clone` command.
 
 ### Syncing an existing project to get the latest updates
-To get the latest updates for each of the submodules, run:
+First, be sure to do any necessary housekeeping (remove, stash, or commit changes). To get the latest updates for each of the submodules, run:
 ```sh
 git submodule update --recursive --remote
 ```

@@ -9,49 +9,15 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the negative binomial distribution with
-        ## parameters `p.nb` and `kappa`.
-        y.rep[n] ~ dnegbin(p.nb[n], kappa[n])
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Linear deterministic model (w/ additional covariates).
-        mu[n] <- max(0.00001,
-                     B[y.site[n], 1, y.strata[n]] +
-                     B[y.site[n], 2, y.strata[n]] * x[n] +
-                     X[n, ] %*% Beta)
-        ## Negative binomial likelihood.
-        p.nb[n] <- kappa[n] / (kappa[n] + mu[n])
-        # https://www.mathpapa.com/algebra-calculator.html?q=v%3Dr*(1-p)%2F(p*p)
-        # http://doingbayesiandataanalysis.blogspot.com/2012/04/negative-binomial-reparameterization.html
-        # r <- (p^2 * v^2) / (-p + 1)
-        #kappa[n] <- (p.nb[n]^2 * sigma.y[n]^2) / (-p.nb[n] + 1)
-        kappa[n] <- mu[n]^2 / max(1E-12, sigma.y[n]^2 - mu[n])
-        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
-        y[n] ~ dnegbin(p.nb[n], kappa[n])
-        ## Residuals.
-        y.hat[n] <- mu[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ## on the variance of observations.
     for(k in 1:y.n.strata) {
       for(j in 1:y.n.site[k]) {
             sigma.ss[j, k] <- sigma[k]
       }
-        sigma[k] ~ dunif(0.0001, 10)
+        #sigma[k] ~ dunif(0.0001, 10)
         #sigma[k] ~ dt(0, 1 / (10^2), 1) T(0,)
-        #sigma[k] ~ dgamma(0.01, 0.01)
+        sigma[k] ~ dgamma(0.01, 0.01)
     }
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -73,5 +39,39 @@ model {
             B[j, 2, k] <- B1[k]
         }
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- max(0.00001,
+                     B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta) 
+        ## Negative binomial likelihood.
+        p.nb[n] <- kappa[n] / (kappa[n] + mu[n])
+        # https://www.mathpapa.com/algebra-calculator.html?q=v%3Dr*(1-p)%2F(p*p)
+        # http://doingbayesiandataanalysis.blogspot.com/2012/04/negative-binomial-reparameterization.html
+        # r <- (p^2 * v^2) / (-p + 1)
+        #kappa[n] <- (p.nb[n]^2 * sigma.y[n]^2) / (-p.nb[n] + 1)
+        kappa[n] <- mu[n]^2 / max(1E-12, sigma.y[n]^2 - mu[n])
+        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
+        y[n] ~ dnegbin(p.nb[n], kappa[n])
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the negative binomial distribution with
+        ## parameters `p.nb` and `kappa`.
+        y.rep[n] ~ dnegbin(p.nb[n], kappa[n])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }
