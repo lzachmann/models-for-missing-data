@@ -23,7 +23,7 @@ git submodule update --recursive --remote
 <!-- git submodule update --remote docs/website/themes/hugo-cite -->
 If you see error, likely you've made changes locally that you've not yet saved (staged and commited using `git add` and `git commit`). Git won't replace changes in unsaved files with changes on the remote by default. This is desireable behavior. Try commiting your changes locally _before_ syncing with the remote.
 
-### Pushing local changes to a subodule to its remote
+### Pushing local changes to a submodule to its remote
 First, `cd` into the submodule directory, we're going to do all of our Git work within the context of the submodule. If you've got uncommitted changes, do any necessary housekeeping:
 ```sh
 git status
