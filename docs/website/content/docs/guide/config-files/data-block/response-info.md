@@ -5,7 +5,8 @@ weight: 1
 
 # Response information
 
-Here is the first few lines of the data block for a model of count-type data at Rocky Mountain Network called `rich.yml`, which lives in the directory `config/ROMN/LIBI`
+## The usual case
+In the usual case, we are working with a single vector of observations (a single column of data in a flat file). Below, we see the first few lines of the data block for an analysis of count-type data from Little Bighorn Battlefield National Monument (LIBI), in Montana (a park within the Rocky Mountain Network). The file, `rich.yml`, lives in the directory `assets/uplands-config/ROMN/LIBI`.
 
 ```YAML
 # ==== DATA ===================================================================
@@ -24,3 +25,5 @@ response info:
         - Transect
         - Plot
 ```
+
+The `response info` section of the data block specifies the `file`, the name of the column containing the response variable of interest (`response column`), a corresponding human-readable description for each response variable (`description`), and the names of the columns required to identify individual observations (`sample id column(s)`). In some cases, `sample id column(s)` is a single column, while in others it's multiple. 

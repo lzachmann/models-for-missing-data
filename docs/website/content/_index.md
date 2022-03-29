@@ -21,15 +21,15 @@ Technical information about the software, including _inputs_ and _outputs_. We d
 
 {{< columns >}}
 ### [Best Practices]({{< ref "/docs/best-practices/_index.md" >}})
-Modeling best practices.
+Modeling best practices, including exploratory data analysis and troubleshooting.
 <--->
 ### [FAQ]({{< ref "/docs/faq/_index.md" >}})
-Frequently asked question and answers!
+Your frequently asked question, answered!
 {{< /columns >}}
 
 {{< columns >}}
 ### [Posts]({{< ref "/posts/_index.md" >}})
-Posts containing more general content, including pieces on the missing data problem, proof-of-concept simulations, and example analyses.
+Blog-style posts containing more general content, including pieces on the missing data problem, proof-of-concept simulations, and example analyses.
 <--->
 {{< /columns >}}
 
