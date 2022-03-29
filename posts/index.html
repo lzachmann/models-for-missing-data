@@ -1,462 +1,66 @@
-<!doctype html><html lang=en dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=theme-color content="#FFFFFF">
-<meta name=color-scheme content="light dark"><meta property="og:title" content="Posts">
-<meta property="og:description" content>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/posts/">
-<title>Posts | Models for missing data</title>
-<link rel=manifest href=/models-for-missing-data/manifest.json>
-<link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/models-for-missing-data/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous>
-<script defer src=/models-for-missing-data/flexsearch.min.js></script>
-<script defer src=/models-for-missing-data/en.search.min.f62e624a151b87b9aaa5117ba4950924ee06995a11ce6a616d3d21caed043ba4.js integrity="sha256-9i5iShUbh7mqpRF7pJUJJO4GmVoRzmphbT0hyu0EO6Q=" crossorigin=anonymous></script>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Posts"><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/posts/"><title>Posts | Models for missing data</title><link rel=manifest href=/models-for-missing-data/manifest.json><link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon><link rel=stylesheet href=/models-for-missing-data/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/models-for-missing-data/flexsearch.min.js></script>
+<script defer src=/models-for-missing-data/en.search.min.553e4bc5133b0e096032c348687e28a50b91e124407e906787ef91b4d6d9b6d8.js integrity="sha256-VT5LxRM7DglgMsNIaH4opQuR4SRAfpBnh++RtNbZttg=" crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W93Y6ZYE7X"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-W93Y6ZYE7X',{anonymize_ip:!1})}</script>
-<link rel=alternate type=application/rss+xml href=https://lzachmann.github.io/models-for-missing-data/posts/index.xml title="Models for missing data">
-<link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a class="flex align-center" href=/models-for-missing-data/><span>Models for missing data</span>
-</a>
-</h2>
-<div class=book-search>
-<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
-<div class="book-search-spinner hidden"></div>
-<ul id=book-search-results></ul>
-</div>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/>Guide</a>
-<ul>
-<li>
-<input type=checkbox id=section-f7766582f62ab983cd62571b7c710fac class=toggle>
-<label for=section-f7766582f62ab983cd62571b7c710fac class="flex justify-between">
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/>Analysis inputs</a>
-</label>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/sampling-design/>Sampling design</a>
-</li>
-<li>
-<input type=checkbox id=section-35783569a5ce73f2b5c1ecc0d6500018 class=toggle>
-<label for=section-35783569a5ce73f2b5c1ecc0d6500018 class="flex justify-between">
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/>Metadata syntax</a>
-</label>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/>Data Block</a>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/response-info/>Response info</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/site-loc-info/>Site location</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/data-block/covariate-info/>Covariates</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/>Model Block</a>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/likelihood/>Likelihood</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/link/>Link function</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/metadata-syntax/model-block/group-level-effects/>Group-level effects</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/analysis-inputs/monitoring-data/>Monitoring data</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-d7373ca643fcc6c02c8442c160b52546 class=toggle>
-<label for=section-d7373ca643fcc6c02c8442c160b52546 class="flex justify-between">
-<a role=button>Model info</a>
-</label>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/>Data Types</a>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/counts/>Counts</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/model-info/data-types/proportions/>Proportions</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-3bbc37212c4a16cbcb354e76443d9d1c class=toggle>
-<label for=section-3bbc37212c4a16cbcb354e76443d9d1c class="flex justify-between">
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/>Usage</a>
-</label>
-<ul>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/git/>Getting started</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/gui/>Graphical user interface</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/cli/>Command line interface</a>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/guide/usage/model-builder/>Model builder</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://lzachmann.github.io/models-for-missing-data/docs/faq/>FAQ</a>
-<ul>
-</ul>
-</li>
-</ul>
-<ul>
-<li>
-<a href=/models-for-missing-data/posts/>
-Posts
-</a>
-</li>
-<li>
-<a href=https://github.com/lzachmann/models-for-missing-data target=_blank rel=noopener>
-GitHub
-</a>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/models-for-missing-data/svg/menu.svg class=book-icon alt=Menu>
-</label>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-W93Y6ZYE7X",{anonymize_ip:!1})}</script><link rel=alternate type=application/rss+xml href=https://lzachmann.github.io/models-for-missing-data/posts/index.xml title="Models for missing data"><link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/models-for-missing-data/><span>Models for missing data</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><span>Getting started</span><ul><li><a href=/models-for-missing-data/docs/getting-started/installation/>Installation</a></li><li><a href=/models-for-missing-data/docs/getting-started/requirements/>Requirements</a></li><li><a href=/models-for-missing-data/docs/getting-started/quickstart/>Quickstart</a></li></ul></li><li><span>Guide</span><ul><li><input type=checkbox id=section-39bc59edc43d693f84d99d3eeb4d5d6b class=toggle>
+<label for=section-39bc59edc43d693f84d99d3eeb4d5d6b class="flex justify-between"><a role=button>Data</a></label><ul><li><input type=checkbox id=section-9dee7de75fffecdf886f750c1c850be6 class=toggle>
+<label for=section-9dee7de75fffecdf886f750c1c850be6 class="flex justify-between"><a href=/models-for-missing-data/docs/guide/data/y-info/>Response data</a></label></li><li><a href=/models-for-missing-data/docs/guide/data/x-info/>Covariate data</a></li><li><a href=/models-for-missing-data/docs/guide/data/types-of-random-variables/>Types of random variables</a><ul></ul></li></ul></li><li><input type=checkbox id=section-03a6bdd178bb5430ab6be908d88b152d class=toggle>
+<label for=section-03a6bdd178bb5430ab6be908d88b152d class="flex justify-between"><a role=button>Config files</a></label><ul><li><input type=checkbox id=section-7ca32ff183419783825bbcc1f16f145c class=toggle>
+<label for=section-7ca32ff183419783825bbcc1f16f145c class="flex justify-between"><a role=button>Data block</a></label><ul><li><a href=/models-for-missing-data/docs/guide/config-files/data-block/response-info/>Response info</a></li><li><a href=/models-for-missing-data/docs/guide/config-files/data-block/site-loc-info/>Location info</a></li></ul></li><li><input type=checkbox id=section-ce152f926c7d0a337fe08499e6b3818b class=toggle>
+<label for=section-ce152f926c7d0a337fe08499e6b3818b class="flex justify-between"><a role=button>Model block</a></label><ul><li><a href=/models-for-missing-data/docs/guide/config-files/model-block/likelihood/>Likelihood</a></li><li><a href=/models-for-missing-data/docs/guide/config-files/model-block/link/>Link function</a></li><li><a href=/models-for-missing-data/docs/guide/config-files/model-block/group-level-effects/>Group-level effects</a></li></ul></li></ul></li><li><input type=checkbox id=section-313d4ed059ec7f6d8ad95580dbd000b8 class=toggle>
+<label for=section-313d4ed059ec7f6d8ad95580dbd000b8 class="flex justify-between"><a href=/models-for-missing-data/docs/guide/outputs/>Outputs</a></label><ul><li><a href=/models-for-missing-data/docs/guide/outputs/00-intputs/>Inputs</a><ul></ul></li><li><a href=/models-for-missing-data/docs/guide/outputs/01-diagnostics/>Diagnostics</a><ul></ul></li></ul></li></ul></li><li><a href=/models-for-missing-data/docs/best-practices/>Best practices</a><ul></ul></li><li><a href=/models-for-missing-data/docs/faq/>FAQ</a><ul></ul></li></ul><ul><li><a href=/models-for-missing-data/posts/>Posts</a></li><li><a href=https://github.com/lzachmann/models-for-missing-data target=_blank rel=noopener>GitHub</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/models-for-missing-data/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>Posts</strong>
-<label for=toc-control>
-<img src=/models-for-missing-data/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav>
-<ul>
-<li class=book-section-flat>
-<strong>Categories</strong>
-<ul>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/applications/>applications</a>
-<span>2</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/background/>background</a>
-<span>5</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/simulation/>simulation</a>
-<span>1</span>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<strong>Tags</strong>
-<ul>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/ignorability/>ignorability</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/inference/>inference</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/missing-data/>missing data</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/population/>population</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/sample/>sample</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>
-<span>4</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/status/>status</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/stratification/>stratification</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/trajectory/>trajectory</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/travel-time/>travel time</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/trends/>trends</a>
-<span>1</span>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/non-ignorable-missingness/>Non-ignorable missingness</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/background/>background</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>,
+<label for=toc-control><img src=/models-for-missing-data/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav><ul><li class=book-section-flat><strong>Categories</strong><ul><li class="flex justify-between"><a href=/models-for-missing-data/categories/applications/>applications</a>
+<span>2</span></li><li class="flex justify-between"><a href=/models-for-missing-data/categories/background/>background</a>
+<span>5</span></li><li class="flex justify-between"><a href=/models-for-missing-data/categories/simulation/>simulation</a>
+<span>1</span></li></ul></li><li class=book-section-flat><strong>Tags</strong><ul><li class="flex justify-between"><a href=/models-for-missing-data/tags/ignorability/>ignorability</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/inference/>inference</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/missing-data/>missing data</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/population/>population</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/sample/>sample</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/statistics/>statistics</a>
+<span>4</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/status/>status</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/stratification/>stratification</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/trajectory/>trajectory</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/travel-time/>travel time</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/trends/>trends</a>
+<span>1</span></li></ul></li></ul></nav></aside></header><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/non-ignorable-missingness/>Non-ignorable missingness</a></h2><div><a href=/models-for-missing-data/categories/background/>background</a></div><div><a href=/models-for-missing-data/tags/statistics/>statistics</a>,
 <a href=/models-for-missing-data/tags/ignorability/>ignorability</a>,
-<a href=/models-for-missing-data/tags/missing-data/>missing data</a>
-</div>
-<p>
-<img src=/models-for-missing-data/images/3D98AD77-CBC4-0963-8EFBF00EA361C5DDOriginal.jpg>
-</p>
-<p>Statistics is basically a missing data problem!
+<a href=/models-for-missing-data/tags/missing-data/>missing data</a></div><p><img src=/models-for-missing-data/images/3D98AD77-CBC4-0963-8EFBF00EA361C5DDOriginal.jpg></p><p>Statistics is basically a missing data problem!
 &ndash; Little 2013
 Nearly all samples &ndash; whether by design or by accident &ndash; are incomplete. We very rarely make a complete census of all individuals in a population or all sites on a landscape. Sometimes we don&rsquo;t collect, or can&rsquo;t collect, complete information for individual samples or measures. For instance, we might know an animal was alive when it was last seen, so we know it survived at least that long, but know nothing about its current status.
-<a href=/models-for-missing-data/posts/non-ignorable-missingness/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/trend-vs-trajectory/>Disentangling concepts of status, trend, and trajectory</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/background/>background</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/status/>status</a>,
+<a href=/models-for-missing-data/posts/non-ignorable-missingness/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/trend-vs-trajectory/>Disentangling concepts of status, trend, and trajectory</a></h2><div><a href=/models-for-missing-data/categories/background/>background</a></div><div><a href=/models-for-missing-data/tags/status/>status</a>,
 <a href=/models-for-missing-data/tags/trends/>trends</a>,
-<a href=/models-for-missing-data/tags/trajectory/>trajectory</a>
-</div>
-<p>
-<img src=/models-for-missing-data/images/615FD65B-B952-15FF-ABA4FF5CA17AFEF6Original.jpg>
-</p>
-<p>The terms status and trend are ubiquitous in resource monitoring and management settings. To be useful and robust, however, they require precise (mathematical) definitions. It has been my experience that misunderstanding these terms can lead to misapplication of model predictions and to researchers and managers drawing the wrong conclusions from the data. In this post we show how relatively simple, even intuitive, definitions for each of these terms clarifies their intent, and improves the insights provided by models of monitoring data.
-<a href=/models-for-missing-data/posts/trend-vs-trajectory/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/unequal-inclusion-probability/>Unequal inclusion probabilities</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/applications/>applications</a>,
-<a href=/models-for-missing-data/categories/simulation/>simulation</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/travel-time/>travel time</a>,
-<a href=/models-for-missing-data/tags/stratification/>stratification</a>
-</div>
-<p>
-<img src=/models-for-missing-data/images/633px-Organ_Pipe_&_antler.jpg>
-</p>
-<p>The Sonoran Desert is among the most extreme environments on Earth. Sampling in these remote, rugged landscapes requires a different approach. When the Park Service established monitoring in Organ Pipe Cactus National Monument they used an approach to select sites based on the cost of travel to sites on the broader landscape, visiting less &ldquo;costly&rdquo; sites with higher probability than more costly sites. The cost surface that defined the probability of inclusion of sites was developed using terrain data, and a tool that estimates the time to travel to any arbitrary location on the landscape.
-<a href=/models-for-missing-data/posts/unequal-inclusion-probability/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/sampling-and-populations/>Sampling and populations</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/background/>background</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>,
+<a href=/models-for-missing-data/tags/trajectory/>trajectory</a></div><p><img src=/models-for-missing-data/images/615FD65B-B952-15FF-ABA4FF5CA17AFEF6Original.jpg></p><p>The terms status and trend are ubiquitous in resource monitoring and management settings. To be useful and robust, however, they require precise (mathematical) definitions. It has been my experience that misunderstanding these terms can lead to misapplication of model predictions and to researchers and managers drawing the wrong conclusions from the data. In this post we show how relatively simple, even intuitive, definitions for each of these terms clarifies their intent, and improves the insights provided by models of monitoring data.
+<a href=/models-for-missing-data/posts/trend-vs-trajectory/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/unequal-inclusion-probability/>Unequal inclusion probabilities</a></h2><div><a href=/models-for-missing-data/categories/applications/>applications</a>,
+<a href=/models-for-missing-data/categories/simulation/>simulation</a></div><div><a href=/models-for-missing-data/tags/travel-time/>travel time</a>,
+<a href=/models-for-missing-data/tags/stratification/>stratification</a></div><p><img src=/models-for-missing-data/images/633px-Organ_Pipe_&_antler.jpg></p><p>The Sonoran Desert is among the most extreme environments on Earth. Sampling in these remote, rugged landscapes requires a different approach. When the Park Service established monitoring in Organ Pipe Cactus National Monument they used an approach to select sites based on the cost of travel to sites on the broader landscape, visiting less &ldquo;costly&rdquo; sites with higher probability than more costly sites. The cost surface that defined the probability of inclusion of sites was developed using terrain data, and a tool that estimates the time to travel to any arbitrary location on the landscape.
+<a href=/models-for-missing-data/posts/unequal-inclusion-probability/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/sampling-and-populations/>Sampling and populations</a></h2><div><a href=/models-for-missing-data/categories/background/>background</a></div><div><a href=/models-for-missing-data/tags/statistics/>statistics</a>,
 <a href=/models-for-missing-data/tags/sample/>sample</a>,
-<a href=/models-for-missing-data/tags/population/>population</a>
-</div>
-<p>We sample for a very practical reason. It&rsquo;s usually impossible to get information on the whole population, so we use a sample to make inferences about the population. In our case, the population is typically all sites in a stratum or all sites &ndash; in all strata &ndash; at the scale of an entire park. Typically, the inference we seek entails three questions.
+<a href=/models-for-missing-data/tags/population/>population</a></div><p>We sample for a very practical reason. It&rsquo;s usually impossible to get information on the whole population, so we use a sample to make inferences about the population. In our case, the population is typically all sites in a stratum or all sites &ndash; in all strata &ndash; at the scale of an entire park. Typically, the inference we seek entails three questions.
 What&rsquo;s the best estimate of the population mean?
-<a href=/models-for-missing-data/posts/sampling-and-populations/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/interpreting-coefficients/>Interpreting coefficients</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/applications/>applications</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/inference/>inference</a>
-</div>
-<p>Making sense of the effects of variables included as predictors # Some aspects of covariate effects are readily apparent &ndash; for instance, the sign of a coefficient in a model says at least something about the general directionality of the effect, positive or negative. However, a deeper understanding of a model typically requires inferences that go well beyond simple measures of the directionality or significance of effects &ndash; it requires understanding the size of effects.
-<a href=/models-for-missing-data/posts/interpreting-coefficients/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/stratum-varying-fixed-effects/>Stratum-varying fixed effects</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/background/>background</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>,
-<a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a>
-</div>
-<p>Assume we have three strata, \(s_0\) , \(s_1\) , and \(s_2\) , where \(s_0\) is the &ldquo;reference&rdquo; stratum – in other words, \(s_0\) is the stratum for which the 0/1 indicator is 0 across the board in the indicator matrix below (the first row):
+<a href=/models-for-missing-data/posts/sampling-and-populations/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/interpreting-coefficients/>Interpreting coefficients</a></h2><div><a href=/models-for-missing-data/categories/applications/>applications</a></div><div><a href=/models-for-missing-data/tags/inference/>inference</a></div><p>Making sense of the effects of variables included as predictors # Some aspects of covariate effects are readily apparent &ndash; for instance, the sign of a coefficient in a model says at least something about the general directionality of the effect, positive or negative. However, a deeper understanding of a model typically requires inferences that go well beyond simple measures of the directionality or significance of effects &ndash; it requires understanding the size of effects.
+<a href=/models-for-missing-data/posts/interpreting-coefficients/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/stratum-varying-fixed-effects/>Stratum-varying fixed effects</a></h2><div><a href=/models-for-missing-data/categories/background/>background</a></div><div><a href=/models-for-missing-data/tags/statistics/>statistics</a>,
+<a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a></div><p>Assume we have three strata, \(s_0\) , \(s_1\) , and \(s_2\) , where \(s_0\) is the &ldquo;reference&rdquo; stratum – in other words, \(s_0\) is the stratum for which the 0/1 indicator is 0 across the board in the indicator matrix below (the first row):
 \[\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix}\] B_0 + (B_1 + B_1_s1_offset * s1 + B_1_s2_offset * s2) * x_1 # in stratum s0 B_0 + (B_1) * x_1 # in stratum s1 B_0 + (B_1 + B_1_s1_offset * s1) * x_1 # in stratum s2 B_0 + (B_1 + B_1_s2_offset * s2) * x_1 # lm(y~x1*x2) model.
-<a href=/models-for-missing-data/posts/stratum-varying-fixed-effects/>...</a>
-</p>
-</article>
-<article class="markdown book-post">
-<h2>
-<a href=/models-for-missing-data/posts/offsets/>The offset term</a>
-</h2>
-<div>
-<a href=/models-for-missing-data/categories/background/>background</a>
-</div>
-<div>
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>
-</div>
-<p>Counts of things naturally scale with the length or duration of observation, the area sampled, and sampling intensity (Citation: McElreath, 2018McElreath,  R.  (2018).  Statistical rethinking: A bayesian course with examples in r and stan.   Chapman; Hall/CRC. ) . For instance, the longer the river stretch we survey, the more fish we&rsquo;ll tend to find.
+<a href=/models-for-missing-data/posts/stratum-varying-fixed-effects/>...</a></p></article><article class="markdown book-post"><h2><a href=/models-for-missing-data/posts/offsets/>The offset term</a></h2><div><a href=/models-for-missing-data/categories/background/>background</a></div><div><a href=/models-for-missing-data/tags/statistics/>statistics</a></div><p>Counts of things naturally scale with the length or duration of observation, the area sampled, and sampling intensity (Citation: McElreath, 2018McElreath,  R.  (2018).  Statistical rethinking: A bayesian course with examples in r and stan.   Chapman; Hall/CRC. ) . For instance, the longer the river stretch we survey, the more fish we&rsquo;ll tend to find.
 Offset terms are used to model rates &ndash; e.g., counts per unit area or time. In the context of the model, the offset term transforms the response variable from a rate to a count.
-<a href=/models-for-missing-data/posts/offsets/>...</a>
-</p>
-</article>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/34c0030cf4c14a59137b61825e5963c36fe3c0db title="Last modified by Luke Zachmann | Jan 21, 2022" target=_blank rel=noopener>
-<img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Jan 21, 2022</span>
-</a>
-</div>
-<div>
-<a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/edit/main/docs/website/content/posts/_index.md target=_blank rel=noopener>
-<img src=/models-for-missing-data/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span>
-</a>
-</div>
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav>
-<ul>
-<li class=book-section-flat>
-<strong>Categories</strong>
-<ul>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/applications/>applications</a>
-<span>2</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/background/>background</a>
-<span>5</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/categories/simulation/>simulation</a>
-<span>1</span>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<strong>Tags</strong>
-<ul>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/ignorability/>ignorability</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/inference/>inference</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/missing-data/>missing data</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/population/>population</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/sample/>sample</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/statistics/>statistics</a>
-<span>4</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/status/>status</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/stratification/>stratification</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/trajectory/>trajectory</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/travel-time/>travel time</a>
-<span>1</span>
-</li>
-<li class="flex justify-between">
-<a href=/models-for-missing-data/tags/trends/>trends</a>
-<span>1</span>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+<a href=/models-for-missing-data/posts/offsets/>...</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/1bbc5939ca24031de0caf3da80a28e3d090cd8e1 title="Last modified by Luke Zachmann | Mar 29, 2022" target=_blank rel=noopener><img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Mar 29, 2022</span></a></div><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/edit/main/docs/website/content/posts/_index.md target=_blank rel=noopener><img src=/models-for-missing-data/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span></a></div></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav><ul><li class=book-section-flat><strong>Categories</strong><ul><li class="flex justify-between"><a href=/models-for-missing-data/categories/applications/>applications</a>
+<span>2</span></li><li class="flex justify-between"><a href=/models-for-missing-data/categories/background/>background</a>
+<span>5</span></li><li class="flex justify-between"><a href=/models-for-missing-data/categories/simulation/>simulation</a>
+<span>1</span></li></ul></li><li class=book-section-flat><strong>Tags</strong><ul><li class="flex justify-between"><a href=/models-for-missing-data/tags/ignorability/>ignorability</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/inference/>inference</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/missing-data/>missing data</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/parameterizations/>parameterizations</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/population/>population</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/sample/>sample</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/statistics/>statistics</a>
+<span>4</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/status/>status</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/stratification/>stratification</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/trajectory/>trajectory</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/travel-time/>travel time</a>
+<span>1</span></li><li class="flex justify-between"><a href=/models-for-missing-data/tags/trends/>trends</a>
+<span>1</span></li></ul></li></ul></nav></div></aside></main></body></html>
