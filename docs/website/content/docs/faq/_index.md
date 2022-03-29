@@ -1,8 +1,7 @@
 ---
-weight: 2
 bookFlatSection: false
+weight: 30
 title: "FAQ"
-bookHidden: false
 ---
 
 <link rel="stylesheet" type="text/css" href="{{ "/hugo-cite.css" | relURL }}" />
@@ -18,5 +17,5 @@ bookHidden: false
 **Q**: Should the locations I supply be for sites or samples within sites?
 **A**: For now, just the site centroids.
 
-**Q**: Why do my variography plots show only a fraction of the largest distance between sites?
+**Q**: Why do my variography plots show only a fraction of the largest distance between sites?  
 **A**: The R functions we are using to develop these plots only show semivariance for distances up to 1/3 of the maximum observed distance.

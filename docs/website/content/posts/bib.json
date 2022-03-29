@@ -96,5 +96,48 @@
     "title": "Statistical rethinking: A bayesian course with examples in r and stan",
     "title-short": "Statistical rethinking",
     "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Zachmann",
+        "given": "Luke J"
+      },
+      {
+        "family": "Borgman",
+        "given": "Erin M"
+      },
+      {
+        "family": "Witwicki",
+        "given": "Dana L"
+      },
+      {
+        "family": "Swan",
+        "given": "Megan C"
+      },
+      {
+        "family": "McIntyre",
+        "given": "Cheryl"
+      },
+      {
+        "family": "Hobbs",
+        "given": "N Thompson"
+      }
+    ],
+    "container-title": "Journal of Agricultural, Biological and Environmental Statistics",
+    "id": "zachmann2022bayesian",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "page": "125-148",
+    "publisher": "Springer",
+    "title": "Bayesian models for analysis of inventory and monitoring data with non-ignorable missingness",
+    "type": "article-journal",
+    "volume": "27"
   }
 ]
