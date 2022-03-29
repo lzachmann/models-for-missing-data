@@ -1,5 +1,5 @@
 ---
 title: Data block
 bookCollapseSection: true
-weight: 1
+weight: 2
 ---

@@ -26,4 +26,4 @@ response info:
         - Plot
 ```
 
-The `response info` section of the data block specifies the `file`, the name of the column containing the response variable of interest (`response column`), a corresponding human-readable description for each response variable (`description`), and the names of the columns required to identify individual observations (`sample id column(s)`). In some cases, `sample id column(s)` is a single column, while in others it's multiple. 
+The `response info` section of the data block specifies the `file` (see the [response data]({{< ref "/docs/guide/data/y-info.md" >}})) for more detail on the contents of this file), the name of the column containing the response variable of interest (`response column`), a corresponding human-readable description for each response variable (`description`), and the names of the columns required to identify individual observations (`sample id column(s)`). In some cases, `sample id column(s)` is a single column, while in others it's multiple. 
