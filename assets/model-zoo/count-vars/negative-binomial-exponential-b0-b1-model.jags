@@ -15,9 +15,9 @@ model {
       for(j in 1:y.n.site[k]) {
             sigma.ss[j, k] <- sigma[k]
       }
-        #sigma[k] ~ dunif(0.0001, 500)
+        sigma[k] ~ dunif(0.0001, 500)
         #sigma[k] ~ dt(0, 1 / (500^2), 1) T(0,)
-        sigma[k] ~ dgamma(0.01, 0.01)
+        #sigma[k] ~ dgamma(0.01, 0.01)
     }
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {

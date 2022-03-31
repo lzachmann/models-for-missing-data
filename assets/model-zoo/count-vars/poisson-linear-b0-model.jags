@@ -18,7 +18,7 @@ model {
     ## stratum.
     for(k in 1:y.n.strata) {
         mu.B0[k] ~ dnorm(0, 4E-06)
-        sigma.B0[k] ~ dunif(1E-6, 1000)
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
         tau.B0[k] <- 1 / sigma.B0[k]^2
         B1[k] ~ dnorm(0, 1E-04)
         for(j in 1:y.n.site[k]) {

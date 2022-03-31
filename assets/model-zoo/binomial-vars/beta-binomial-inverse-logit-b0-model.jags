@@ -15,9 +15,9 @@ model {
         for(j in 1:y.n.site[k]) {
             sigma.ss[j, k] <- sigma[k]
         }
-        #sigma[k] ~ dunif(0.0001, 10)
+        sigma[k] ~ dunif(0.0001, 10)
         #sigma[k] ~ dt(0, 1 / (10^2), 1) T(0,)
-        sigma[k] ~ dgamma(0.01, 0.01)
+        #sigma[k] ~ dgamma(0.01, 0.01)
     }
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -26,8 +26,8 @@ model {
     ## on intercept parameters for each site within each stratum. Slopes vary by
     ## stratum.
     for(k in 1:y.n.strata) {
-        mu.B0[k] ~ dnorm(0, 0.4444444)
-        sigma.B0[k] ~ dunif(1E-6, 1000)
+        mu.B0[k] ~ dnorm(0, pow(1.5, -2))
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
         tau.B0[k] <- 1 / sigma.B0[k]^2
         B1[k] ~ dnorm(0, 16)
         for(j in 1:y.n.site[k]) {
