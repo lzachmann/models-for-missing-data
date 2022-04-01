@@ -47,3 +47,7 @@
   position: absolute;
   width: 1px;
 }
+
+.hugo-cite-bibliography dt {
+  display: none;
+}
