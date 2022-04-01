@@ -5,7 +5,7 @@ weight: 1
 
 # Likelihood function
 
-The likelihood statement specifies the probability distribution that will be used to describe the response variable. The available options depend on your data, so knowing what [type of variable]({{< ref "/docs/1-guide/data/types-of-random-variables/_index.md" >}}) you're working with is essential.
+The likelihood statement specifies the probability distribution that will be used to describe the response variable. The available options depend on your data, so knowing what [type of variable]({{< ref "/docs/1-guide/a-data/types-of-random-variables/_index.md" >}}) you're working with is essential.
 
 ## Syntax
 

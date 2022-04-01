@@ -13,4 +13,4 @@ trend conditions:
 ```
 
 ## Usage
-See the [object types]({{< ref "/docs/1-guide/outputs/object-types/_index.md" >}}) entry for a more thorough introduction to this topic.
+See the [object types]({{< ref "/docs/1-guide/c-outputs/object-types/_index.md" >}}) entry for a more thorough introduction to this topic.
