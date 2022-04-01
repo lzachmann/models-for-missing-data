@@ -15,9 +15,9 @@ model {
       for(j in 1:y.n.site[k]) {
             sigma.ss[j, k] <- sigma[k]
       }
-        #sigma[k] ~ dunif(0.0001, 10)
+        sigma[k] ~ dunif(0.0001, 10)
         #sigma[k] ~ dt(0, 1 / (10^2), 1) T(0,)
-        sigma[k] ~ dgamma(0.01, 0.01)
+        #sigma[k] ~ dgamma(0.01, 0.01)
     }
     ## on the coefficients for each covariate.
     for(m in 1:length(X[1, ])) {
@@ -35,9 +35,9 @@ model {
         mu.B1[k] ~ dnorm(0, 1E-04)
         Tau.B[1:2, 1:2, k] <- inverse(Sigma.B[1:2, 1:2, k])
         Sigma.B[1, 1, k] <- sigma.B0[k]^2
-        sigma.B0[k] ~ dunif(1E-6, 1000)
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
         Sigma.B[2, 2, k] <- sigma.B1[k]^2
-        sigma.B1[k] ~ dunif(1E-6, 100)
+        sigma.B1[k] ~ dgamma(0.01, 0.01)
         Sigma.B[1, 2, k] <- rho[k] * sigma.B0[k] * sigma.B1[k]
         Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
         rho[k] ~ dunif(-1, 1)
