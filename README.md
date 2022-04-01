@@ -13,7 +13,3 @@ Data, model config files, and the ["model zoo"](assets/model-zoo), a quick refer
 ## model-api
 
 R library for calling the model building / model fitting API.
-
-## data-api
-
-R and Python utilities used to call external services (e.g., Google Earth Engine, Microsoft's Planetary Computer, and USGS APIs) to link field-based observations with gridded datasets, which can be used as covariates in models, or to provide other contextual information at sites or park units.

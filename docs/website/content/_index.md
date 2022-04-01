@@ -20,10 +20,10 @@ Technical information about the software, including _inputs_ and _outputs_. We d
 {{< /columns >}}
 
 {{< columns >}}
-### [Best Practices]({{< ref "/docs/best-practices/_index.md" >}})
+### [Best Practices]({{< ref "/docs/2-best-practices/_index.md" >}})
 Modeling best practices, including exploratory data analysis and troubleshooting.
 <--->
-### [FAQ]({{< ref "/docs/faq/_index.md" >}})
+### [FAQ]({{< ref "/docs/3-faq/_index.md" >}})
 Your frequently asked question, answered!
 {{< /columns >}}
 
