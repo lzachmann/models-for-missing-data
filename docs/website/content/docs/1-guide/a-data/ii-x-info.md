@@ -12,7 +12,7 @@ Covariates can be static or dynamic. A variable like the elevation of site varie
 The _granularity_ of information can also vary. Sometimes the information we have is rather coarse, so many sites have the same value. Gridded climate data are an excellent example of relatively coarse (e.g., 1km gridcell) data. Adjacent sites falling into the same gridcell will have the same value. 
 
 ## Format
-As with the [response data]({{< ref "/docs/1-guide/a-data/y-info.md" >}}), covariates are typically stored as flat files.
+As with the [response data]({{< ref "/docs/1-guide/a-data/i-y-info.md" >}}), covariates are typically stored as flat files.
 
 ## Example
 
@@ -43,7 +43,7 @@ The data below contain site (`SiteName`), stratum (`MDCATY`), time (`Year`), and
 |3244|Upland |LIBI_050|2018|JA      |393.2275301  |
 |3245|Upland |LIBI_050|2019|JA      |247.7891026  |
 
-It's worth pointing out a few things. First, we see two different types of variables --- a categorical variable containing the initials of the observing botanist, and a continuous variable for pre growing season water deficit. Second, the granularity of the covariates is limited to the site, but both variables appear to vary in time. Finally, we see more rows that we might expect based on the example data seen in the [response data]({{< ref "/docs/1-guide/a-data/y-info.md" >}}) section. The reason for this is two-fold:
+It's worth pointing out a few things. First, we see two different types of variables --- a categorical variable containing the initials of the observing botanist, and a continuous variable for pre growing season water deficit. Second, the granularity of the covariates is limited to the site, but both variables appear to vary in time. Finally, we see more rows that we might expect based on the example data seen in the [response data]({{< ref "/docs/1-guide/a-data/i-y-info.md" >}}) section. The reason for this is two-fold:
 1. The covariate data at a site include values for all years over the duration of the study, whether that site was sampled or not. In general, sites are visited on a rotating basis, meaning they're not sampled every year.
 2. There are sites (e.g., `Grid_100`) that were _never_ sampled. We include this information because it's needed to make inference at the park scale, and because we're interested in making predictions of our focal response variables at every site on the landscape, whether it was visited by field crews or not. 
 

@@ -4,7 +4,7 @@ weight: 2
 ---
 
 # Finite population correction
-TBD
+When the size of the sample collected is a significant proportion of the overall population, then we must use a finite population correction, a topic we introduce briefly in [another post]({{< ref "/posts/sampling-and-populations.md" >}}).
 
 ## Syntax
 ```yml

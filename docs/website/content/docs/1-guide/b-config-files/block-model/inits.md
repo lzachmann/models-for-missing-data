@@ -8,7 +8,8 @@ Initial values
 
 ## Syntax
 ```yml
-initial values: inherited  # one of: 'auto', 'default', or 'inherited'
+# Initial values (one of: 'none', 'default', or 'inherited')
+initial values: inherited
 ```
 
 ## Usage

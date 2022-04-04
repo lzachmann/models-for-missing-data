@@ -22,3 +22,6 @@
 	url = https://gitlab.com/nps-ima/uplands-config.git
 	branch = gh-submodule
 	# update = none
+[submodule "docs/website/themes/hugo-notice"]
+	path = docs/website/themes/hugo-notice
+	url = https://github.com/martignoni/hugo-notice.git

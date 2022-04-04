@@ -14,4 +14,4 @@ covariate info:
         date-time format: Y!
 ```
 
-As with the other statements in the data block, we point to the name of the covariate file (`file`; see the [covariate data]({{< ref "/docs/1-guide/a-data/x-info.md" >}}) section for more detail) and, if different from the date attributes in the response data, supply info required to properly parse covariate datetime fields.
+As with the other statements in the data block, we point to the name of the covariate file (`file`; see the [covariate data]({{< ref "/docs/1-guide/a-data/ii-x-info.md" >}}) section for more detail) and, if different from the date attributes in the response data, supply info required to properly parse covariate datetime fields.
