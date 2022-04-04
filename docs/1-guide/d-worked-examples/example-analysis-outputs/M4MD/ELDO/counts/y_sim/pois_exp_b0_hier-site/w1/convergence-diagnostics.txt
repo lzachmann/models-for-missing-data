@@ -1,0 +1,14 @@
+Potential scale reduction factors:
+
+            Point est. Upper C.I.
+B1[1]             1.00       1.01
+B1[2]             1.00       1.00
+Beta              1.00       1.01
+deviance          1.00       1.00
+mu.B0[1]          1.00       1.00
+mu.B0[2]          1.00       1.00
+p.mean            1.00       1.00
+p.sd              1.00       1.00
+sigma.B0[1]       1.00       1.01
+sigma.B0[2]       1.01       1.01
+

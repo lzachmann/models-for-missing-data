@@ -1,0 +1,63 @@
+# ==== DATA ===================================================================
+
+response info:
+    file: assets/_data/count-data.csv
+    state variable:
+        response column:
+            - y_sim
+        description:
+            - Simulated count data
+    sampling method: plot
+    sample id column(s):
+        - plot
+
+site location info:
+    file: assets/_data/sample-locs.csv
+    coordinate columns:
+        - x_coord
+        - y_coord
+
+covariate info:
+    file: assets/_data/sample-covariates.csv
+    # event date info: # TODO: describe. Only use when covariates are time-varying!
+    #     date-time column: event_year
+    #     date-time format: Y!
+
+# ==== MODEL ==================================================================
+
+# Likelihood. For counts, one or both of: poisson, negative-binomial.
+likelihood:
+    - poisson
+    - negative-binomial
+
+# Deterministic model for the mean. For counts, one of: exponential, linear,
+# or monomolecular.
+deterministic model:
+    # - linear
+    - exponential
+    # - monomolecular
+
+# Group-level effects structure. One of: b0, b0-b1.
+group-level effects:
+    - b0
+    # - b0-b1
+
+# Variance structure (these *have* to be colnames, not descriptions).
+variances:
+    stratum-level fixed:
+      level: stratum
+      type: fixed
+      response column(s):
+          - y_sim
+    # site-level hierarchical:
+    #  level: site
+    #  type: hier
+    #  response column(s):
+    #      - y_sim
+
+# Covariates.
+additional covariates:
+    - w1
+
+# Initial values (one of: 'auto', 'default', or 'inherited')
+initial values: default

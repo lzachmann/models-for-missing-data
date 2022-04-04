@@ -1,0 +1,183 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Worked examples #  In all cases below we will work with the demo data included with models-for-missing-data, which has the following directory structure:
+. └── assets └── _config/ └── M4MD/ ├── ELDO/ │ ├── _park-level-attributes.yml │ ├── counts.yml │ └── hits-vs-trials.yml └── _network-level-attributes.yml  A minimal example for count data #  The following example comes from &ldquo;assets/_config/M4MD/ELDO/counts.yml&rdquo;.
+The analysis config file #  # ==== DATA ===================================================================  response info:  file: assets/_data/count-data."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Worked examples"><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://lzachmann.github.io/models-for-missing-data/docs/1-guide/d-worked-examples/"><title>Worked examples | Models for missing data</title><link rel=manifest href=/models-for-missing-data/manifest.json><link rel=icon href=/models-for-missing-data/favicon.png type=image/x-icon><link rel=stylesheet href=/models-for-missing-data/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/models-for-missing-data/flexsearch.min.js></script>
+<script defer src=/models-for-missing-data/en.search.min.13d8af0371ee4e06fe38592d4f8081831166e3f9b7e9db9c5c67d3c48e393a3e.js integrity="sha256-E9ivA3HuTgb+OFktT4CBgxFm4/m36ducXGfTxI45Oj4=" crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W93Y6ZYE7X"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-W93Y6ZYE7X",{anonymize_ip:!1})}</script><link rel=alternate type=application/rss+xml href=https://lzachmann.github.io/models-for-missing-data/docs/1-guide/d-worked-examples/index.xml title="Models for missing data"><link rel=stylesheet type=text/css href=/models-for-missing-data/hugo-cite.css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/models-for-missing-data/><span>Models for missing data</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><span>Getting started</span><ul><li><a href=/models-for-missing-data/docs/0-getting-started/installation/>Installation</a></li><li><a href=/models-for-missing-data/docs/0-getting-started/requirements/>Requirements</a></li><li><a href=/models-for-missing-data/docs/0-getting-started/quickstart/>Quickstart</a></li></ul></li><li><span>Guide</span><ul><li><input type=checkbox id=section-1bb19b4a3ba83aba0cc27d50cb56f078 class=toggle>
+<label for=section-1bb19b4a3ba83aba0cc27d50cb56f078 class="flex justify-between"><a role=button>Data</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/a-data/i-y-info/>Response data</a></li><li><a href=/models-for-missing-data/docs/1-guide/a-data/ii-x-info/>Covariate data</a></li><li><a href=/models-for-missing-data/docs/1-guide/a-data/iii-types-of-random-variables/>Types of random variables</a><ul></ul></li></ul></li><li><input type=checkbox id=section-df8b9a8fadb3aac4bacdd1a4f66ee700 class=toggle>
+<label for=section-df8b9a8fadb3aac4bacdd1a4f66ee700 class="flex justify-between"><a href=/models-for-missing-data/docs/1-guide/b-config-files/>Config files</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/design-metadata/>Design metadata</a><ul></ul></li><li><input type=checkbox id=section-c07b45d86b089188bfbcb6cdd933f6be class=toggle>
+<label for=section-c07b45d86b089188bfbcb6cdd933f6be class="flex justify-between"><a role=button>Block / the data</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-data/response-info/>Response info</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-data/site-loc-info/>Location info</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-data/covariate-info/>Covariate info</a></li></ul></li><li><input type=checkbox id=section-465c5722e3b7de08e6b406c7b30f6cfe class=toggle>
+<label for=section-465c5722e3b7de08e6b406c7b30f6cfe class="flex justify-between"><a role=button>Block / the model</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/likelihood-function/>Likelihood function</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/link-function/>Link function</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/group-level-effects/>Group-level effects</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/variances/>Variances</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/covariates/>Covariates</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-model/inits/>Initial values</a></li></ul></li><li><input type=checkbox id=section-a7ae9a68c33c64599bb16bc7b6e95b4c class=toggle>
+<label for=section-a7ae9a68c33c64599bb16bc7b6e95b4c class="flex justify-between"><a role=button>Block / extras</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-extras/conditions/>Conditions</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-extras/finite-pop/>Finite population correction</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-extras/marginal-effects/>Marginal effects</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-extras/ppc-facets/>Posterior predictive checks</a></li><li><a href=/models-for-missing-data/docs/1-guide/b-config-files/block-extras/trend-step-size/>Trend step size</a><ul></ul></li></ul></li></ul></li><li><input type=checkbox id=section-9b2d1dca484514277fe4388313831216 class=toggle>
+<label for=section-9b2d1dca484514277fe4388313831216 class="flex justify-between"><a role=button>Outputs</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/object-types/>Object types</a><ul></ul></li><li><input type=checkbox id=section-14e60cfee5650eb7fac0fe7ab0d03678 class=toggle>
+<label for=section-14e60cfee5650eb7fac0fe7ab0d03678 class="flex justify-between"><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/>The output directory</a></label><ul><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/00-input/>00-input</a><ul></ul></li><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/01-diagnostics/>01-diagnostics</a><ul></ul></li><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/02-checking/>02-checking</a><ul></ul></li><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/03-inference/>03-inference</a><ul></ul></li><li><a href=/models-for-missing-data/docs/1-guide/c-outputs/output-dir/99-misc/>99-misc</a><ul></ul></li></ul></li></ul></li><li><a href=/models-for-missing-data/docs/1-guide/d-worked-examples/ class=active>Worked examples</a><ul></ul></li></ul></li><li><a href=/models-for-missing-data/docs/2-best-practices/>Best practices</a><ul></ul></li><li><a href=/models-for-missing-data/docs/3-faq/>FAQ</a><ul></ul></li></ul><ul><li><a href=/models-for-missing-data/posts/>Posts</a></li><li><a href=https://github.com/lzachmann/models-for-missing-data target=_blank rel=noopener>GitHub</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/models-for-missing-data/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>Worked examples</strong>
+<label for=toc-control><img src=/models-for-missing-data/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#a-minimal-example-for-count-data>A minimal example for count data</a><ul><li><a href=#the-analysis-config-file>The analysis config file</a></li><li><a href=#the-model-call>The model call</a></li><li><a href=#selected-outputs>Selected outputs</a></li></ul></li><li><a href=#a-minimal-example-for-binomial-data>A minimal example for binomial data</a><ul><li><a href=#the-analysis-config-file-1>The analysis config file</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=worked-examples>Worked examples
+<a class=anchor href=#worked-examples>#</a></h1><p>In all cases below we will work with the demo data included with <strong>models-for-missing-data</strong>, which has the following directory structure:</p><pre><code>.
+└── assets
+    └── _config/
+        └── M4MD/
+            ├── ELDO/
+            │   ├── _park-level-attributes.yml
+            │   ├── counts.yml
+            │   └── hits-vs-trials.yml
+            └── _network-level-attributes.yml
+</code></pre><h2 id=a-minimal-example-for-count-data>A minimal example for count data
+<a class=anchor href=#a-minimal-example-for-count-data>#</a></h2><p>The following example comes from &ldquo;assets/_config/M4MD/ELDO/counts.yml&rdquo;.</p><h3 id=the-analysis-config-file>The analysis config file
+<a class=anchor href=#the-analysis-config-file>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:#75715e># ==== DATA ===================================================================</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>response info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/count-data.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state variable</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>response column</span>:
+</span></span><span style=display:flex><span>            - <span style=color:#ae81ff>y_sim</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>description</span>:
+</span></span><span style=display:flex><span>            - <span style=color:#ae81ff>Simulated count data</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sampling method</span>: <span style=color:#ae81ff>plot</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sample id column(s)</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>plot</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>site location info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/sample-locs.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>coordinate columns</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>x_coord</span>
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>y_coord</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>covariate info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/sample-covariates.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># event date info: # TODO: describe. Only use when covariates are time-varying!</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#     date-time column: event_year</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#     date-time format: Y!</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ==== MODEL ==================================================================</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Likelihood. For counts, one or both of: poisson, negative-binomial.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>likelihood</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>poisson</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>negative-binomial</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Deterministic model for the mean. For counts, one of: exponential, linear,</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># or monomolecular.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>deterministic model</span>:
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - linear</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>exponential</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - monomolecular</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Group-level effects structure. One of: b0, b0-b1.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>group-level effects</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>b0</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - b0-b1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Variance structure (these *have* to be colnames, not descriptions).</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>variances</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>stratum-level fixed</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>level</span>: <span style=color:#ae81ff>stratum</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>fixed</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>response column(s)</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>y_sim</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># site-level hierarchical:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  level: site</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  type: hier</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  response column(s):</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#      - y_sim</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Covariates.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>additional covariates</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>w1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initial values (one of: &#39;auto&#39;, &#39;default&#39;, or &#39;inherited&#39;)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>initial values</span>: <span style=color:#ae81ff>default</span>
+</span></span></code></pre></div><h3 id=the-model-call>The model call
+<a class=anchor href=#the-model-call>#</a></h3><p>You can run this model interactively from Rstudio using &ldquo;model-api/analysis-pipeline.R&rdquo;, or at the command line with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>./model-api/analysis-pipeline.R <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    assets/_config/M4MD/ELDO/counts.yml <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --n-adapt <span style=color:#ae81ff>5000</span> --n-update <span style=color:#ae81ff>10000</span> --n-iter <span style=color:#ae81ff>8000</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --n-cores <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --excl-null
+</span></span></code></pre></div><p>Note that we exclude the &ldquo;null&rdquo; (time-only) model with the flag <code>--excl-null</code>.</p><h3 id=selected-outputs>Selected outputs
+<a class=anchor href=#selected-outputs>#</a></h3><h4 id=convergence-diagnostics>Convergence diagnostics
+<a class=anchor href=#convergence-diagnostics>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>Potential scale reduction factors:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            Point est. Upper C.I.
+</span></span><span style=display:flex><span>B1[1]             1.00       1.01
+</span></span><span style=display:flex><span>B1[2]             1.00       1.00
+</span></span><span style=display:flex><span>Beta              1.00       1.01
+</span></span><span style=display:flex><span>deviance          1.00       1.00
+</span></span><span style=display:flex><span>mu.B0[1]          1.00       1.00
+</span></span><span style=display:flex><span>mu.B0[2]          1.00       1.00
+</span></span><span style=display:flex><span>p.mean            1.00       1.00
+</span></span><span style=display:flex><span>p.sd              1.00       1.00
+</span></span><span style=display:flex><span>sigma.B0[1]       1.00       1.01
+</span></span><span style=display:flex><span>sigma.B0[2]       1.01       1.01
+</span></span></code></pre></div><h4 id=heading><a class=anchor href=#heading>#</a></h4><h4 id=model-checking-and-evaluation>Model checking and evaluation
+<a class=anchor href=#model-checking-and-evaluation>#</a></h4><table><thead><tr><th><strong>Posterior predictive checks</strong></th><th><strong>Observed vs. predicted plots</strong></th></tr></thead><tbody><tr><td><figure><img src=example-analysis-outputs/M4MD/ELDO/counts/y_sim/pois_exp_b0_hier-site/w1/y-rep-by-unit_code-stats.jpg></figure></td><td><figure><img src=example-analysis-outputs/M4MD/ELDO/counts/y_sim/pois_exp_b0_hier-site/w1/op-y-rep.jpg></figure></td></tr></tbody></table><h4 id=inference>Inference
+<a class=anchor href=#inference>#</a></h4><table><thead><tr><th><strong>Intercept and time slope terms</strong></th><th><strong>Fixed effects</strong></th></tr></thead><tbody><tr><td><figure><img src=example-analysis-outputs/M4MD/ELDO/counts/y_sim/pois_exp_b0_hier-site/w1/beta-coef-estimates-untransformed.png></figure></td><td><figure><img src=example-analysis-outputs/M4MD/ELDO/counts/y_sim/pois_exp_b0_hier-site/w1/additional-coef-estimates-Beta-untransformed.png></figure></td></tr></tbody></table><h2 id=a-minimal-example-for-binomial-data>A minimal example for binomial data
+<a class=anchor href=#a-minimal-example-for-binomial-data>#</a></h2><p>The following example comes from &ldquo;assets/_config/M4MD/ELDO/hits-vs-trials.yml&rdquo;.</p><h3 id=the-analysis-config-file-1>The analysis config file
+<a class=anchor href=#the-analysis-config-file-1>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:#75715e># ==== DATA ===================================================================</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>response info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/binomial-data.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state variable</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>hits column</span>:
+</span></span><span style=display:flex><span>            - <span style=color:#ae81ff>y_sim</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>description</span>:
+</span></span><span style=display:flex><span>            - <span style=color:#ae81ff>Simulated binomial data</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>trials column</span>:
+</span></span><span style=display:flex><span>            - <span style=color:#ae81ff>trials</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sampling method</span>: <span style=color:#ae81ff>transect</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sample id column(s)</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>transect</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>site location info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/sample-locs.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>coordinate columns</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>x_coord</span>
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>y_coord</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>covariate info</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>file</span>: <span style=color:#ae81ff>assets/_data/sample-covariates.csv</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># event date info: # TODO: describe. Only use when covariates are time-varying!</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#     date-time column: event_year</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#     date-time format: Y!</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ==== MODEL ==================================================================</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Likelihood. For counts, one or both of: poisson, negative-binomial.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>likelihood</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>binomial</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>beta-binomial</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - zero-inflated-binomial</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - zero-inflated-beta-binomial</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Deterministic model for the mean. For counts, one of: exponential, linear,</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># or monomolecular.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>deterministic model</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>inverse-logit</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Group-level effects structure. One of: b0, b0-b1.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>group-level effects</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>b0</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># - b0-b1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Variance structure (these *have* to be colnames, not descriptions).</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>variances</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>stratum-level fixed</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>level</span>: <span style=color:#ae81ff>stratum</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>fixed</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>response column(s)</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>y_sim</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># site-level hierarchical:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  level: site</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  type: hier</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#  response column(s):</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#      - y_sim</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Covariates.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>additional covariates</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>w1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initial values (one of: &#39;auto&#39;, &#39;default&#39;, or &#39;inherited&#39;)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>initial values</span>: <span style=color:#ae81ff>default</span>
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/commit/fdcd22f1f0fb23fb5a285353c79d963262243097 title="Last modified by Luke Zachmann | Apr 4, 2022" target=_blank rel=noopener><img src=/models-for-missing-data/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Apr 4, 2022</span></a></div><div><a class="flex align-center" href=https://github.com/lzachmann/models-for-missing-data/edit/main/docs/website/content/docs/1-guide/d-worked-examples/_index.md target=_blank rel=noopener><img src=/models-for-missing-data/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span></a></div></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#a-minimal-example-for-count-data>A minimal example for count data</a><ul><li><a href=#the-analysis-config-file>The analysis config file</a></li><li><a href=#the-model-call>The model call</a></li><li><a href=#selected-outputs>Selected outputs</a></li></ul></li><li><a href=#a-minimal-example-for-binomial-data>A minimal example for binomial data</a><ul><li><a href=#the-analysis-config-file-1>The analysis config file</a></li></ul></li></ul></nav></div></aside></main></body></html>
