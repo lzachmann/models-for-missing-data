@@ -27,6 +27,7 @@ jobs: # =======================================================================
 
       - name: Update themes used by the website
         run: |
+          git submodule update --init --remote docs/website/themes/hugo-notice
           git submodule update --init --remote docs/website/themes/hugo-cite
           git submodule update --init --remote docs/website/themes/book
 
