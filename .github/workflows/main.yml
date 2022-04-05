@@ -38,8 +38,7 @@ jobs: # =======================================================================
       matrix:
         likelihood: [ poisson, 
                       negative-binomial-simple, negative-binomial, 
-                      gen-pois, 
-                      zero-inflated-poisson, zero-inflated-negative-binomial ]
+                      gen-pois ] # zero-inflated-poisson, zero-inflated-negative-binomial
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
         include:
