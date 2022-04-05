@@ -36,7 +36,10 @@ jobs: # =======================================================================
 
     strategy:
       matrix:
-        likelihood: [ poisson, negative-binomial ] # gen-pois
+        likelihood: [ poisson, 
+                      negative-binomial-simple, negative-binomial, 
+                      gen-pois, 
+                      zero-inflated-poisson, zero-inflated-negative-binomial ]
         link: [ linear, exponential ]
         gle: [ b0, b0-b1 ]
         include:
@@ -46,10 +49,10 @@ jobs: # =======================================================================
             link: exponential
             gle: b0-b1
             demo: true
-        # exclude:
-        #   # excludes parameterizations
-        #   - likelihood: gen-pois
-        #     link: linear
+        exclude:
+          # excludes parameterizations
+          - likelihood: gen-pois
+            link: linear
     runs-on: ubuntu-latest
     # if: ${{ github.event.workflow_run.conclusion == 'success' }}
 

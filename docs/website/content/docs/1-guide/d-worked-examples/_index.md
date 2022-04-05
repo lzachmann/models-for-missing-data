@@ -25,7 +25,7 @@ The following example comes from "assets/_config/M4MD/ELDO/counts.yml".
 {{< code file="content/docs/1-guide/d-worked-examples/example-analysis-configs/M4MD/ELDO/counts.yml" language="yml" >}}
 
 ### The model call
-You can run this model interactively from Rstudio using "model-api/analysis-pipeline.R", or at the command line with: 
+You can run this model interactively from RStudio using "model-api/analysis-pipeline.R", or at the command line with: 
 ```sh
 ./model-api/analysis-pipeline.R \
     assets/_config/M4MD/ELDO/counts.yml \

@@ -1,7 +1,7 @@
 ---
+title: "FAQ"
 bookFlatSection: false
 weight: 30
-title: "FAQ"
 ---
 
 <link rel="stylesheet" type="text/css" href="{{ "/hugo-cite.css" | relURL }}" />
