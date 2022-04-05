@@ -59,7 +59,7 @@ model {
         l4[n] <- -loggam(y[n] + 1)
         L[n] <- l1[n] + l2[n] + l3[n] + l4[n]
 
-        lambda[n] <- (1 - delta[y.strata[n]]) * exp(eta[n])
+        lambda[n] <- (1 - delta[y.strata[n]]) * exp(eta[n]) 
 
         # Discrepancy measures: mean, variance, Pearson residuals
         mu[n] <- lambda[n] / (1 - delta[y.strata[n]])
