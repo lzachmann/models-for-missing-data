@@ -1,0 +1,70 @@
+# Authors: L. J. Zachmann and N. T. Hobbs. 2021.
+
+# Likelihood: zero-inflated-negative-binomial
+# Design matrix for additional covariates, X: present
+# Deterministic model: exponential
+# Group-level effects: b0
+# Variance structure: fixed-stratum
+# Release: v0.7.0
+
+model {
+
+    # ---- priors -------------------------------------------------------------
+    ## on `kappa`, `p.zero`, and `tau.epsilon` for each stratum.
+    for(k in 1:y.n.strata) {
+        kappa[k] ~ dunif(0, 10000)
+        p.zero[k] ~ dunif(0, 1)
+    }
+    tau.epsilon <- 1
+    ## on the coefficients for each covariate.
+    for(m in 1:length(X[1, ])) {
+        Beta[m] ~ dnorm(0, 0.001)
+    }
+    ## on intercept parameters for each site within each stratum. Slopes vary by
+    ## stratum.
+    for(k in 1:y.n.strata) {
+        mu.B0[k] ~ dnorm(0, 0.0001)
+        sigma.B0[k] ~ dunif(1E-6, 100)
+        tau.B0[k] <- 1 / sigma.B0[k]^2
+        B1[k] ~ dnorm(0, 0.001)
+        for(j in 1:y.n.site[k]) {
+            ### Intercepts vary by site and stratum.
+            B0[j, k] ~ dnorm(mu.B0[k], tau.B0[k])
+            ### Put coefficients into matrix form to make them compatible with
+            ### the multiple slopes model.
+            B[j, 1, k] <- B0[j, k]
+            B[j, 2, k] <- B1[k]
+        }
+    }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Exponential deterministic model (w/ additional covariates).
+        mu[n] <- exp(B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta) 
+        ## Zero-inflated negative binomial likelihood.
+        z[n] ~ dbern(p.zero[y.strata[n]])
+        p.nb[n] <- kappa[y.strata[n]] /
+            (kappa[y.strata[n]] + mu[n] * (1 - z[n]))
+        sigma[n] <- sqrt(p.nb[n] * kappa[y.strata[n]] / (1 + p.nb[n]))
+        y[n] ~ dnegbin(p.nb[n] - .0001, kappa[y.strata[n]])
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for a zero-inflated negative binomial
+        ## distribution with parameters `p.nb` and `kappa`.
+        y.rep[n] ~ dnegbin(p.nb[n], kappa[y.strata[n]])
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
+
+}
