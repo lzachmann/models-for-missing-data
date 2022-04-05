@@ -1,0 +1,77 @@
+# Authors: L. J. Zachmann and N. T. Hobbs. 2021.
+
+# Likelihood: gen-pois
+# Design matrix for additional covariates, X: present
+# Deterministic model: exponential
+# Group-level effects: b0-b1
+# Variance structure: fixed-stratum
+# Release: v0.7.0
+
+model {
+
+    # ---- priors -------------------------------------------------------------
+    # Prior for delta parameter of GP distribution.
+    for(k in 1:y.n.strata) {
+        delta[k] ~ dunif(-1, 1)
+    }
+    C <- 10000
+    ## on the coefficients for each covariate.
+    for(m in 1:length(X[1, ])) {
+        Beta[m] ~ dnorm(0, 0.001)
+    }
+    ## on slope and intercept parameters and their covariance matrix for each
+    ## site within each stratum.
+    for(k in 1:y.n.strata) {
+        for(j in 1:y.n.site[k]) {
+            B[j, 1:2, k] ~ dmnorm(B.hat[j, 1:2, k], Tau.B[, 1:2, k])
+            B.hat[j, 1, k] <- mu.B0[k]
+            B.hat[j, 2, k] <- mu.B1[k]
+        }
+        mu.B0[k] ~ dnorm(0, 0.0001)
+        mu.B1[k] ~ dnorm(0, 0.001)
+        Tau.B[1:2, 1:2, k] <- inverse(Sigma.B[1:2, 1:2, k])
+        Sigma.B[1, 1, k] <- sigma.B0[k]^2
+        sigma.B0[k] ~ dunif(1E-6, 100)
+        Sigma.B[2, 2, k] <- sigma.B1[k]^2
+        sigma.B1[k] ~ dunif(1E-6, 100)
+        Sigma.B[1, 2, k] <- rho[k] * sigma.B0[k] * sigma.B1[k]
+        Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
+        rho[k] ~ dunif(-1, 1)
+    }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Exponential deterministic model (w/ additional covariates).
+        mu[n] <- exp(B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta) 
+        ## Generalized Poisson likelihood.
+
+        # From: Bayesian Models for Astrophysical Data, Cambridge Univ. Press
+        # (c) 2017,  Joseph M. Hilbe, Rafael S. de Souza and Emille E. O. Ishida
+
+        Zeros[n] ~ dpois(Zeros.mean[n])
+        Zeros.mean[n] <- -L[n] + C
+
+        l1[n] <- log(lambda[n])
+        l2[n] <- (y[n] - 1) * log(lambda[n] + delta[y.strata[n]] * y[n])
+        l3[n] <- -lambda[n] - delta[y.strata[n]] * y[n]
+        l4[n] <- -loggam(y[n] + 1)
+        L[n] <- l1[n] + l2[n] + l3[n] + l4[n]
+
+        lambda[n] <- (1 - delta[y.strata[n]]) * exp(eta[n])
+
+        # Discrepancy measures: mean, variance, Pearson residuals
+        mu[n] <- lambda[n] / (1 - delta[y.strata[n]])
+        var.y[n] <- lambda[n] / ((1 - delta[y.strata[n]])^3)
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+
+
+}

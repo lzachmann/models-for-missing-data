@@ -1,0 +1,69 @@
+# Authors: L. J. Zachmann and N. T. Hobbs. 2021.
+
+# Likelihood: zero-inflated-poisson
+# Design matrix for additional covariates, X: present
+# Deterministic model: linear
+# Group-level effects: b0-b1
+# Variance structure: fixed-stratum
+# Release: v0.7.0
+
+model {
+
+    # ---- priors -------------------------------------------------------------
+        ## on `p.zero` for each stratum.
+        for(k in 1:y.n.strata) {
+            p.zero[k] ~ dunif(0, 1)
+        }
+    ## on the coefficients for each covariate.
+    for(m in 1:length(X[1, ])) {
+        Beta[m] ~ dnorm(0, 1E-04)
+    }
+    ## on slope and intercept parameters and their covariance matrix for each
+    ## site within each stratum.
+    for(k in 1:y.n.strata) {
+        for(j in 1:y.n.site[k]) {
+            B[j, 1:2, k] ~ dmnorm(B.hat[j, 1:2, k], Tau.B[, 1:2, k])
+            B.hat[j, 1, k] <- mu.B0[k]
+            B.hat[j, 2, k] <- mu.B1[k]
+        }
+        mu.B0[k] ~ dnorm(0, 4E-06)
+        mu.B1[k] ~ dnorm(0, 1E-04)
+        Tau.B[1:2, 1:2, k] <- inverse(Sigma.B[1:2, 1:2, k])
+        Sigma.B[1, 1, k] <- sigma.B0[k]^2
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
+        Sigma.B[2, 2, k] <- sigma.B1[k]^2
+        sigma.B1[k] ~ dgamma(0.01, 0.01)
+        Sigma.B[1, 2, k] <- rho[k] * sigma.B0[k] * sigma.B1[k]
+        Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
+        rho[k] ~ dunif(-1, 1)
+    }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- max(0.00001,
+                     B[y.site[n], 1, y.strata[n]] +
+                     B[y.site[n], 2, y.strata[n]] * x[n] +
+                     X[n, ] %*% Beta) 
+        ## Zero-inflated Poisson likelihood.
+        y[n] ~ dpois(mu[n] * (1 - z[n]))
+        z[n] ~ dbern(p.zero[y.strata[n]])
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for a zero-inflated negative binomial
+        ## distribution with parameters `p.nb` and `kappa`.
+        y.rep[n] ~ dpois(mu[n] * (1 - z[n]))
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
+
+}
