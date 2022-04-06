@@ -25,15 +25,15 @@ In some cases -- a model for soil stability observations -- there is only one pl
 |:--------|:-------------|:---------|
 | `beta`  | Continuous variables with values between 0 and 1  | Ocular cover  |
 | `beta-binomial`[^1]  | [Overdispersed binomial data](https://en.wikipedia.org/wiki/Overdispersion#Binomial)  |   |
-| `binomial`  | "Successes" in a given number of trails  | The number of "hits" of invasive species in {{< katex >}}n{{< /katex >}} point intercepts along a transect  |
+| `binomial`  | "Successes" in a given number of trials  | The number of "hits" of invasive species in {{< katex >}}n{{< /katex >}} point intercepts along a transect  |
 | `gamma`[^2]  | Continuous, non-negative quantities  |   |
 | `gen-pois`  | Underdispersed count data  |   |
 | `hurdle-ordinal-latent-beta`  | Ordinal data arising from a beta distributed latent variable  | Plant cover measured using Daubenmire cover classes  |
-| `lognormal`[^3]  | Continuous, non-negative quantities  |   |
-| `negative-binomial`  | Overdispersed counts (with support for either fixed stratum-level or hierarchical site-level variances modeled using a moment match for {{< katex >}}\kappa{{< /katex >}}) |   |
+| `lognormal`[^3]  | Continuous, non-negative quantities  | Tree height |
+| `negative-binomial`  | Overdispersed counts (with support for either fixed stratum-level or hierarchical site-level variances modeled using a moment match for {{< katex >}}\kappa{{< /katex >}}) | Abundance |
 | `negative-binomial-simple`  | Overdispersed counts (with fixed stratum-level dispersion modeled directly using {{< katex >}}\kappa{{< /katex >}})  |   |
 | `ordinal-latent-normal`  | Ordinal data arising from a normally distributed latent variable  | Soil stability  |
-| `poisson`  | Counts  | Richness or shrub density  |
+| `poisson`  | Counts  | Population size |
 | `zero-inflated-beta-binomial`  | Binomial data that exhibit overdispersion _and_ excess zeros  |   |
 | `zero-inflated-binomial`  | Binomial data with an excess of zero counts  |   |
 | `zero-inflated-negative-binomial`  | Count data that exhibit overdispersion _and_ excess zeros  |   |
