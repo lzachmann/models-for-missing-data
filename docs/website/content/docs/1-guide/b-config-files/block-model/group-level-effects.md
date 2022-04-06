@@ -7,7 +7,7 @@ weight: 3
 
 The basic motivation for random group-level effects is that sites matter. They are an essential feature of the sampling design. Having no such random effects would imply that sites don't matter and observations can be pooled (as if they were collected from a completely random sample).[^1] 
 
-Group-level effects incorporate differences among sites to inform park-level trends. They allow each site to have its intercept (and potentially, its slope) drawn from a common / underlying distribution of intercepts (and slopes). We make inference at the park scale using the parameters of the distribution from which the individual site intercepts and slopes are drawn.
+Group-level effects incorporate differences among sites (that may be impossible to model with covariates) to inform park-level trends. They allow each site to have its intercept (and potentially, its slope) drawn from a common / underlying distribution of intercepts (and slopes). We make inference at the park scale using the parameters of the distribution from which the individual site intercepts and slopes are drawn.
 
 ## Syntax
 

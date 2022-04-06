@@ -4,7 +4,7 @@ weight: 1
 ---
 
 # Response data
-The response data include the observations we are trying to model, as well as columns with identifiers (indices, IDs, datetime strings) for all relevant design information. Elements of the sampling design often seen in long-term monitoring data include the following:
+The response data include the observations we are trying to model, as well as columns with identifiers (indices, IDs, datetime strings) for all relevant sampling design information. Elements of the sampling design often seen in long-term monitoring data include the following:
 
 | Design element | Examples |
 |:------|:------|
@@ -14,7 +14,7 @@ The response data include the observations we are trying to model, as well as co
 |   date / event times   |   `MM/DD/YYYY`, `YYYY`   |
 
 ## Format
-The response information are stored as flat files, which are typically text files with no special word processing or markup. Each row represents a single observation, while the columns describe the value of the observation and the design features described above. The file can be CSV, XLS, XLSX, GZ, or RDS. For ease of use, readability, and other reasons, we generally recommend CSV.
+The response data are stored as flat files. The key characteristic of a flat file is that each row represents a single observation, while the columns describe values associated with the observation and the design features described above. These files are typically text files with no special word processing or markup. The file can be CSV, XLS, XLSX, GZ, or RDS. For ease of use, readability, and other reasons, we generally recommend CSV.
 
 ## Example
 The response data below contain species richness observations for forb (`native.forb.rich`) and grass-like (`native.gram.rich`) species from Little Bighorn Battlefield National Monument (LIBI), in Montana. Here, we see the first and last six rows of the data. 
