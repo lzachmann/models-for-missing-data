@@ -12,8 +12,8 @@ R objects required to recreate analyses (JAGS inputs) and lookup tables.
 |---|---|
 | calendar-and-relative-years.csv | A lookup table showing how calendar years are encoded as (zero-indexed) relative years. The first year of the study is always year 0. |
 | coda-vars.rds | A list of the variables for which coda samples are drawn |
-| complete-covariates-data.csv | What is this file? |
-| covariate-moments.rds | What is this file? |
+| complete-covariates-data.csv | The covariate information used by this model |
+| covariate-moments.rds | Mean and standard deviation used to scale each of the covariates, used to back out of scaled version |
 | eval-mean-for-tv-covariates.rds | What is this file? |
 | jags-data.rds | A list containing the data |
 | jags-info.rds | Data frame containing the JAGS and CODA variables to be monitored, in addition to several other 'environment' settings/variables used during the original pass through the analysis pipeline |
