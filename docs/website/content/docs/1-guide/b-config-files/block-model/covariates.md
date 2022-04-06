@@ -4,7 +4,7 @@ weight: 5
 ---
 
 # Covariates
-Predictors...
+The predictors to use for modeling the mean of the response variable.
 
 ## Syntax
 

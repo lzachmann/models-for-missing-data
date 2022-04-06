@@ -12,7 +12,7 @@ trend step size: 1 # (0, 1]
 ```
 
 ## Usage
-The default `trend step size` is 0.2 years, which means we get five predictions in every calendar year. For instance, between years 0 and 1, this equates to predictions at
+The default `trend step size` is 0.2 years, which means we get five predictions in every calendar year. For instance, between years 0 and 1, this equates to predictions at <!-- could be a bit confusing since you have 6 predictions below, not 5 as above, but I get why -->
 
     0.0 0.2 0.4 0.6 0.8 1.0
 

@@ -9,7 +9,7 @@ Two high-level "attributes" files are required for all analyses. So long as the 
 
 ## The config file tree
 
-The file tree needed to configure analysis of data from a given park unit (`<unit code>`) in a given network (`<network code>`) looks like the following
+The file tree structure needed to configure analysis of data from a given park unit (`<unit code>`) in a given network (`<network code>`) must look like the following
 
     . # project root
     └── assets
