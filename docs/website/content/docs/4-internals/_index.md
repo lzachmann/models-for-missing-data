@@ -1,5 +1,6 @@
 ---
+title: "Internals"
 bookFlatSection: false
-weight: 3
 bookHidden: true
+weight: 3
 ---

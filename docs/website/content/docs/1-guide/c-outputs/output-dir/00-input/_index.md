@@ -10,7 +10,7 @@ R objects required to recreate analyses (JAGS inputs) and lookup tables.
 
 | __File__ | __Description__ |
 |---|---|
-| calendar-and-relative-years.csv | Mappings of calendar year to (zero-indexed) relative year of the study |
+| calendar-and-relative-years.csv | A lookup table showing how calendar years are encoded as (zero-indexed) relative years. The first year of the study is always year 0 |
 |coda-vars.rds | A list of the variables for which coda samples are drawn |
 |complete-covariates-data.csv | What is this file? |
 |covariate-moments.rds | What is this file? |

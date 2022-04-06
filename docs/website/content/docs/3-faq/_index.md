@@ -1,6 +1,7 @@
 ---
 title: "FAQ"
 bookFlatSection: false
+bookHidden: true
 weight: 4
 ---
 
