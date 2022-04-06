@@ -226,5 +226,25 @@
     "title": "Faster estimation of bayesian models in ecology using hamiltonian monte carlo",
     "type": "article-journal",
     "volume": "8"
+  },
+  {
+    "author": [
+      {
+        "family": "McElreath",
+        "given": "Richard"
+      }
+    ],
+    "id": "mcelreath2020statistical",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "publisher": "Chapman; Hall/CRC",
+    "title": "Statistical rethinking: A bayesian course with examples in r and stan",
+    "title-short": "Statistical rethinking",
+    "type": "book"
   }
 ]
