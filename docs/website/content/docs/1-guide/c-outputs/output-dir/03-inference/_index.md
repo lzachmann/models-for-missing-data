@@ -12,12 +12,12 @@ Tabular and graphical summaries of Markov chain Monte Carlo (MCMC) draws from th
 
 | __File__ | __Description__ |
 |:---|:---|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+| coef/ | Model coefficients |
+| me/ | Marginal effects |
+| park/ | Park-level inference |
+| site/ | Site-level inference |
+| strata/ | Stratum-level inference |
+| zone/ | Zone-level inference |
 | coda-samples-quantiles.csv | Quantiles of the posterior distribution of key variables / parameters  |
 | coda-samples-summary.txt | Descriptive statistics and quantiles of the posterior distribution of key variables / parameters |
 
