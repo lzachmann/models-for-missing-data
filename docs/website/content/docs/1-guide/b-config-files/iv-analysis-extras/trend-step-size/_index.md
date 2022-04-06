@@ -40,5 +40,5 @@ ggplot(d) +
   labs(x = expression(x), y = expression(italic(mu))) +
   theme(axis.title.y = element_text(angle = 0)) +
   guides(color = "none")
-ggsave('docs/website/content/docs/1-guide/b-config-files/block-extras/trend-step-size.png',
+ggsave('docs/website/content/docs/1-guide/b-config-files/iv-analysis-extras/trend-step-size.png',
        width = 7, height = 5) -->

@@ -23,4 +23,4 @@ More details on different probability distributions are shown in the tables belo
 ## True or extra zeros
 There are occasions when we need to accommodate "true" zeros or extra zeros. In these cases, we need to use either hurdle or zero-inflated models. From [wikipedia](https://en.wikipedia.org/wiki/Hurdle_model): 
 > Hurdle models differ from zero-inflated models in that zero-inflated models model the zeros using a two-component mixture model. With a mixture model, the probability of the variable being zero is determined by both the main distribution and the mixture weight.
-We'll see references to these types of models as we begin to talk about specific [likelihood functions]({{< ref "/docs/1-guide/b-config-files/block-model/likelihood-function.md" >}}).
+We'll see references to these types of models as we begin to talk about specific [likelihood functions]({{< ref "/docs/1-guide/b-config-files/iii-analysis-model/likelihood-function.md" >}}).

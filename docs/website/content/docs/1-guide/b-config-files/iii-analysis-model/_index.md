@@ -1,5 +1,5 @@
 ---
-title: Block / the model
+title: Analysis / the model
 bookCollapseSection: true
 weight: 3
 ---
