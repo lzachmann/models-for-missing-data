@@ -9,36 +9,6 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the lognormal distribution with
-        ## centrality and scale parameters.
-        y.rep[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) 
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Linear deterministic model (w/ additional covariates).
-        mu[n] <- B[y.site[n], 1, y.strata[n]] +
-                    B[y.site[n], 2, y.strata[n]] * x[n] +
-                    X[n, ] %*% Beta
-        ## Lognormal likelihood.
-        mu.log.y[n] <- log(mu[n]) - 1/2 * log((sigma2[n] + mu[n]^2) / mu[n]^2)
-        tau.log.y[n] <- 1 / sigma.log.y[n]^2
-        sigma2[n] <- sigma.ss[y.site[n], y.strata[n]]^2
-        sigma.log.y[n] <- sqrt(log((sigma2[n] + mu[n]^2) / mu[n]^2))
-        y[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) 
-        ## Residuals.
-        y.hat[n] <- mu[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ### on sigma for each site and/or stratum.
     for(k in 1:y.n.strata) {
@@ -65,12 +35,42 @@ model {
         mu.B1[k] ~ dnorm(0, 1E-04)
         Tau.B[1:2, 1:2, k] <- inverse(Sigma.B[1:2, 1:2, k])
         Sigma.B[1, 1, k] <- sigma.B0[k]^2
-        sigma.B0[k] ~ dunif(1E-6, 1000)
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
         Sigma.B[2, 2, k] <- sigma.B1[k]^2
-        sigma.B1[k] ~ dunif(1E-6, 100)
+        sigma.B1[k] ~ dgamma(0.01, 0.01)
         Sigma.B[1, 2, k] <- rho[k] * sigma.B0[k] * sigma.B1[k]
         Sigma.B[2, 1, k] <- Sigma.B[1, 2, k]
         rho[k] ~ dunif(-1, 1)
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- B[y.site[n], 1, y.strata[n]] +
+                    B[y.site[n], 2, y.strata[n]] * x[n] +
+                    X[n, ] %*% Beta
+        ## Lognormal likelihood.
+        mu.log.y[n] <- log(mu[n]) - 1/2 * log((sigma2[n] + mu[n]^2) / mu[n]^2)
+        tau.log.y[n] <- 1 / sigma.log.y[n]^2
+        sigma2[n] <- sigma.ss[y.site[n], y.strata[n]]^2
+        sigma.log.y[n] <- sqrt(log((sigma2[n] + mu[n]^2) / mu[n]^2))
+        y[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) 
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the lognormal distribution with
+        ## centrality and scale parameters.
+        y.rep[n] ~ dlnorm(mu.log.y[n], tau.log.y[n]) 
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }

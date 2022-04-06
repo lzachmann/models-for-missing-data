@@ -9,33 +9,6 @@
 
 model {
 
-
-    # ---- model checking -----------------------------------------------------
-    # Quantities used for model checking (e.g., simulated data for comparison
-    # to the observed data and Bayesian P values).
-    for(n in 1:length(y)) {
-        ## Random number generation for the gamma distribution with
-        ## moment-matched shape and rate parameters.
-        y.rep[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) 
-    }
-    ## Bayesian P values.
-    p.sd <- step(sd(y.rep[]) - sd(y[]))
-    p.mean <- step(mean(y.rep[]) - mean(y[]))
-
-    # ---- likelihood ---------------------------------------------------------
-    for(n in 1:length(y)) {
-        ## Linear deterministic model (w/ additional covariates).
-        mu[n] <- B[y.site[n], 1, y.strata[n]] +
-                    B[y.site[n], 2, y.strata[n]] * x[n] +
-                    X[n, ] %*% Beta
-        ## Gamma likelihood.
-        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
-        y[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) 
-        ## Residuals.
-        y.hat[n] <- mu[n]
-        epsilon[n] <- y[n] - y.hat[n]
-    }
-
     # ---- priors -------------------------------------------------------------
     ### on sigma.y for each stratum.
     #for(k in 1:y.n.strata) {
@@ -59,7 +32,7 @@ model {
     ## stratum.
     for(k in 1:y.n.strata) {
         mu.B0[k] ~ dnorm(0, 4E-06)
-        sigma.B0[k] ~ dunif(1E-6, 1000)
+        sigma.B0[k] ~ dgamma(0.01, 0.01)
         tau.B0[k] <- 1 / sigma.B0[k]^2
         B1[k] ~ dnorm(0, 1E-04)
         for(j in 1:y.n.site[k]) {
@@ -71,5 +44,32 @@ model {
             B[j, 2, k] <- B1[k]
         }
     }
+
+    # ---- likelihood ---------------------------------------------------------
+    for(n in 1:length(y)) {
+        ## Linear deterministic model (w/ additional covariates).
+        mu[n] <- B[y.site[n], 1, y.strata[n]] +
+                    B[y.site[n], 2, y.strata[n]] * x[n] +
+                    X[n, ] %*% Beta
+        ## Gamma likelihood.
+        sigma.y[n] <- sigma.ss[y.site[n], y.strata[n]]
+        y[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) 
+        ## Residuals.
+        y.hat[n] <- mu[n]
+        epsilon[n] <- y[n] - y.hat[n]
+    }
+
+    # ---- model checking -----------------------------------------------------
+    # Quantities used for model checking (e.g., simulated data for comparison
+    # to the observed data and Bayesian P values).
+    for(n in 1:length(y)) {
+        ## Random number generation for the gamma distribution with
+        ## moment-matched shape and rate parameters.
+        y.rep[n] ~ dgamma(mu[n]^2 / sigma.y[n]^2, mu[n] / sigma.y[n]^2) 
+    }
+    ## Bayesian P values.
+    p.sd <- step(sd(y.rep[]) - sd(y[]))
+    p.mean <- step(mean(y.rep[]) - mean(y[]))
+
 
 }
