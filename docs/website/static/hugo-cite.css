@@ -6,7 +6,7 @@
   display: inline-block;
   vertical-align: baseline; /*compensate for lower height */
   position: relative;
-  font-size: .85em; /* reduce to avoid some breaks */
+  font-size: 1em; /* was .85em to reduce to avoid some breaks */
 }
 .hugo-cite-group
   .hugo-cite-citation {
