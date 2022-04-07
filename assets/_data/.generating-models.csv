@@ -1,3 +1,2 @@
 file, generating_model
-assets/_data/count-data.csv, poisson-exponential-b0-b1
-assets/_data/binomial-data.csv, binomial-inverse-logit-b0
+assets/_data/nonnegative-continuous-data.csv, gamma-linear-b0-b1
