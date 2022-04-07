@@ -246,5 +246,32 @@
     "title": "Statistical rethinking: A bayesian course with examples in r and stan",
     "title-short": "Statistical rethinking",
     "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Gelman",
+        "given": "Andrew"
+      },
+      {
+        "family": "Rubin",
+        "given": "Donald B"
+      }
+    ],
+    "container-title": "Statistical science",
+    "id": "gelman1992inference",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "page": "457-472",
+    "publisher": "Institute of Mathematical Statistics",
+    "title": "Inference from iterative simulation using multiple sequences",
+    "type": "article-journal",
+    "volume": "7"
   }
 ]
