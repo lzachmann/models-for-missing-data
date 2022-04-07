@@ -30,7 +30,7 @@ From the output root (`.`), there are an ordered / numbered set of directories a
 | calling-script.R | Reproducible calling script |
 | inits-needed.txt | List of the parameters for which initial values (`inits`) are required |
 | mod-summary.csv | Test statistics (`p_sd`, `p_mean`), posterior predictive loss (`ppl`), deviance information criterion (`dic`), and {{< katex >}}\hat{R}{{< /katex >}} (`gelman_diag`) |
-| model.jags | Model file |
+| model.jags | JAGS model file |
 | output-metadata.md | Basic metadata for files included in the output folder |
 | system-time.txt | Time required to fit the model |
 
