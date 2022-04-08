@@ -11,7 +11,15 @@ bookToc: true
 ### Project updates
 To get the latest __models-for-missing-data__ code, navigate to your project directory using a terminal, and run `git pull`.
 
-### Submodule updates
+### Submodule updates / individual submodules
+```sh
+cd <submodule path> # e.g., model-api
+git fetch
+git checkout gh-submodule
+git pull origin gh-submodule
+```
+
+### Submodule updates / all submodules simultaneously
 First, be sure to do any necessary housekeeping (remove, stash, or commit changes). To get the latest updates for each of the submodules, run:
 ```sh
 git submodule update --recursive --remote
