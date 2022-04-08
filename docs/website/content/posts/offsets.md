@@ -3,7 +3,7 @@ author: Luke Zachmann
 title: The offset term
 weight: 8
 categories: background
-bookHidden: true
+bookHidden: false
 tags:
   - statistics
 bibFile: content/posts/bib.json
@@ -24,7 +24,7 @@ The offset needs to be on the same scale as the linear predictor. In the case of
 
 poi_r <- glm(numclaims ~ x1+x2+x3,data=train, family = "poisson", offset=log(exposure))
 
-Typically we use offsets when the sampling unit (time, area, exposure) varies across observations. For example, species richness in riparian areas in arid ecosystems is often evaluated for the entire riparian area, which tend to be quite small. But the actual extent of each riparian area might differ.
+Typically, we use offsets when the sampling unit (time, area, exposure) varies across observations. For example, species richness in riparian areas in arid ecosystems is often evaluated for the entire riparian area, which tend to be quite small. But the actual extent of each riparian area might differ.
 
 ---
 

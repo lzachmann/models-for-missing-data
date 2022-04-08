@@ -27,3 +27,20 @@ response info:
 ```
 
 The `response info` section of the data block specifies the `file` (see the [response data]({{< ref "/docs/1-guide/a-data/i-y-info.md" >}})) for more detail on the contents of this file), the name of the column containing the response variable of interest (`response column`), a corresponding human-readable description for each response variable (`description`), and the names of the columns required to identify individual observations (`sample id column(s)`). In some cases, `sample id column(s)` is a single column, while in others it's multiple. 
+
+{{< notice note >}}
+There is one additional option for count models requiring offsets. 
+```yml
+response info:
+    file: assets/uplands-data/CASP/modified/spp_comp_0to25.csv
+    state variable:
+        response column:
+            - n_spp
+        description:
+            - Richness per acre
+        offset column: n_acres_per_belt # plot_size/4046.86, e.g., (20*50)/4046.86
+    sampling method: plot
+    sample id column(s):
+        - plot_name
+```
+{{< /notice >}}

@@ -66,6 +66,10 @@ stratum area info:
     Upland: 1063552
 ```
 
+{{< notice note >}}
+Only the `stratum id`'s appearing beneath `stratum area info` are included in analysis. If your original response data contain strata A, B, and C, but `_park-level-attributes.yml` includes just A and C, then records associated with stratum B are automatically removed prior to analysis.
+{{< /notice >}}
+
 The number assigned to each stratum under `stratum area info` corresponds to the total number of sites -- regardless of the actual units -- that _could_ have been sampled in that stratum. In this example there were `684731` potentially sampleable sites in `Gulley1`. The proportion of the park represented by `Gulley1` is `684731 / (684731 + 138247 + 1063552) = 0.3629579`.[^1] 
 
 In most cases, the sites actually sampled in any given stratum represents a tiny fraction of that stratum's area (e.g., <1%). In cases where sampled sites represent a larger proportion of the total stratum area, we may need to apply finite population correction, which we'll describe in another section of this guide.
