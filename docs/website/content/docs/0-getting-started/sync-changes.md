@@ -22,16 +22,21 @@ If you encounter an error, it's likely you've made changes locally that are not 
 
 ## Pushing local changes to a submodule to its remote
 First, `cd` into the submodule directory. We're going to do all of our Git work within the context of the submodule. If you've got uncommitted changes, do any necessary housekeeping:
+
+{{< notice note >}}
+If you're seeing files after running `git status` that you _don't_ want to commit to the version history, open the ".gitignore" file and add a new entry for the file you want to ignore. You can open ".gitignore" with any text editor, including RStudio. 
+{{< /notice >}}
+
 ```sh
 git status
+git fetch
+git checkout gh-submodule
 git add .
 git commit -m "<some descriptive message about your changes>"
 ```
 As always, please ensure you're not staging / committing unwanted files (e.g., binary files). Then run:
 
 ```sh
-git fetch
-git checkout gh-submodule
 git merge <ref>
 git push origin gh-submodule
 ```
