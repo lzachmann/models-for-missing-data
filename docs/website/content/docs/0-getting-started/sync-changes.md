@@ -33,13 +33,9 @@ git fetch
 git checkout gh-submodule
 git add .
 git commit -m "<some descriptive message about your changes>"
-```
-As always, please ensure you're not staging / committing unwanted files (e.g., binary files). Then run:
-
-```sh
-git merge <ref>
 git push origin gh-submodule
 ```
+As always, please ensure you're not staging / committing unwanted files (e.g., binary files).
 
 ## Troubleshooting
 If, on an attempt to pull from the remote submodule, you got `fatal: Not possible to fast-forward, aborting`, try:

@@ -26,3 +26,7 @@ The `git clone` command above will recurse through all of the project submodules
 
 [^1]: Windows users will need to use Git Bash to do this, which comes with your installation of [Git for Windows](https://gitforwindows.org/).
 [^2]: If this command doesn't work, try updating Git (`--remote-submodules` is only available in newer versions of Git). Alternatively, try removing `--remote-submodules` from the `git clone` command.
+
+{{< notice note >}}
+If you're seeing empty submodule directories after cloning, try running `git submodule update --init`!
+{{< /notice >}}
